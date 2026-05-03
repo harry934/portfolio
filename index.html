@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Otieno | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Typed.js for interactivity -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    <header class="header" id="main-nav">
+        <div class="container nav-flex">
+            <div class="logo">H<span>O</span></div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#expertise">Expertise</a>
+                <a href="#projects">Projects</a>
+                <a href="#resume">CV</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="hamburger" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="smooth-scroll-container">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-standard">
+            <div class="container hero-flex">
+                <div class="hero-content">
+                    <h1 class="hero-title">HELLO, I'M HARRY. <span class="accent">SOFTWARE ENGINEER.</span></h1>
+                    <p class="hero-subtitle">Building <span id="typed"></span></p>
+                    <div class="hero-actions-row">
+                        <a href="#resume" class="btn btn-dark">VIEW CV</a>
+                        <a href="#contact" class="btn btn-outline">CONTACT ME</a>
+                    </div>
+                </div>
+                <div class="hero-image-profile">
+                    <div class="image-wrapper">
+                        <img src="assets/img/profile.jpg" alt="Harry Otieno" id="profile-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-heading">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>I'm Harry Otieno Mokaya, a Software Engineer from Nairobi with roots in Migori County. I work across multiple domains from web and mobile development to machine learning and IoT systems.</p>
+                        <p>My focus is on building practical solutions that solve real problems. Whether it's developing responsive web applications, training ML models, or creating IoT prototypes, I enjoy the challenge of turning ideas into working products.</p>
+                        <p>When I'm not coding, you'll find me exploring fitness tech and wellness applications. I believe technology should be accessible and beneficial to everyone, which drives my approach to development.</p>
+                    </div>
+                    <div class="about-stats-clean">
+                        <div class="stat-item-minimal">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>Nairobi, Kenya</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section id="expertise" class="section bg-light">
+            <div class="container">
+                <h2 class="section-heading">Core Expertise</h2>
+                <div class="expertise-grid">
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="bi bi-code-square"></i></div>
+                        <h3>Web Tech</h3>
+                        <p>Crafting universal web experiences that combine modern performance standards with engaging design.</p>
+                        <div class="expertise-tags"><span>react</span><span>next.js</span><span>node.js</span></div>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="bi bi-cpu"></i></div>
+                        <h3>Machine Learning</h3>
+                        <p>Leveraging advanced neural networks and data science to build systems that learn and adapt.</p>
+                        <div class="expertise-tags"><span>python</span><span>tensorflow</span><span>nlp</span></div>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="bi bi-phone"></i></div>
+                        <h3>Android Dev</h3>
+                        <p>Creating fluid, native Android experiences that merge powerful functionality with intuitive UX.</p>
+                        <div class="expertise-tags"><span>kotlin</span><span>jetpack</span><span>mvvm</span></div>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><i class="bi bi-broadcast"></i></div>
+                        <h3>IoT Solutions</h3>
+                        <p>Developing integrated systems that bridge the physical and digital worlds seamlessly.</p>
+                        <div class="expertise-tags"><span>arduino</span><span>raspberry pi</span><span>mqtt</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-heading">Portfolio & Github</h2>
+                <div class="projects-featured">
+                    <div class="projects-actions-main">
+                        <p class="projects-lead">Interested in seeing my latest code and open-source contributions?</p>
+                        <a href="https://github.com/harry934?tab=repositories" target="_blank" class="btn btn-dark btn-large">
+                            <i class="bi bi-github"></i> EXPLORE REPOSITORIES ON GITHUB
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="section">
+            <div class="container">
+                <h2 class="section-heading">Resume</h2>
+                <div class="resume-content-center">
+                    <div class="skills-highlight">
+                        <div class="skill-item">
+                            <span>JavaScript / React</span>
+                            <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Python / ML</span>
+                            <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Kotlin / Android</span>
+                            <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>IoT / Arduino</span>
+                            <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-actions-row">
+                        <a href="https://harryyportfolio.netlify.app/assets/resume/harry%20resume_protected.pdf" target="_blank" class="btn btn-outline">VIEW CV</a>
+                        <a href="https://harryyportfolio.netlify.app/assets/resume/harry%20resume_protected.pdf" download class="btn btn-dark">DOWNLOAD CV</a>
+                    </div>
+                    <p class="resume-note"><i class="bi bi-shield-lock"></i> Protected PDF - Password may be required</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-light-gray">
+            <div class="container">
+                <h2 class="section-heading">Get In Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item dark">
+                            <i class="bi bi-geo-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Nairobi, Kenya</p>
+                            </div>
+                        </div>
+                        <div class="contact-item dark">
+                            <i class="bi bi-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>otienoharry876@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item dark">
+                            <i class="bi bi-telephone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+254 112601334</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form dark">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message" rows="4" required></textarea>
+                        <button type="submit" class="btn btn-dark">SEND MESSAGE</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-simple">
+        <p>&copy; 2024 Harry Otieno. Designed with minimalist aesthetics.</p>
+    </footer>
+
+    <a href="#hero" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
