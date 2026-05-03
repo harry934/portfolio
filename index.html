@@ -13,10 +13,6 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-    
     <div class="scroll-progress"></div>
     <header class="header" id="main-nav">
         <div class="container nav-flex">
@@ -111,13 +107,39 @@
         <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="container">
-                <h2 class="section-heading">Portfolio & Github</h2>
-                <div class="projects-featured">
-                    <div class="projects-actions-main">
-                        <p class="projects-lead">Interested in seeing my latest code and open-source contributions?</p>
-                        <a href="https://github.com/harry934?tab=repositories" target="_blank" class="btn btn-dark btn-large">
-                            <i class="bi bi-github"></i> EXPLORE REPOSITORIES ON GITHUB
+                <div class="portfolio-container">
+                    <div class="portfolio-content">
+                        <h2 class="portfolio-title">Portfolio <span>&</span> Code</h2>
+                        <p class="portfolio-description">My development journey is documented through open-source contributions, experimental prototypes, and production-ready systems. I believe in writing clean, scalable code that solves real-world problems.</p>
+                        <div class="portfolio-stats">
+                            <div class="stat">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Repositories</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">200+</span>
+                                <span class="stat-label">Contributions</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/harry934?tab=repositories" target="_blank" class="btn btn-dark portfolio-btn">
+                            <i class="bi bi-github"></i> VIEW ALL ON GITHUB
                         </a>
+                    </div>
+                    <div class="portfolio-visual">
+                        <div class="code-window">
+                            <div class="window-header">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            <div class="window-content">
+                                <pre><code><span class="code-keyword">const</span> <span class="code-func">exploreProjects</span> = () => {
+  <span class="code-keyword">return</span> <span class="code-string">'Clean Code & Innovation'</span>;
+};
+
+<span class="code-comment">// Building the future one commit at a time.</span></code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

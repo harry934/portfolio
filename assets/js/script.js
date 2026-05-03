@@ -93,48 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    // Custom Cursor Logic
-    const dot = document.querySelector('.cursor-dot');
-    const outline = document.querySelector('.cursor-outline');
-
-    window.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-
-        dot.style.left = `${posX}px`;
-        dot.style.top = `${posY}px`;
-
-        outline.animate({
-            left: `${posX}px`,
-            top: `${posY}px`
-        }, { duration: 500, fill: "forwards" });
-    });
-
-    const interactables = document.querySelectorAll('a, button, .expertise-card, .btn');
-    interactables.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            dot.classList.add('active');
-            outline.classList.add('active');
-        });
-        el.addEventListener('mouseleave', () => {
-            dot.classList.remove('active');
-            outline.classList.remove('active');
-        });
-    });
-
-    // Magnetic Buttons
-    const magneticBtns = document.querySelectorAll('.btn');
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const position = btn.getBoundingClientRect();
-            const x = e.pageX - position.left - position.width / 2;
-            const y = e.pageY - position.top - position.height / 2;
-            
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0, 0)';
-        });
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(section);
     });
 });
