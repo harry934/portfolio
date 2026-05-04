@@ -37,6 +37,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Contact Form Smart Redirect
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const message = document.getElementById('contact-message').value;
+            
+            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            
+            // This opens the default email client (Gmail/Outlook/etc.)
+            window.location.href = `mailto:otienoharry876@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Clear form
+            contactForm.reset();
+        });
+    }
+
     // Close mobile nav on link click
     const links = document.querySelectorAll('.nav-links a');
     links.forEach(link => {

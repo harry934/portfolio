@@ -205,7 +205,11 @@
                     </div>
                     <div class="resume-right">
                         <h2 class="resume-label">Curriculum Vitae</h2>
-                        <p>Download my professional resume to see my full experience and academic background.</p>
+                        <div class="resume-protection-badge">
+                            <i class="bi bi-shield-lock-fill"></i>
+                            <span>PASSWORD PROTECTED</span>
+                        </div>
+                        <p>This document is encrypted for security. Please request the password via the contact section to view or download.</p>
                         <div class="cv-buttons">
                             <a href="assets/pdf/resume.pdf" target="_blank" class="btn btn-outline btn-with-icon">
                                 <i class="bi bi-eye"></i> <span>VIEW CV</span>
@@ -214,7 +218,7 @@
                                 <i class="bi bi-download"></i> <span>DOWNLOAD CV</span>
                             </a>
                         </div>
-                    </div>
+                   </div>
                 </div>
             </div>
         </section>
@@ -247,13 +251,15 @@
                             </div>
                         </div>
                     </div>
-                    <form class="contact-form dark">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <textarea placeholder="Your Message" rows="4" required></textarea>
-                        <button type="submit" class="btn btn-dark">SEND MESSAGE</button>
+                    <form class="contact-form dark" id="contact-form">
+                        <input type="text" id="contact-name" placeholder="Your Name" required>
+                        <input type="email" id="contact-email" placeholder="Your Email" required>
+                        <textarea id="contact-message" placeholder="Your Message" rows="4" required></textarea>
+                        <button type="submit" class="btn btn-dark btn-with-icon">
+                            <i class="bi bi-send-fill"></i> <span>SEND VIA EMAIL</span>
+                        </button>
                     </form>
-                </div>
+               </div>
             </div>
         </section>
     </main>

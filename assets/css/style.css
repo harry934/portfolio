@@ -840,6 +840,24 @@ body {
     padding: 4rem;
 }
 
+.resume-protection-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #fff5f5;
+    color: #e53e3e;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border: 1px solid #feb2b2;
+}
+
+.resume-protection-badge i {
+    font-size: 1rem;
+}
+
 .resume-label {
     font-size: 0.8rem;
     text-transform: uppercase;
