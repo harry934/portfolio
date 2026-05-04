@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelector('.nav-links');
 
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 50) {
+        if (window.scrollY > 80) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
