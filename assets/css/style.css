@@ -255,63 +255,77 @@ body {
     font-weight: 500;
 }
 
-/* Expertise v3 - Modern Minimalist */
-.expertise-v3-grid {
+/* Expertise Modern Grid */
+.expertise-modern-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 3rem;
 }
 
-.expertise-v3-item {
-    text-align: center;
-    padding: 3rem 2rem;
+.expertise-item {
+    display: flex;
+    gap: 2rem;
+    padding: 3rem;
     background: #fff;
-    border-radius: 24px;
+    border-radius: 30px;
     border: 1px solid #f0f0f0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.expertise-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+    border-color: #000;
+}
+
+.exp-icon-box {
+    width: 60px;
+    height: 60px;
+    background: #f8f8f8;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
     transition: all 0.4s ease;
 }
 
-.expertise-v3-item:hover {
-    border-color: #000;
-    transform: translateY(-10px);
+.expertise-item:hover .exp-icon-box {
+    background: #000;
+    color: #fff;
 }
 
-.expertise-v3-item i {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    display: block;
-    color: #000;
-}
-
-.expertise-v3-item h3 {
-    font-size: 1.1rem;
+.exp-info h3 {
+    font-size: 1.3rem;
     margin-bottom: 1rem;
-    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.exp-info p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.expertise-tags-new {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.expertise-tags-new span {
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 700;
+    color: #bbb;
 }
 
-.expertise-v3-item p {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-}
-
-/* Button Global - Better Icon Spacing */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem; /* Space between icon and text */
-    padding: 0.8rem 2rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-.btn i {
-    font-size: 1.1rem;
+@media (max-width: 992px) {
+    .expertise-modern-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Portfolio Redesign */
@@ -422,50 +436,177 @@ body {
     padding: 40px 0;
 }
 
-/* Simplified Resume Card */
-.resume-simple-card {
+/* Expertise Grid Minimal */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 4rem;
+}
+
+.expertise-card {
+    background: transparent;
+    padding: 0;
+    border: none;
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.expertise-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #000;
+    transition: width 0.4s ease;
+}
+
+.expertise-card:hover::after {
+    width: 50px;
+}
+
+.expertise-card:hover {
+    transform: translateY(-5px);
+}
+
+.expertise-icon {
+    font-size: 1.5rem;
+    color: #000;
+    margin-bottom: 2rem;
+    opacity: 0.3;
+    transition: all 0.4s ease;
+}
+
+.expertise-card:hover .expertise-icon {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.expertise-card h3 {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.expertise-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.expertise-tags {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: auto;
+}
+
+.expertise-tags span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #bbb;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.expertise-card:hover .expertise-tags span {
+    color: #333;
+}
+
+/* Resume Split Card */
+.resume-split-card {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
     background: #fff;
-    padding: 4rem;
     border-radius: 40px;
     border: 1px solid #f0f0f0;
-    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
 }
 
-.skills-flex-center {
+.resume-left {
+    padding: 4rem;
+    background: #fdfdfd;
+    border-right: 1px solid #f0f0f0;
+}
+
+.resume-right {
+    padding: 4rem;
+}
+
+.resume-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #999;
+    margin-bottom: 2rem;
+}
+
+.expertise-chips {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
+    gap: 0.8rem;
 }
 
-.resume-actions-simple {
+.chip {
+    padding: 0.6rem 1.2rem;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+}
+
+.chip:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.resume-right p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.cv-buttons {
     display: flex;
     gap: 1.5rem;
+}
+
+/* Button Icon Pacing Fix */
+.btn-with-icon {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    gap: 0.8rem; /* Correct spacing between icon and text */
 }
 
-@media (max-width: 768px) {
-    .resume-simple-card {
-        padding: 3rem 1.5rem;
-    }
-    
-    .resume-actions-simple {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 768px) {
-    .resume-card {
-        padding: 3rem 2rem;
-    }
-    
-    .resume-grid-new {
+@media (max-width: 992px) {
+    .resume-split-card {
         grid-template-columns: 1fr;
-        gap: 3rem;
     }
     
-    .resume-actions-new {
+    .resume-left {
+        border-right: none;
+        border-bottom: 1px solid #f0f0f0;
+    }
+}
+
+@media (max-width: 768px) {
+    .cv-buttons {
         flex-direction: column;
     }
 }
