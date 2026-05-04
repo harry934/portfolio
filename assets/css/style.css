@@ -428,7 +428,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.05;
+    opacity: 0.08;
     pointer-events: none;
     z-index: 0;
 }
@@ -472,47 +472,72 @@ body {
 }
 
 .hub-icon {
-    font-size: 3.5rem;
+    font-size: 4rem;
     color: #000;
     z-index: 5;
-    animation: hubPulse 4s ease-in-out infinite;
+    animation: hubPulse 3s ease-in-out infinite;
 }
 
 .orbit-1, .orbit-2 {
     position: absolute;
-    border: 1px solid #eee;
     border-radius: 50%;
 }
 
 .orbit-1 {
     width: 200px;
     height: 200px;
-    animation: rotateHub 15s linear infinite;
-    border-style: dashed;
+    border: 2px dashed #bbb;
+    animation: rotateHub 12s linear infinite;
 }
 
 .orbit-2 {
-    width: 280px;
-    height: 280px;
-    animation: rotateHub 25s linear infinite reverse;
-    opacity: 0.5;
+    width: 290px;
+    height: 290px;
+    border: 1.5px solid #ccc;
+    animation: rotateHub 22s linear infinite reverse;
+}
+
+/* Orbital dot rider on orbit-1 */
+.orbit-1::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #000;
+    border-radius: 50%;
+}
+
+/* Orbital dot rider on orbit-2 */
+.orbit-2::before {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: #555;
+    border-radius: 50%;
 }
 
 .floating-data {
     position: absolute;
-    width: 40px;
-    height: 4px;
+    width: 50px;
+    height: 3px;
     background: #000;
     border-radius: 2px;
-    opacity: 0.1;
+    opacity: 0.15;
 }
 
-.d1 { top: 20%; left: 10%; animation: dataStream 6s infinite; }
-.d2 { bottom: 30%; right: 10%; animation: dataStream 8s infinite reverse; }
+.d1 { top: 15%; left: 5%; animation: dataStream 5s infinite; }
+.d2 { bottom: 20%; right: 5%; animation: dataStream 7s 1s infinite reverse; }
 
 @keyframes hubPulse {
     0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); }
-    50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(0,0,0,0.05)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(0,0,0,0.15)); }
 }
 
 @keyframes rotateHub {
@@ -521,14 +546,15 @@ body {
 }
 
 @keyframes floatNode {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(20px, 20px); }
+    0%, 100% { transform: translate(0, 0); opacity: 1; }
+    50% { transform: translate(15px, 15px); opacity: 0.5; }
 }
 
 @keyframes dataStream {
-    0% { transform: translateX(-50px); opacity: 0; }
-    50% { opacity: 0.2; }
-    100% { transform: translateX(100px); opacity: 0; }
+    0% { transform: translateX(-60px); opacity: 0; }
+    30% { opacity: 0.2; }
+    70% { opacity: 0.2; }
+    100% { transform: translateX(120px); opacity: 0; }
 }
 
 .about-location-tag {
