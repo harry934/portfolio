@@ -53,6 +53,74 @@ function playIntroSound() {
     document.body && document.body.classList.add('loading');
 })();
 
+/* ============================================================
+   TEXT ROLL — hero title character-by-character hover animation
+   Translates the Framer Motion TextRoll into vanilla JS + CSS.
+   Each .text-roll[data-text] span gets two character layers:
+     • .text-roll-top  — visible, rolls UP on hover
+     • .text-roll-bottom — hidden below, rises INTO VIEW on hover
+   Stagger delay mirrors the React original:
+     delay = STAGGER × |i − (len − 1) / 2|  (center-out)
+   ============================================================ */
+function initTextRoll() {
+    const STAGGER = 0.035;
+
+    document.querySelectorAll('.text-roll').forEach(roll => {
+        const text = roll.dataset.text;
+        if (!text) return;
+
+        const totalLen = text.length;
+        roll.innerHTML = '';
+
+        const words = text.split(' ');
+        let charIndex = 0; // Global char index for stagger across words
+
+        words.forEach((word, wordIdx) => {
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'word-roll';
+
+            word.split('').forEach((char) => {
+                // Center-out stagger based on total string length
+                const delay = STAGGER * Math.abs(charIndex - (totalLen - 1) / 2);
+
+                const charContainer = document.createElement('span');
+                charContainer.className = 'char-container';
+
+                const topLayer = document.createElement('span');
+                topLayer.className = 'char-top';
+                const topChar = document.createElement('span');
+                topChar.className = 'text-roll-char';
+                topChar.textContent = char;
+                topChar.style.transitionDelay = delay + 's';
+                topLayer.appendChild(topChar);
+
+                const bottomLayer = document.createElement('span');
+                bottomLayer.className = 'char-bottom';
+                bottomLayer.setAttribute('aria-hidden', 'true');
+                const bottomChar = document.createElement('span');
+                bottomChar.className = 'text-roll-char';
+                bottomChar.textContent = char;
+                bottomChar.style.transitionDelay = delay + 's';
+                bottomLayer.appendChild(bottomChar);
+
+                charContainer.appendChild(topLayer);
+                charContainer.appendChild(bottomLayer);
+                wordSpan.appendChild(charContainer);
+                
+                charIndex++;
+            });
+
+            roll.appendChild(wordSpan);
+
+            // Add space between words (as a text node for natural wrapping)
+            if (wordIdx < words.length - 1) {
+                roll.appendChild(document.createTextNode(' '));
+                charIndex++; // Increment index for the space
+            }
+        });
+    });
+}
+
 function revealPageContent() {
     // Each entry: [selector, CSS class, delay in seconds]
     const reveals = [
@@ -96,6 +164,9 @@ function dismissIntro() {
    MAIN SITE LOGIC
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
+    // ── Text Roll: build character layers before anything reveals ──
+    initTextRoll();
+
     // ── Intro: lock scroll, then dismiss ──
     document.body.classList.add('loading');
     setTimeout(dismissIntro, 600); // Short pause, then staircase sweeps away

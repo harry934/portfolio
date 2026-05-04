@@ -318,13 +318,77 @@ body {
     font-size: 4.5rem;
     line-height: 1;
     margin-bottom: 2rem;
-    letter-spacing: -3px;
+    letter-spacing: -1.5px; /* Stretched from -3px */
 }
 
 .hero-title .accent {
     font-weight: 300;
     color: #888;
-    letter-spacing: -1px;
+    letter-spacing: 0.5px; /* Stretched from -1px */
+}
+
+/* ── Text Roll Animation (Hero Title) ──
+   Two layers of character spans stack inside an overflow:hidden container.
+   On hover the top layer rolls upward, the bottom layer rises into view.
+   Per-character transition-delay is set by initTextRoll() in script.js.
+   ─────────────────────────────────────────────────────────────────────── */
+.text-roll {
+    display: inline;
+    letter-spacing: inherit;
+}
+
+/* Ensure words stay together and only wrap at spaces */
+.word-roll {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* Each character is its own roll container */
+.char-container {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    vertical-align: baseline;
+    line-height: 1.1; /* Added slight headroom to prevent clipping */
+    letter-spacing: inherit;
+}
+
+.char-top {
+    display: block;
+}
+
+.char-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+}
+
+.text-roll-char {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    letter-spacing: normal; /* Reset individual char spacing */
+}
+
+/* Initial state — bottom chars hidden below */
+.char-bottom .text-roll-char {
+    transform: translateY(100%);
+}
+
+/* Hover — top chars roll upward */
+.hero-title:hover .char-top .text-roll-char {
+    transform: translateY(-100%);
+}
+
+/* Hover — bottom chars rise into view */
+.hero-title:hover .char-bottom .text-roll-char {
+    transform: translateY(0%);
+}
+
+/* Cursor hint */
+.hero-title {
+    cursor: default;
 }
 
 .hero-subtitle {
@@ -389,8 +453,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45px;
-    height: 45px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     color: #4d4d4d;
     background-color: #fff;
@@ -406,8 +470,8 @@ body {
 .example-2 .icon-content a svg {
     position: relative;
     z-index: 1;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 .example-2 .icon-content a .filled {
