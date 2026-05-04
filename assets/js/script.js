@@ -52,9 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Typed.js ──
     new Typed('#typed', {
-        strings: ['Innovative Systems.', 'Scalable Software.', 'AI-Driven Solutions.', 'IoT Ecosystems.'],
+        strings: ['Fitness Advisor', 'Innovator', 'UI/UX Designer', 'Web Developer','Cyber Security Enthusiast','Junior DevOps'],
         typeSpeed: 40,
         backSpeed: 20,
+        backDelay: 1000,
         loop: true,
         cursorChar: '_'
     });
