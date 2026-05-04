@@ -88,18 +88,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Contact Form Smart Redirect ──
+    // ── Contact Form → Formspree ──
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        // 👇 Paste your Formspree endpoint here after signing up at formspree.io
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdwggdy';
+
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const btnText   = submitBtn.querySelector('span');
+
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name    = document.getElementById('contact-name').value;
-            const email   = document.getElementById('contact-email').value;
-            const message = document.getElementById('contact-message').value;
-            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-            const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-            window.location.href = `mailto:otienoharry876@gmail.com?subject=${subject}&body=${body}`;
-            contactForm.reset();
+
+            // Show sending state
+            submitBtn.disabled = true;
+            btnText.textContent = 'SENDING...';
+
+            const data = new FormData(contactForm);
+
+            try {
+                const res = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    btnText.textContent = 'MESSAGE SENT ✓';
+                    submitBtn.style.background = '#222';
+                    contactForm.reset();
+                    setTimeout(() => {
+                        btnText.textContent = 'SEND VIA EMAIL';
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                    }, 3000);
+                } else {
+                    throw new Error('Send failed');
+                }
+            } catch {
+                btnText.textContent = 'FAILED — TRY AGAIN';
+                submitBtn.disabled = false;
+                setTimeout(() => { btnText.textContent = 'SEND VIA EMAIL'; }, 3000);
+            }
         });
     }
 
