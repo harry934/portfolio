@@ -1,4 +1,51 @@
 /* ============================================================
+   PREMIUM INTRO SOUND  —  Web Audio API (no external file)
+   ============================================================ */
+function playIntroSound() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Cinematic chord: G3-B3-D4-G4 (pentatonic stack, staircase)
+        const notes = [196, 247, 294, 392]; // Hz
+        const stagger = 0.12;               // seconds between each note
+
+        notes.forEach((freq, i) => {
+            const osc  = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+            // Soft attack, long decay — like a piano key
+            gain.gain.setValueAtTime(0, ctx.currentTime + i * stagger);
+            gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i * stagger + 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * stagger + 1.8);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + i * stagger);
+            osc.stop(ctx.currentTime + i * stagger + 2.0);
+        });
+
+        // Optional: a soft high shimmer on top
+        const shimmer  = ctx.createOscillator();
+        const shimGain = ctx.createGain();
+        shimmer.type = 'sine';
+        shimmer.frequency.setValueAtTime(784, ctx.currentTime + 0.4); // G5
+        shimGain.gain.setValueAtTime(0, ctx.currentTime + 0.4);
+        shimGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.5);
+        shimGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.0);
+        shimmer.connect(shimGain);
+        shimGain.connect(ctx.destination);
+        shimmer.start(ctx.currentTime + 0.4);
+        shimmer.stop(ctx.currentTime + 2.2);
+
+    } catch (e) {
+        // Browser doesn't support Web Audio API — silent fail
+    }
+}
+
+/* ============================================================
    INTRO OVERLAY CONTROLLER
    ============================================================ */
 (function () {
@@ -29,26 +76,29 @@ function dismissIntro() {
     const overlay = document.getElementById('intro-overlay');
     if (!overlay) return;
 
-    // Trigger the split-away exit (CSS handles the animation)
+    // Play the cinematic intro chord
+    playIntroSound();
+
+    // Trigger the staircase exit (CSS handles the animation)
     overlay.classList.add('exit');
 
     // Kick off the page content staggered reveals
     revealPageContent();
 
-    // Fallback: fully hide and re-enable scroll after transition
+    // Last panel: delay 0.405s + transition 0.65s = ~1.06s total. Give margin.
     setTimeout(() => {
         overlay.classList.add('hidden');
         document.body.classList.remove('loading');
-    }, 1000);
+    }, 1400);
 }
 
 /* ============================================================
    MAIN SITE LOGIC
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
-    // ── Intro: lock scroll, then dismiss after intro plays ──
+    // ── Intro: lock scroll, then dismiss ──
     document.body.classList.add('loading');
-    setTimeout(dismissIntro, 400); // Brief pause then screen opens
+    setTimeout(dismissIntro, 600); // Short pause, then staircase sweeps away
 
     // ── Typed.js ──
     new Typed('#typed', {
