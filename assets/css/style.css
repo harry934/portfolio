@@ -316,15 +316,15 @@ body {
 
 .hero-title {
     font-size: 4.5rem;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 2rem;
-    letter-spacing: -1.5px; /* Stretched from -3px */
+    letter-spacing: 2px;
 }
 
 .hero-title .accent {
     font-weight: 300;
     color: #888;
-    letter-spacing: 0.5px; /* Stretched from -1px */
+    letter-spacing: 4px;
 }
 
 /* ── Text Roll Animation (Hero Title) ──
@@ -341,6 +341,7 @@ body {
 .word-roll {
     display: inline-block;
     white-space: nowrap;
+    letter-spacing: inherit;
 }
 
 /* Each character is its own roll container */
