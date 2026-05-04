@@ -50,11 +50,11 @@ body {
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Scrolled State: Show ONLY Hamburger */
 .header.scrolled {
-    background: transparent;
-    padding: 1.5rem 0;
-    pointer-events: none;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 1rem 0;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
 }
 
 .nav-flex {
@@ -67,8 +67,6 @@ body {
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -1.5px;
-    transition: all 0.4s ease;
-    pointer-events: all;
 }
 
 .logo span {
@@ -76,18 +74,10 @@ body {
     font-weight: 300;
 }
 
-/* Hide Logo on Scroll */
-.header.scrolled .logo {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-}
-
 .nav-links {
     display: flex;
     gap: 3rem;
     transition: all 0.4s ease;
-    pointer-events: all;
 }
 
 /* Hide Nav Links on Scroll */
@@ -114,7 +104,7 @@ body {
 
 /* Hamburger */
 .hamburger {
-    display: none; /* Hidden at top on desktop */
+    display: none; /* Hidden at top */
     flex-direction: column;
     gap: 6px;
     background: none;
@@ -122,7 +112,6 @@ body {
     cursor: pointer;
     z-index: 1002;
     padding: 10px;
-    pointer-events: all;
 }
 
 /* Show Hamburger on Scroll */
@@ -133,15 +122,15 @@ body {
 .hamburger span {
     display: block;
     width: 24px;
-    height: 1.5px;
+    height: 2px;
     background: #000;
     transition: all 0.3s ease;
 }
 
 /* Hamburger Animation */
-.hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* Mobile Menu / Scrolled Active Menu */
 .nav-links.active {
@@ -276,25 +265,70 @@ body {
 
 .bg-light { background-color: var(--bg-light); }
 
-/* About Grid */
+/* About Section Enhanced */
 .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 8rem;
     align-items: center;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+}
+
+.about-text .lead {
+    font-size: 1.2rem;
+    color: var(--text-main);
+    font-weight: 500;
+    margin-bottom: 2rem;
 }
 
 .about-text p {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     color: var(--text-muted);
-    font-size: 1.05rem;
+    font-size: 1rem;
+    line-height: 1.7;
 }
 
-.stat-item-minimal {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    font-weight: 500;
+.values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.value-item {
+    padding: 2rem;
+    background: #fdfdfd;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+    transition: var(--transition);
+}
+
+.value-item:hover {
+    background: #fff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    border-color: #000;
+}
+
+.value-item i {
+    font-size: 1.5rem;
+    color: #000;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.value-item h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.value-item p {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    line-height: 1.5;
 }
 
 /* Expertise Modern Grid */
@@ -710,7 +744,11 @@ body {
     transition: var(--transition);
     display: inline-flex;
     align-items: center;
+    gap: 0.8rem; /* Global icon spacing */
+    justify-content: center;
+    border-radius: 4px;
 }
+
 
 .btn-dark {
     background: #000;
