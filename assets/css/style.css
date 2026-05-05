@@ -942,73 +942,101 @@ body {
     padding: 40px 0;
 }
 
-/* Expertise Grid Minimal */
-.expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 4rem;
-}
+/* ── Expertise Section Redesign ── */
 
-.expertise-card {
-    background: transparent;
-    padding: 0;
-    border: none;
-    transition: var(--transition);
-    position: relative;
+.expertise-header {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 3.5rem;
+    border-left: 3px solid #000;
+    padding-left: 1.5rem;
 }
 
-.expertise-card::after {
-    content: '';
+.expertise-section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+}
+
+.expertise-section-sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.expertise-bento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.expertise-bento-card {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    border-radius: 24px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Ghost number watermark */
+.bento-num {
     position: absolute;
-    bottom: -20px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: #000;
-    transition: width 0.4s ease;
+    top: -18px;
+    right: 16px;
+    font-size: 7rem;
+    font-weight: 900;
+    color: #f2f2f2;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -4px;
+    transition: color 0.35s ease;
 }
 
-.expertise-card:hover::after {
-    width: 50px;
+.expertise-bento-card:hover {
+    border-color: #000;
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.07);
 }
 
-.expertise-card:hover {
-    transform: translateY(-5px);
+.expertise-bento-card:hover .bento-num {
+    color: #ebebeb;
 }
 
-.expertise-icon {
-    font-size: 1.5rem;
-    color: #000;
-    margin-bottom: 2rem;
-    opacity: 0.3;
-    transition: all 0.4s ease;
+/* Top row: icon + badge */
+.bento-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
-.expertise-card:hover .expertise-icon {
-    opacity: 1;
-    transform: scale(1.2);
+.bento-icon {
+    font-size: 1.6rem;
+    color: #111;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
 }
 
-.expertise-card h3 {
-    font-size: 1rem;
-    margin-bottom: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.expertise-bento-card:hover .bento-icon {
+    transform: scale(1.15);
 }
 
 /* Skill level badge */
-.expertise-skill-level {
-    margin-bottom: 0.75rem;
-}
-
 .skill-badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.28rem 0.85rem;
     border-radius: 50px;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -1020,38 +1048,64 @@ body {
 }
 
 .skill-intermediate {
-    background: #f0f0f0;
-    color: #555;
-    border: 1px solid #ddd;
+    background: #f2f2f2;
+    color: #666;
+    border: 1px solid #e0e0e0;
 }
 
+/* Card heading */
+.expertise-bento-card h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
 
-
-.expertise-card p {
-    font-size: 0.9rem;
+/* Card description */
+.expertise-bento-card p {
+    font-size: 0.88rem;
     color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 2rem;
+    line-height: 1.75;
+    flex: 1;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
-.expertise-tags {
+/* Tech tags */
+.bento-tags {
     display: flex;
-    gap: 1.2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
     margin-top: auto;
 }
 
-.expertise-tags span {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #bbb;
-    letter-spacing: 1px;
+.bento-tags span {
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    transition: color 0.3s ease;
+    letter-spacing: 1px;
+    color: #999;
+    background: #f7f7f7;
+    padding: 0.3rem 0.7rem;
+    border-radius: 50px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.expertise-card:hover .expertise-tags span {
-    color: #333;
+.expertise-bento-card:hover .bento-tags span {
+    background: #111;
+    color: #fff;
 }
+
+/* Keep old classes for any lingering references */
+.expertise-grid { display: none; }
+
+
 
 /* Resume Split Card */
 .resume-split-card {
@@ -1438,15 +1492,33 @@ body {
     }
 
     /* ── Expertise Section ── */
-    .expertise-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+    .expertise-bento-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .expertise-header {
+        margin-bottom: 2rem;
+    }
+
+    .expertise-section-title {
+        font-size: 1.5rem;
+    }
+
+    .bento-num {
+        font-size: 5rem;
+        top: -10px;
+    }
+
+    .expertise-bento-card {
+        padding: 2rem 1.5rem;
     }
 
     .section-heading {
         font-size: 1.5rem;
         margin-bottom: 2rem;
     }
+
 
     /* ── Portfolio Section ── */
     .portfolio-container {
@@ -1604,11 +1676,16 @@ body {
         height: 170px;
     }
 
-    /* Expertise — stack to 1 col on small phones */
-    .expertise-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+    /* Expertise — already 1 col from 768px, just tighten padding */
+    .expertise-bento-card {
+        padding: 1.5rem 1.25rem;
     }
+
+    .bento-num {
+        font-size: 4rem;
+    }
+
+
 
     /* Portfolio */
     .portfolio-container {
