@@ -157,7 +157,7 @@ function dismissIntro() {
     setTimeout(() => {
         overlay.classList.add('hidden');
         document.body.classList.remove('loading');
-    }, 1400);
+    }, 1400); 
 }
 
 /* ============================================================
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Intro: lock scroll, then dismiss ──
     document.body.classList.add('loading');
-    setTimeout(dismissIntro, 600); // Short pause, then staircase sweeps away
+    setTimeout(dismissIntro, 200); // Short pause, then staircase sweeps away
 
     // ── Typed.js ──
     new Typed('#typed', {
@@ -311,4 +311,17 @@ document.addEventListener('DOMContentLoaded', () => {
         section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
         observer.observe(section);
     });
+
+    // ── Back-to-top button ──
+    const backToTop = document.querySelector('.back-to-top');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    }
 });
+
