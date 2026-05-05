@@ -121,7 +121,114 @@ function initTextRoll() {
     });
 }
 
+/* ============================================================
+   EXPERTISE CARD — Perfectly smooth height animation
+   Measures real scrollHeight so transition knows exact target.
+   ============================================================ */
+function initExpCardSmooth() {
+    const COLLAPSED_H = 88; // px — dots row + title
+    document.querySelectorAll('.exp-card').forEach(card => {
+        // 1. Expand to natural height to measure it
+        card.style.height = 'auto';
+        card.style.overflow = 'visible';
+        const fullH = card.scrollHeight;
+
+        // 2. Snap back to collapsed (no animation yet)
+        card.style.transition = 'none';
+        card.style.height = COLLAPSED_H + 'px';
+        card.style.overflow = 'hidden';
+
+        // 3. Re-enable transition on next frame
+        requestAnimationFrame(() => {
+            card.style.transition = '';
+        });
+
+        // 4. Hover: animate to exact measured height
+        card.addEventListener('mouseenter', () => {
+            card.style.height = fullH + 'px';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.height = COLLAPSED_H + 'px';
+        });
+    });
+}
+
+/* ============================================================
+   EXPERTISE NETWORK CANVAS — Animated node-line network
+   Draws at low opacity in the section background.
+   ============================================================ */
+function initExpertiseNetwork() {
+    const canvas = document.getElementById('expertise-network');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const section = canvas.parentElement;
+    let animFrame;
+
+    function resize() {
+        canvas.width  = section.offsetWidth;
+        canvas.height = section.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); });
+
+    const NODE_COUNT = 28;
+    const MAX_DIST   = 130;
+    const SPEED      = 0.35;
+
+    const nodes = Array.from({ length: NODE_COUNT }, () => ({
+        x:  Math.random() * canvas.width,
+        y:  Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * SPEED,
+        vy: (Math.random() - 0.5) * SPEED,
+        r:  1.5 + Math.random() * 1.5
+    }));
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw connecting lines
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx   = nodes[i].x - nodes[j].x;
+                const dy   = nodes[i].y - nodes[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MAX_DIST) {
+                    const alpha = (1 - dist / MAX_DIST) * 0.12;
+                    ctx.strokeStyle = `rgba(0,0,0,${alpha})`;
+                    ctx.lineWidth   = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Draw nodes
+        nodes.forEach(node => {
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.10)';
+            ctx.fill();
+        });
+
+        // Move nodes (bounce off edges)
+        nodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+            if (node.x < 0 || node.x > canvas.width)  node.vx *= -1;
+            if (node.y < 0 || node.y > canvas.height)  node.vy *= -1;
+        });
+
+        animFrame = requestAnimationFrame(draw);
+    }
+
+    draw();
+}
+
 function revealPageContent() {
+
     // Each entry: [selector, CSS class, delay in seconds]
     const reveals = [
         ['#main-nav',          'reveal-nav',   0.0],
@@ -166,6 +273,10 @@ function dismissIntro() {
 document.addEventListener('DOMContentLoaded', () => {
     // ── Text Roll: build character layers before anything reveals ──
     initTextRoll();
+
+    // ── Expertise Card: smooth expand + network canvas ──
+    initExpCardSmooth();
+    initExpertiseNetwork();
 
     // ── Intro: lock scroll, then dismiss ──
     document.body.classList.add('loading');

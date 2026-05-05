@@ -944,6 +944,29 @@ body {
 
 /* ── Expertise Section Redesign ── */
 
+/* Section: needs relative so canvas fills it */
+.expertise-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Network canvas — absolutely fills the section */
+.expertise-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 1;
+}
+
+/* Container sits above the canvas */
+.expertise-container {
+    position: relative;
+    z-index: 1;
+}
+
 .expertise-header {
     display: flex;
     flex-direction: column;
@@ -982,20 +1005,42 @@ body {
     border-left: 2px solid rgba(0, 0, 0, 0.04);
     box-shadow: -18px 28px 40px rgba(0, 0, 0, 0.07);
     transform: skewX(6deg);
-    /* Tight max-height range = silky smooth transition */
-    transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
-                transform   0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow  0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    /* JS sets exact height — CSS just defines the transition speed */
+    transition: height     0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                transform  0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     color: var(--text-main);
-    max-height: 90px; /* Collapsed — dots row + title only */
+    position: relative; /* for ::before dot grid */
     cursor: default;
 }
 
+/* Subtle dot-grid pattern on card background */
+.exp-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+    transition: opacity 0.45s ease;
+}
+
+.exp-card:hover::before {
+    opacity: 1;
+}
+
 .exp-card:hover {
-    max-height: 320px; /* Close to real content height = smooth */
     transform: skewX(0deg);
     box-shadow: -8px 20px 40px rgba(0, 0, 0, 0.10);
+}
+
+/* All card children sit above the dot-grid */
+.exp-dots, .exp-card h3, .exp-card p, .exp-tags {
+    position: relative;
+    z-index: 1;
 }
 
 /* Traffic-light dot row */
@@ -1505,11 +1550,12 @@ body {
         font-size: 1.5rem;
     }
 
-    /* On mobile: remove skew (overflow risk) and show full content */
+    /* On mobile: no skew, always fully visible, no hover needed */
     .exp-card {
         transform: skewX(0deg) !important;
-        max-height: none !important; /* Always expanded on mobile */
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        height: auto !important;     /* Override JS inline height */
+        overflow: visible !important;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
     }
 
     .section-heading {
