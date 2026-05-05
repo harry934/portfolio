@@ -999,6 +999,34 @@ body {
     text-transform: uppercase;
 }
 
+/* Skill level badge */
+.expertise-skill-level {
+    margin-bottom: 0.75rem;
+}
+
+.skill-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.skill-advanced {
+    background: #000;
+    color: #fff;
+}
+
+.skill-intermediate {
+    background: #f0f0f0;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+
+
 .expertise-card p {
     font-size: 0.9rem;
     color: var(--text-muted);
