@@ -970,10 +970,9 @@ body {
 .expertise-header {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     margin-bottom: 3.5rem;
-    border-left: 3px solid #000;
-    padding-left: 1.5rem;
 }
 
 .expertise-section-title {
@@ -1252,6 +1251,7 @@ body {
     font-weight: 700;
     color: #999;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .expertise-chips {
@@ -1301,6 +1301,154 @@ body {
 .tech-tile:hover i {
     transform: scale(1.12);
 }
+
+/* ══════════════════════════════════════════
+   SOCIAL ORBIT — Core Expertise
+   Ring 1 (inner Ø180px): clockwise  20s
+   Ring 2 (outer Ø260px): counter-CW 30s
+   Icons counter-rotate to stay upright
+   ══════════════════════════════════════════ */
+.social-orbit-wrap {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 2rem auto 1rem;
+}
+
+/* Expanding ripple rings from center */
+.orb-ripple {
+    position: absolute;
+    top: 50%; left: 50%;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.07);
+    pointer-events: none;
+    animation: orb-ripple-expand 2.8s ease-out infinite;
+}
+.orb-r1 { animation-delay: 0s; }
+.orb-r2 { animation-delay: 0.93s; }
+.orb-r3 { animation-delay: 1.86s; }
+
+@keyframes orb-ripple-expand {
+    0%   { width: 64px;  height: 64px;  transform: translate(-50%,-50%); opacity: 0.8; }
+    100% { width: 296px; height: 296px; transform: translate(-50%,-50%); opacity: 0; }
+}
+
+/* Center badge — light, fits 'Tech Stack' */
+.orb-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.orb-center span {
+    font-size: 0.44rem;
+    font-weight: 800;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    line-height: 1.4;
+    font-family: var(--font-main, inherit);
+}
+
+/* Orbit rings */
+.orb-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,0,0,0.08);
+}
+
+.orb-ring-1 {
+    width: 180px; height: 180px;
+    transform: translate(-50%,-50%);
+    animation: orb-cw 20s linear infinite;
+}
+.orb-ring-2 {
+    width: 264px; height: 264px;
+    transform: translate(-50%,-50%);
+    animation: orb-ccw 30s linear infinite;
+}
+
+@keyframes orb-cw  { to { transform: translate(-50%,-50%) rotate(360deg); } }
+@keyframes orb-ccw { to { transform: translate(-50%,-50%) rotate(-360deg); } }
+
+/* Icon items — placed at ring's top, rotated to --a via transform-origin at ring center */
+.orb-item {
+    position: absolute;
+    width: 36px; height: 36px;
+    top: -18px;
+    left: calc(50% - 18px);
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: default;
+}
+
+/* Name tooltip — appears above icon on hover */
+.orb-item::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: calc(100% + 7px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateX(-50%) translateY(4px);
+    z-index: 50;
+}
+.orb-item:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.orb-item:hover {
+    border-color: #bbb;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.orb-item i { font-size: 1.1rem; line-height: 1; }
+
+/* Ring-1 items: transform-origin = (18px, 90+18=108px) */
+.orb-ring-1 .orb-item {
+    transform-origin: 18px 108px;
+    transform: rotate(var(--a));
+}
+.orb-ring-1 .orb-item i {
+    animation: orb-counter-cw 20s linear infinite;
+}
+
+/* Ring-2 items: transform-origin = (18px, 132+18=150px) */
+.orb-ring-2 .orb-item {
+    transform-origin: 18px 150px;
+    transform: rotate(var(--a));
+}
+.orb-ring-2 .orb-item i {
+    animation: orb-counter-ccw 30s linear infinite;
+}
+
+@keyframes orb-counter-cw  { to { transform: rotate(-360deg); } }
+@keyframes orb-counter-ccw { to { transform: rotate(360deg); } }
+
+
 
 .resume-right p {
     font-size: 1.1rem;
