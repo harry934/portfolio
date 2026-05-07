@@ -1,26 +1,11 @@
 :root {
-    /* Base Colors */
     --bg-white: #ffffff;
     --bg-light: #f9f9f9;
-    --bg-dark: #111111;
-    
-    /* Text Colors */
     --text-main: #1a1a1a;
     --text-muted: #666666;
-    --text-light: #999999;
-    
-    /* Brand Colors */
-    --accent: #000000;
-    --accent-soft: #333333;
-    --accent-gray: #bbb;
-    
-    /* Functional Tokens */
-    --border-color: #f0f0f0;
+    --accent: #333333;
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    --shadow-soft: 0 10px 40px rgba(0,0,0,0.05);
-    --shadow-bold: 0 40px 80px rgba(0,0,0,0.1);
 }
-
 
 /* ============================================================
    INTRO / LOADING OVERLAY  —  10-COLUMN STAIRCASE REVEAL
@@ -160,42 +145,6 @@ body.loading {
     padding: 0;
     box-sizing: border-box;
 }
-
-.skip-to-content {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    background: var(--accent-color, #000);
-    color: #fff;
-    padding: 8px 16px;
-    z-index: 9999;
-    transition: top 0.3s;
-}
-
-.skip-to-content:focus {
-    top: 0;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--bg-white);
-}
-
-::-webkit-scrollbar-thumb {
-    background: #e0e0e0;
-    border-radius: 5px;
-    border: 3px solid var(--bg-white);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #bbb;
-}
-
-
 
 body {
     font-family: 'Inter', sans-serif;
@@ -1621,20 +1570,15 @@ body {
 }
 
 .btn-dark:hover {
-    color: var(--accent);
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: var(--shadow-soft);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .btn-dark:hover::before {
     transform: scaleY(1);
     transform-origin: bottom;
 }
-
-.btn-dark:active {
-    transform: translateY(-2px) scale(0.98);
-}
-
 
 .btn-outline {
     background: transparent;
@@ -1658,19 +1602,14 @@ body {
 
 .btn-outline:hover {
     color: #fff;
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: var(--shadow-soft);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .btn-outline:hover::before {
     transform: scaleY(1);
     transform-origin: bottom;
 }
-
-.btn-outline:active {
-    transform: translateY(-2px) scale(0.98);
-}
-
 
 /* Footer */
 .footer-simple {
