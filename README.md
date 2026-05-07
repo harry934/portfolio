@@ -10,3 +10,16 @@ This project is a high-end, responsive portfolio designed with a focus on minima
 - **Libraries:** Typed.js, Bootstrap Icons, Devicons
 - **Design:** Minimalist, Glassmorphism, Responsive Grid
 
+## Project Structure
+```text
+.
+├── assets/
+│   ├── css/        # Stylesheets
+│   ├── img/        # Images and assets
+│   ├── js/         # JavaScript logic
+│   └── pdf/        # Documents (Resume)
+├── index.html      # Main entry point
+└── README.md       # Project documentation
+```
+
+
