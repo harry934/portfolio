@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://harry934.github.io/newportfolio/sitemap.xml
