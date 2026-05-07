@@ -176,6 +176,26 @@ body.loading {
     top: 0;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-white);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 5px;
+    border: 3px solid var(--bg-white);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bbb;
+}
+
+
 
 body {
     font-family: 'Inter', sans-serif;
