@@ -1,11 +1,26 @@
 :root {
+    /* Base Colors */
     --bg-white: #ffffff;
     --bg-light: #f9f9f9;
+    --bg-dark: #111111;
+    
+    /* Text Colors */
     --text-main: #1a1a1a;
     --text-muted: #666666;
-    --accent: #333333;
+    --text-light: #999999;
+    
+    /* Brand Colors */
+    --accent: #000000;
+    --accent-soft: #333333;
+    --accent-gray: #bbb;
+    
+    /* Functional Tokens */
+    --border-color: #f0f0f0;
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --shadow-soft: 0 10px 40px rgba(0,0,0,0.05);
+    --shadow-bold: 0 40px 80px rgba(0,0,0,0.1);
 }
+
 
 /* ============================================================
    INTRO / LOADING OVERLAY  —  10-COLUMN STAIRCASE REVEAL
