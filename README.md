@@ -22,4 +22,12 @@ This project is a high-end, responsive portfolio designed with a focus on minima
 └── README.md       # Project documentation
 ```
 
+## Getting Started
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/harry934/newportfolio.git
+   ```
+2. Open `index.html` in your browser or use a live server extension.
+
+
 
