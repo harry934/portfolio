@@ -127,10 +127,23 @@ if (printBtn) {
 }
 
 /* ──────────────────────────────────────────────────────────
-   On page load — DO NOT auto-unlock from session.
-   User must re-enter password every visit (session cleared on load).
+   Back to Portfolio link — clear session so user is locked out
+   when they return from the portfolio page.
+   ────────────────────────────────────────────────────────── */
+const backBtn = document.querySelector('a[href="index.html"]');
+if (backBtn) {
+    backBtn.addEventListener('click', () => {
+        sessionStorage.removeItem(SESSION_KEY);
+    });
+}
+
+/* ──────────────────────────────────────────────────────────
+   On page load — restore session if still valid (e.g. after refresh).
+   Only locked out when navigating back to portfolio.
    ────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-    // Always require re-entry — clear any stored session on page load
-    sessionStorage.removeItem(SESSION_KEY);
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        gate.style.display = 'none';
+        cvWrapper.classList.add('cv-visible');
+    }
 });
