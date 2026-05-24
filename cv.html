@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV — Harry Otieno Mokaya | Software Engineer</title>
+    <meta name="description" content="Professional Curriculum Vitae of Harry Otieno Mokaya, Software Engineer based in Nairobi, Kenya. Password-protected for privacy.">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- CV Styles -->
+    <link rel="stylesheet" href="assets/css/cv.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PASSWORD GATE OVERLAY
+     ═══════════════════════════════════════════════════════════ -->
+<div id="cv-gate" role="dialog" aria-modal="true" aria-label="CV Password Gate">
+    <div class="gate-card">
+
+        <div class="gate-icon-ring" aria-hidden="true">
+            <i class="bi bi-lock-fill"></i>
+        </div>
+
+        <h1 class="gate-title">Protected CV</h1>
+        <p class="gate-subtitle">This document is password-protected.<br>Enter the access code to continue.</p>
+
+        <form id="gate-form" autocomplete="off" novalidate>
+            <div class="gate-input-wrap">
+                <i class="bi bi-key-fill gate-input-icon" aria-hidden="true"></i>
+                <input
+                    id="gate-input"
+                    type="password"
+                    placeholder="Enter access code…"
+                    autocomplete="current-password"
+                    aria-label="Password"
+                    autofocus
+                    required
+                >
+                <button type="button" class="gate-toggle-vis" id="gate-toggle-vis" aria-label="Show or hide password" tabindex="-1">
+                    <i class="bi bi-eye" id="gate-toggle-icon"></i>
+                </button>
+            </div>
+
+            <span id="gate-error" role="alert" aria-live="polite"></span>
+
+            <button type="submit" class="gate-btn-primary" id="gate-submit-btn">
+                Unlock CV
+            </button>
+        </form>
+
+        <div class="gate-divider" aria-hidden="true">OR</div>
+
+        <a href="index.html#contact" class="gate-btn-ghost">
+            <i class="bi bi-chat-dots"></i>
+            Don't know the password? Request access
+        </a>
+
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CV WRAPPER  (hidden until unlocked)
+     ═══════════════════════════════════════════════════════════ -->
+<div id="cv-wrapper">
+
+    <!-- ── Utility Bar ── -->
+    <div class="cv-util-bar" role="toolbar" aria-label="CV utilities">
+        <span class="cv-util-brand">Harry Otieno &mdash; CV</span>
+        <div class="cv-util-actions">
+            <button id="cv-print-btn" class="cv-util-btn cv-util-btn-white" aria-label="Download CV as PDF">
+                <i class="bi bi-download"></i> Download CV
+            </button>
+            <a href="index.html" class="cv-util-btn cv-util-btn-light" aria-label="Back to portfolio">
+                <i class="bi bi-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CV DOCUMENT
+         ═══════════════════════════════════════════════════════ -->
+    <main>
+        <article class="cv-document" role="main" aria-label="Curriculum Vitae">
+
+            <!-- ──────────────────────────────────────────────
+                 SIDEBAR
+                 ────────────────────────────────────────────── -->
+            <aside class="cv-sidebar">
+
+                <!-- Name / Role -->
+                <div class="cv-profile-block">
+                    <h2 class="cv-name">Harry Otieno<br>Mokaya</h2>
+                    <p class="cv-role">Software Engineer</p>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <p class="cv-sidebar-section-title">Contact</p>
+                    <ul class="cv-contact-list">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>Nairobi, Kenya</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <a href="tel:+254112601334">+254 112 601 334</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <a href="mailto:otienoharry876@gmail.com">otienoharry876@gmail.com</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-linkedin"></i>
+                            <a href="https://linkedin.com/in/harry-otieno-mokaya-882068218/" target="_blank" rel="noopener">LinkedIn Profile</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-github"></i>
+                            <a href="https://github.com/harry934" target="_blank" rel="noopener">github.com/harry934</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Technical Skills -->
+                <div>
+                    <p class="cv-sidebar-section-title">Technical Skills</p>
+                    <ul class="cv-skills-list">
+                        <li>React / Next.js</li>
+                        <li>Node.js / Express</li>
+                        <li>TypeScript / JavaScript</li>
+                        <li>Python / scikit-learn</li>
+                        <li>TensorFlow / Keras</li>
+                        <li>Java / Kotlin (Android)</li>
+                        <li>MongoDB / Firebase</li>
+                        <li>REST APIs</li>
+                        <li>Arduino / ESP32 (IoT)</li>
+                        <li>Git / GitHub / CI/CD</li>
+                        <li>Linux / Bash</li>
+                        <li>Docker (Fundamentals)</li>
+                    </ul>
+                </div>
+
+                <!-- Soft Skills -->
+                <div>
+                    <p class="cv-sidebar-section-title">Soft Skills</p>
+                    <ul class="cv-skills-list">
+                        <li>Problem Solving</li>
+                        <li>Team Collaboration</li>
+                        <li>Technical Communication</li>
+                        <li>Self-directed Learning</li>
+                        <li>Agile / Scrum Awareness</li>
+                    </ul>
+                </div>
+
+                <!-- Languages -->
+                <div>
+                    <p class="cv-sidebar-section-title">Languages</p>
+                    <div class="cv-lang-list">
+                        <div class="cv-lang-item">
+                            <span class="cv-lang-name">English</span>
+                            <span class="cv-lang-level">Fluent</span>
+                        </div>
+                        <div class="cv-lang-item">
+                            <span class="cv-lang-name">Swahili</span>
+                            <span class="cv-lang-level">Native</span>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- ──────────────────────────────────────────────
+                 MAIN BODY
+                 ────────────────────────────────────────────── -->
+            <div class="cv-main">
+
+                <!-- Professional Summary -->
+                <section class="cv-section cv-summary">
+                    <div class="cv-section-header">
+                        <i class="bi bi-person-badge" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">Professional Summary</h3>
+                    </div>
+                    <p>Results-driven Software Engineer from Nairobi, Kenya with hands-on experience across full-stack web development, Android mobile applications, machine learning pipelines, and IoT systems. Passionate about building practical, scalable solutions that solve real-world problems. Equally comfortable working independently or as part of a cross-functional team, with a track record of delivering clean, maintainable code across diverse technology stacks.</p>
+                </section>
+
+                <!-- Education -->
+                <section class="cv-section">
+                    <div class="cv-section-header">
+                        <i class="bi bi-mortarboard-fill" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">Education</h3>
+                    </div>
+                    <div class="cv-timeline">
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">BSc. Computer Science</span>
+                                    <span class="cv-entry-date">2022 &ndash; Present</span>
+                                </div>
+                                <p class="cv-entry-org">Dedan Kimathi University of Technology, Nyeri</p>
+                                <div class="cv-entry-body">
+                                    Core coursework: Data Structures &amp; Algorithms, Operating Systems, Database Systems, Software Engineering, Artificial Intelligence, Computer Networks, and Mobile Application Development.
+                                </div>
+                                <div class="cv-tags">
+                                    <span class="cv-tag">Computer Science</span>
+                                    <span class="cv-tag">DeKUT</span>
+                                    <span class="cv-tag">Undergraduate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">Kenya Certificate of Secondary Education (KCSE)</span>
+                                    <span class="cv-entry-date">2018 &ndash; 2021</span>
+                                </div>
+                                <p class="cv-entry-org">Rapogi High School, Migori</p>
+                                <div class="cv-entry-body">
+                                    Grade: B+ &mdash; Strong foundation in Mathematics and Sciences.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Work Experience -->
+                <section class="cv-section">
+                    <div class="cv-section-header">
+                        <i class="bi bi-briefcase-fill" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">Work Experience</h3>
+                    </div>
+                    <div class="cv-timeline">
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">Freelance Software Developer</span>
+                                    <span class="cv-entry-date">2023 &ndash; Present</span>
+                                </div>
+                                <p class="cv-entry-org">Self-Employed &mdash; Remote</p>
+                                <div class="cv-entry-body">
+                                    <ul>
+                                        <li>Designed and deployed full-stack web applications for clients using React, Node.js and MongoDB.</li>
+                                        <li>Built RESTful APIs with authentication (JWT), integrated third-party services and managed cloud deployments.</li>
+                                        <li>Delivered Android mobile apps in Kotlin using MVVM architecture, Room DB and Retrofit.</li>
+                                        <li>Created IoT prototypes using Arduino and ESP32 with real-time MQTT dashboards.</li>
+                                    </ul>
+                                </div>
+                                <div class="cv-tags">
+                                    <span class="cv-tag">React</span>
+                                    <span class="cv-tag">Node.js</span>
+                                    <span class="cv-tag">MongoDB</span>
+                                    <span class="cv-tag">Kotlin</span>
+                                    <span class="cv-tag">IoT</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">Industrial Attachment — Software Engineering</span>
+                                    <span class="cv-entry-date">Jan 2025 &ndash; Apr 2025</span>
+                                </div>
+                                <p class="cv-entry-org">TechOrg Kenya &mdash; Nairobi</p>
+                                <div class="cv-entry-body">
+                                    <ul>
+                                        <li>Contributed to a team building a web-based inventory management system using React and Express.js.</li>
+                                        <li>Wrote unit and integration tests, participated in daily standups and sprint retrospectives under an Agile workflow.</li>
+                                        <li>Improved API response times by refactoring database queries and adding Redis caching.</li>
+                                    </ul>
+                                </div>
+                                <div class="cv-tags">
+                                    <span class="cv-tag">React</span>
+                                    <span class="cv-tag">Express.js</span>
+                                    <span class="cv-tag">Agile</span>
+                                    <span class="cv-tag">Redis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Key Projects -->
+                <section class="cv-section">
+                    <div class="cv-section-header">
+                        <i class="bi bi-code-slash" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">Key Projects</h3>
+                    </div>
+                    <div class="cv-timeline">
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">FitTrack — Fitness &amp; Wellness App</span>
+                                    <span class="cv-entry-date">2024</span>
+                                </div>
+                                <div class="cv-entry-body">
+                                    Full-stack MERN fitness tracking application featuring workout logging, progress charts and user authentication. Deployed on Vercel with a MongoDB Atlas backend.
+                                </div>
+                                <div class="cv-tags">
+                                    <span class="cv-tag">MongoDB</span>
+                                    <span class="cv-tag">Express</span>
+                                    <span class="cv-tag">React</span>
+                                    <span class="cv-tag">Node.js</span>
+                                    <span class="cv-tag">Chart.js</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">Sentiment Analysis — NLP Pipeline</span>
+                                    <span class="cv-entry-date">2024</span>
+                                </div>
+                                <div class="cv-entry-body">
+                                    Trained a binary sentiment classifier on Twitter data using Python, NLTK and scikit-learn (SVM). Achieved 87% accuracy on the test set with a custom feature engineering pipeline.
+                                </div>
+                                <div class="cv-tags">
+                                    <span class="cv-tag">Python</span>
+                                    <span class="cv-tag">scikit-learn</span>
+                                    <span class="cv-tag">NLTK</span>
+                                    <span class="cv-tag">NLP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">Smart Home Monitor — IoT Dashboard</span>
+                                    <span class="cv-entry-date">2023</span>
+                                </div>
+                                <div class="cv-entry-body">
+                                    ESP32-based environmental monitoring system (temperature, humidity, motion) with real-time MQTT data streamed to a React dashboard and Firebase database.
+                                </div>
+                                <div class="cv-tags">
+                                    <span class="cv-tag">ESP32</span>
+                                    <span class="cv-tag">MQTT</span>
+                                    <span class="cv-tag">React</span>
+                                    <span class="cv-tag">Firebase</span>
+                                    <span class="cv-tag">C++</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Volunteering -->
+                <section class="cv-section">
+                    <div class="cv-section-header">
+                        <i class="bi bi-people-fill" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">Volunteering</h3>
+                    </div>
+                    <div class="cv-timeline">
+
+                        <div class="cv-entry">
+                            <div class="cv-entry-dot" aria-hidden="true"></div>
+                            <div class="cv-entry-content">
+                                <div class="cv-entry-header">
+                                    <span class="cv-entry-title">Tech Mentor — Coding Bootcamp</span>
+                                    <span class="cv-entry-date">2024 &ndash; Present</span>
+                                </div>
+                                <p class="cv-entry-org">DeKUT Tech Club &mdash; Nyeri</p>
+                                <div class="cv-entry-body">
+                                    Mentored first and second year students in Python fundamentals, web development basics and Git version control during weekly Saturday coding sessions.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Awards & Certifications -->
+                <section class="cv-section">
+                    <div class="cv-section-header">
+                        <i class="bi bi-trophy-fill" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">Awards &amp; Certifications</h3>
+                    </div>
+                    <div class="cv-award-grid">
+
+                        <div class="cv-award-card">
+                            <p class="cv-award-title">Google Developers Certificate</p>
+                            <p class="cv-award-body">Android Development with Kotlin &mdash; Completed Jetpack Compose fundamentals track.</p>
+                        </div>
+
+                        <div class="cv-award-card">
+                            <p class="cv-award-title">Coursera: Deep Learning Specialization</p>
+                            <p class="cv-award-body">deeplearning.ai — Completed 4 of 5 courses covering CNNs, RNNs, and optimisation.</p>
+                        </div>
+
+                        <div class="cv-award-card">
+                            <p class="cv-award-title">Hackathon — 2nd Place</p>
+                            <p class="cv-award-body">DeKUT Annual Hackathon 2024 — AgriTech IoT monitoring solution.</p>
+                        </div>
+
+                        <div class="cv-award-card">
+                            <p class="cv-award-title">freeCodeCamp</p>
+                            <p class="cv-award-body">Responsive Web Design &amp; JavaScript Algorithms and Data Structures certifications.</p>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- References -->
+                <section class="cv-section">
+                    <div class="cv-section-header">
+                        <i class="bi bi-person-check-fill" aria-hidden="true"></i>
+                        <h3 class="cv-section-title">References</h3>
+                    </div>
+                    <div class="cv-ref-note">
+                        Professional references are available upon request. Please reach out via the contact form on my portfolio at <a href="index.html#contact" style="color:inherit;font-weight:600;">harry-portfolio.dev</a> or send an email to <a href="mailto:otienoharry876@gmail.com" style="color:inherit;font-weight:600;">otienoharry876@gmail.com</a>.
+                    </div>
+                </section>
+
+            </div><!-- /.cv-main -->
+        </article><!-- /.cv-document -->
+    </main>
+
+    <footer class="cv-doc-footer">
+        &copy; 2025 Harry Otieno Mokaya &mdash; Software Engineer, Nairobi, Kenya
+    </footer>
+
+</div><!-- /#cv-wrapper -->
+
+<script src="assets/js/cv.js"></script>
+</body>
+</html>
