@@ -1,16 +1,15 @@
 /* ============================================================
    PREMIUM INTRO SOUND  —  Web Audio API (no external file)
-   Browsers block AudioContext autoplay without a user gesture.
-   Strategy: create the context immediately, then resume it on
-   the first user interaction (click / touch / keydown) and
-   play the chord at that moment.
+   Called directly from the overlay click handler, so the
+   AudioContext is created inside a user gesture — no autoplay
+   policy issues.
    ============================================================ */
-(function () {
-    let _audioCtx = null;
-    let _soundScheduled = false;
+function playIntroSound() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-    function _scheduleChord(ctx) {
-        const notes = [196, 247, 294, 392]; // G3-B3-D4-G4
+        // Cinematic chord: G3-B3-D4-G4
+        const notes   = [196, 247, 294, 392];
         const stagger = 0.12;
 
         notes.forEach((freq, i) => {
@@ -20,6 +19,7 @@
             osc.type = 'sine';
             osc.frequency.setValueAtTime(freq, ctx.currentTime);
 
+            // Soft attack, long decay — like a piano key
             gain.gain.setValueAtTime(0, ctx.currentTime + i * stagger);
             gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i * stagger + 0.08);
             gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * stagger + 1.8);
@@ -34,7 +34,7 @@
         const shimmer  = ctx.createOscillator();
         const shimGain = ctx.createGain();
         shimmer.type = 'sine';
-        shimmer.frequency.setValueAtTime(784, ctx.currentTime + 0.4);
+        shimmer.frequency.setValueAtTime(784, ctx.currentTime + 0.4); // G5
         shimGain.gain.setValueAtTime(0, ctx.currentTime + 0.4);
         shimGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.5);
         shimGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.0);
@@ -42,39 +42,11 @@
         shimGain.connect(ctx.destination);
         shimmer.start(ctx.currentTime + 0.4);
         shimmer.stop(ctx.currentTime + 2.2);
+
+    } catch (e) {
+        // Browser doesn't support Web Audio API — silent fail
     }
-
-    // Called by dismissIntro() — creates the context early so it's ready.
-    window.playIntroSound = function () {
-        try {
-            _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-            if (_audioCtx.state === 'running') {
-                // Context already running (rare on page load, but handle it)
-                _scheduleChord(_audioCtx);
-                _soundScheduled = true;
-            } else {
-                // Suspended — wait for the first user gesture then play
-                const EVENTS = ['click', 'touchstart', 'keydown', 'pointerdown'];
-
-                function onFirstGesture() {
-                    if (_soundScheduled) return;
-                    _soundScheduled = true;
-
-                    EVENTS.forEach(ev => window.removeEventListener(ev, onFirstGesture, true));
-
-                    _audioCtx.resume().then(() => {
-                        _scheduleChord(_audioCtx);
-                    }).catch(() => {});
-                }
-
-                EVENTS.forEach(ev => window.addEventListener(ev, onFirstGesture, { capture: true, once: false }));
-            }
-        } catch (e) {
-            // Browser doesn't support Web Audio API — silent fail
-        }
-    };
-})();
+}
 
 /* ============================================================
    INTRO OVERLAY CONTROLLER
@@ -309,9 +281,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initExpCardSmooth();
     initExpertiseNetwork();
 
-    // ── Intro: lock scroll, then dismiss ──
+    // ── Intro: lock scroll, then dismiss on first click ──
     document.body.classList.add('loading');
-    setTimeout(dismissIntro, 200); // Short pause, then staircase sweeps away
+
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', function onEnterClick() {
+            overlay.removeEventListener('click', onEnterClick);
+            dismissIntro();
+        });
+    }
 
     // ── Typed.js ──
     new Typed('#typed', {
