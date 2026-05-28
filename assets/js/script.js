@@ -1,13 +1,17 @@
 /* ============================================================
    PREMIUM INTRO SOUND  —  Web Audio API (no external file)
+   Browsers block AudioContext autoplay without a user gesture.
+   Strategy: create the context immediately, then resume it on
+   the first user interaction (click / touch / keydown) and
+   play the chord at that moment.
    ============================================================ */
-function playIntroSound() {
-    try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+(function () {
+    let _audioCtx = null;
+    let _soundScheduled = false;
 
-        // Cinematic chord: G3-B3-D4-G4 (pentatonic stack, staircase)
-        const notes = [196, 247, 294, 392]; // Hz
-        const stagger = 0.12;               // seconds between each note
+    function _scheduleChord(ctx) {
+        const notes = [196, 247, 294, 392]; // G3-B3-D4-G4
+        const stagger = 0.12;
 
         notes.forEach((freq, i) => {
             const osc  = ctx.createOscillator();
@@ -16,7 +20,6 @@ function playIntroSound() {
             osc.type = 'sine';
             osc.frequency.setValueAtTime(freq, ctx.currentTime);
 
-            // Soft attack, long decay — like a piano key
             gain.gain.setValueAtTime(0, ctx.currentTime + i * stagger);
             gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i * stagger + 0.08);
             gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * stagger + 1.8);
@@ -27,11 +30,11 @@ function playIntroSound() {
             osc.stop(ctx.currentTime + i * stagger + 2.0);
         });
 
-        // Optional: a soft high shimmer on top
+        // Soft high shimmer on top
         const shimmer  = ctx.createOscillator();
         const shimGain = ctx.createGain();
         shimmer.type = 'sine';
-        shimmer.frequency.setValueAtTime(784, ctx.currentTime + 0.4); // G5
+        shimmer.frequency.setValueAtTime(784, ctx.currentTime + 0.4);
         shimGain.gain.setValueAtTime(0, ctx.currentTime + 0.4);
         shimGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.5);
         shimGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.0);
@@ -39,11 +42,39 @@ function playIntroSound() {
         shimGain.connect(ctx.destination);
         shimmer.start(ctx.currentTime + 0.4);
         shimmer.stop(ctx.currentTime + 2.2);
-
-    } catch (e) {
-        // Browser doesn't support Web Audio API — silent fail
     }
-}
+
+    // Called by dismissIntro() — creates the context early so it's ready.
+    window.playIntroSound = function () {
+        try {
+            _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+            if (_audioCtx.state === 'running') {
+                // Context already running (rare on page load, but handle it)
+                _scheduleChord(_audioCtx);
+                _soundScheduled = true;
+            } else {
+                // Suspended — wait for the first user gesture then play
+                const EVENTS = ['click', 'touchstart', 'keydown', 'pointerdown'];
+
+                function onFirstGesture() {
+                    if (_soundScheduled) return;
+                    _soundScheduled = true;
+
+                    EVENTS.forEach(ev => window.removeEventListener(ev, onFirstGesture, true));
+
+                    _audioCtx.resume().then(() => {
+                        _scheduleChord(_audioCtx);
+                    }).catch(() => {});
+                }
+
+                EVENTS.forEach(ev => window.addEventListener(ev, onFirstGesture, { capture: true, once: false }));
+            }
+        } catch (e) {
+            // Browser doesn't support Web Audio API — silent fail
+        }
+    };
+})();
 
 /* ============================================================
    INTRO OVERLAY CONTROLLER
