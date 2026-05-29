@@ -281,15 +281,15 @@ document.addEventListener('DOMContentLoaded', () => {
     initExpCardSmooth();
     initExpertiseNetwork();
 
-    // ── Intro: lock scroll, then dismiss on first click ──
+    // ── Intro: lock scroll, then dismiss automatically ──
     document.body.classList.add('loading');
 
     const overlay = document.getElementById('intro-overlay');
     if (overlay) {
-        overlay.addEventListener('click', function onEnterClick() {
-            overlay.removeEventListener('click', onEnterClick);
+        // Automatically dismiss the intro and play sound when the website opens
+        setTimeout(() => {
             dismissIntro();
-        });
+        }, 300);
     }
 
     // ── Typed.js ──
