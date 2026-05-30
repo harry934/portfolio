@@ -2471,69 +2471,47 @@ body.page-transitioning {
 
 /* ── Nav Arrows (Prev / Next) ── */
 .carousel-nav {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
     display: flex;
-    justify-content: space-between;
-    pointer-events: none;
-    z-index: 10;
+    gap: 0.6rem;
+    align-items: center;
 }
 
 .carousel-nav .nav-btn {
-    pointer-events: auto;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
-    border: 1px solid #d0d0d0;
+    border: 1.5px solid #d0d0d0;
     background: #fff;
     color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     flex-shrink: 0;
-}
-
-/* Position them floating slightly inside over the cards */
-.carousel-nav #carousel-prev { transform: translateX(10px); }
-.carousel-nav #carousel-next { transform: translateX(-10px); }
-
-@media (max-width: 768px) {
-    .carousel-nav #carousel-prev { transform: translateX(5px); }
-    .carousel-nav #carousel-next { transform: translateX(-5px); }
-    .carousel-nav .nav-btn {
-        width: 3rem;
-        height: 3rem;
-        font-size: 1rem;
-    }
 }
 
 .carousel-nav .nav-btn:hover:not(:disabled) {
     background: #111;
     color: #fff;
     border-color: #111;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    transform: scale(1.1) translateX(calc(var(--dir, 1) * -5px));
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transform: scale(1.08);
 }
-.carousel-nav #carousel-prev:hover:not(:disabled) { --dir: -1; }
-.carousel-nav #carousel-next:hover:not(:disabled) { --dir: 1; }
 
 .carousel-nav .nav-btn:disabled {
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0.3;
     cursor: not-allowed;
-    transform: none !important;
+    transform: none;
 }
 
 .carousel-nav .nav-btn i {
     line-height: 1;
 }
+
+
 
 /* ── Carousel Track ── */
 .carousel-track-wrapper {
@@ -2725,53 +2703,28 @@ body.page-transitioning {
 /* ── Card Arrow (bottom-right of text section) ── */
 .card-arrow {
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    width: 2.5rem;
     height: 2.5rem;
-    border-radius: 2rem;
-    border: 1px solid #ddd;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #111;
-    font-size: 0.95rem;
+    font-size: 1rem;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     z-index: 4;
-    overflow: hidden;
-    padding: 0;
-    width: 2.5rem; /* starts circular */
-}
-
-/* Text hidden by default */
-.card-arrow span {
-    max-width: 0;
-    opacity: 0;
-    white-space: nowrap;
-    transition: max-width 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
-    font-weight: 500;
-    font-size: 0.85rem;
 }
 
 .carousel-card-link:hover .card-arrow {
     background: #111;
     color: #fff;
     border-color: #111;
-    width: 9rem; /* expands to pill */
-    padding: 0 1rem;
+    transform: rotate(-45deg) scale(1.05);
     box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-}
-
-/* Show text on hover */
-.carousel-card-link:hover .card-arrow span {
-    max-width: 100px;
-    opacity: 1;
-    margin-right: 0.5rem;
-}
-
-/* Rotate icon slightly to point right instead of up-right */
-.carousel-card-link:hover .card-arrow i {
-    transform: translateX(2px);
 }
 
 /* ── Carousel footer row (nav arrows inline) ── */
