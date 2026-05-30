@@ -2427,6 +2427,7 @@ body.page-transitioning {
     align-items: center;
     gap: 0.6rem;
     margin-top: 2rem;
+    margin-bottom: -1rem; /* Forcefully pull the carousel up tightly */
     padding: 0.85rem 1.8rem;
     background: #111;
     color: #fff;
@@ -2439,6 +2440,8 @@ body.page-transitioning {
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    position: relative; /* ensure it stays on top */
+    z-index: 5;
 }
 
 .btn-explore-projects:hover {
@@ -2473,20 +2476,21 @@ body.page-transitioning {
 .carousel-nav {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 50%;
     width: 100%;
-    transform: translateY(-50%);
+    max-width: 440px; /* Hugs the active central card tightly */
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: space-between;
     pointer-events: none; /* Let clicks pass through empty space */
     z-index: 10;
-    padding: 0; /* Align perfectly with edges */
+    padding: 0; 
 }
 
-/* Push them slightly outside on larger screens without clipping */
+/* Give them a bit more room on larger screens where cards are wider */
 @media (min-width: 1024px) {
     .carousel-nav {
-        padding: 0 1rem;
+        max-width: 480px;
     }
 }
 
@@ -2532,8 +2536,9 @@ body.page-transitioning {
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-top: 0.5rem; /* Minimized space below Explore button */
-    padding: 1rem 0; /* Breathing room for shadows */
+    margin-top: 0; /* Fully minimized space below Explore button */
+    padding-top: 0.25rem; /* Minimized top breathing room */
+    padding-bottom: 1.5rem; /* Keep bottom shadow breathing room */
 }
 
 .carousel-track {
