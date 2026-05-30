@@ -2280,3 +2280,96 @@ body.page-transitioning {
     font-size: 0.95rem;
     line-height: 1.6;
 }
+
+/* ============================================================
+   FEATURE: Mobile Bottom Navigation (#11)
+   ============================================================ */
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid #eaeaea;
+    z-index: 1000;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+}
+
+.mobile-bottom-nav .nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: color 0.3s;
+}
+
+.mobile-bottom-nav .nav-btn i {
+    font-size: 1.25rem;
+    margin-bottom: 0.2rem;
+}
+
+.mobile-bottom-nav .nav-btn:hover,
+.mobile-bottom-nav .nav-btn:active {
+    color: #000;
+}
+
+@media (max-width: 767px) {
+    .mobile-bottom-nav {
+        display: flex;
+    }
+    /* Add padding to body so content isn't hidden behind the nav bar */
+    body {
+        padding-bottom: 70px;
+    }
+    /* Hide the hamburger toggle and top nav links since we have bottom nav */
+    #nav-toggle {
+        display: none !important;
+    }
+    .nav-links {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   FEATURE: Fix hero layout on very small screens (#15)
+   ============================================================ */
+@media (max-width: 375px) {
+    .hero-flex {
+        padding-top: 2rem;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.1;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .hero-actions-row {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    .hero-actions-row .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    .hero-image-profile {
+        margin-top: 1rem;
+    }
+    .image-wrapper img {
+        max-width: 200px;
+        height: auto;
+    }
+    /* Hide social sidebar on very small screens to save space */
+    .social-side-bar {
+        display: none;
+    }
+}

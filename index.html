@@ -112,7 +112,7 @@
         <!-- About Section -->
         <section id="about" class="section">
             <div class="container">
-                <h2 class="section-heading">About Me</h2>
+                <h2 class="section-heading" data-scramble="About Me">About Me</h2>
                 <div class="about-grid">
                     <div class="about-text-container">
                         <div class="background-network">
@@ -147,7 +147,7 @@
             <div class="container expertise-container">
 
                 <div class="expertise-header">
-                    <h2 class="expertise-section-title">Technical Expertise</h2>
+                    <h2 class="expertise-section-title" data-scramble="Technical Expertise">Technical Expertise</h2>
                     <p class="expertise-section-sub">Domains I've built in, what I've learned, and where I stand.</p>
                 </div>
 
@@ -330,7 +330,7 @@
         <!-- Contact Section -->
         <section id="contact" class="section bg-light-gray">
             <div class="container">
-                <h2 class="section-heading">Get In Touch</h2>
+                <h2 class="section-heading" data-scramble="Get In Touch">Get In Touch</h2>
                 <div class="contact-grid">
                     <div class="contact-info">
                         <div class="contact-item dark">
@@ -383,8 +383,27 @@
         <p>&copy; 2024 Harry Otieno. Designed with minimalist aesthetics.</p>
     </footer>
 
+    <!-- Mobile Bottom Navigation (#11) -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
+        <a href="#hero" class="nav-btn"><i class="bi bi-house"></i><span>Home</span></a>
+        <a href="#about" class="nav-btn"><i class="bi bi-person"></i><span>About</span></a>
+        <a href="#projects" class="nav-btn"><i class="bi bi-code-slash"></i><span>Work</span></a>
+        <a href="#contact" class="nav-btn"><i class="bi bi-envelope"></i><span>Contact</span></a>
+    </nav>
+
     <a href="#hero" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
 
     <script src="assets/js/script.js"></script>
+
+    <!-- Service Worker Registration (#26) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed: ', err));
+            });
+        }
+    </script>
 </body>
 </html>

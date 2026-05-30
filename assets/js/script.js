@@ -555,6 +555,86 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         });
     });
+
+    // ── FEATURE: Mobile Swipe Navigation (#13) ──
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // min distance to be a swipe
+    const sectionIds = ['hero', 'about', 'expertise', 'projects', 'resume', 'contact'];
+    
+    document.body.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    document.body.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        if (Math.abs(touchEndX - touchStartX) < swipeThreshold) return;
+        
+        // Find current section index based on scroll position
+        let currentIdx = -1;
+        const scrollY = window.scrollY + window.innerHeight / 2;
+        
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const sec = document.getElementById(sectionIds[i]);
+            if (sec && sec.offsetTop <= scrollY) {
+                currentIdx = i;
+                break;
+            }
+        }
+        
+        if (currentIdx === -1) currentIdx = 0;
+        
+        if (touchEndX < touchStartX) {
+            // Swiped Left -> Go to Next Section
+            if (currentIdx < sectionIds.length - 1) {
+                const target = document.getElementById(sectionIds[currentIdx + 1]);
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            }
+        } else if (touchEndX > touchStartX) {
+            // Swiped Right -> Go to Prev Section
+            if (currentIdx > 0) {
+                const target = document.getElementById(sectionIds[currentIdx - 1]);
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            }
+        }
+    }
+
+    // ── FEATURE: Text Scramble Effect (#5) ──
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const scrambleElements = document.querySelectorAll('[data-scramble]');
+    
+    const scrambleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const originalText = el.dataset.scramble;
+                let iterations = 0;
+                
+                const interval = setInterval(() => {
+                    el.innerText = originalText.split("")
+                        .map((letter, index) => {
+                            if(index < iterations) return originalText[index];
+                            return letters[Math.floor(Math.random() * 26)];
+                        })
+                        .join("");
+                        
+                    if(iterations >= originalText.length) {
+                        clearInterval(interval);
+                        el.innerText = originalText;
+                    }
+                    iterations += 1 / 3; // Controls speed of unscrambling
+                }, 30);
+                
+                scrambleObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.8 });
+    
+    scrambleElements.forEach(el => scrambleObserver.observe(el));
 });
 
 // ── Email Obfuscation ──
