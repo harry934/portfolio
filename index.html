@@ -314,9 +314,9 @@
                         <h2 class="resume-label">Curriculum Vitae</h2>
                         <p>Download my professional resume to see my full experience and academic background.</p>
                         <div class="cv-buttons">
-                            <button id="open-cv-modal" class="btn btn-dark btn-with-icon">
+                            <a href="cv.html" class="btn btn-dark btn-with-icon">
                                 <i class="bi bi-lock-fill"></i> <span>OPEN PROTECTED CV</span>
-                            </button>
+                            </a>
                         </div>
                         <div class="resume-protection-badge">
                             <i class="bi bi-lock-fill"></i>
@@ -355,19 +355,10 @@
                             </div>
                         </div>
                     </div>
-                    <form class="contact-form dark" id="contact-form" novalidate>
-                        <div class="form-group">
-                            <input type="text" id="contact-name" name="name" placeholder="Your Name" required>
-                            <span class="validation-msg"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="contact-email" name="email" placeholder="Your Email" required>
-                            <span class="validation-msg"></span>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="contact-message" name="message" placeholder="Your Message" rows="4" required></textarea>
-                            <span class="validation-msg"></span>
-                        </div>
+                    <form class="contact-form dark" id="contact-form">
+                        <input type="text"  id="contact-name"    name="name"    placeholder="Your Name"    required>
+                        <input type="email" id="contact-email"   name="email"   placeholder="Your Email"   required>
+                        <textarea           id="contact-message" name="message" placeholder="Your Message" rows="4" required></textarea>
                         <button type="submit" class="btn btn-dark btn-with-icon">
                             <i class="bi bi-send-fill"></i> <span>SEND MESSAGE</span>
                         </button>
@@ -380,29 +371,6 @@
     <footer class="footer-simple">
         <p>&copy; 2024 Harry Otieno. Designed with minimalist aesthetics.</p>
     </footer>
-
-    <!-- CV Preview Modal -->
-    <div id="cv-modal" class="cv-modal">
-        <div class="cv-modal-content">
-            <button class="cv-modal-close" aria-label="Close Modal"><i class="bi bi-x-lg"></i></button>
-            <div class="cv-modal-visual">
-                <div class="cv-blurred-preview">
-                    <!-- CSS will handle the blur pattern here -->
-                    <div class="blur-overlay"></div>
-                    <i class="bi bi-file-earmark-lock-fill lock-icon"></i>
-                </div>
-            </div>
-            <div class="cv-modal-form">
-                <h3>Protected Document</h3>
-                <p>Please enter the password provided to you to view the full CV.</p>
-                <form id="cv-password-form">
-                    <input type="password" id="cv-password" placeholder="Enter Password" required>
-                    <button type="submit" class="btn btn-dark">UNLOCK</button>
-                </form>
-                <div id="cv-error-msg" class="cv-error-msg"></div>
-            </div>
-        </div>
-    </div>
 
     <a href="#hero" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
 

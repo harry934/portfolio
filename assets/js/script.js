@@ -346,35 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Custom Validation
-            let isValid = true;
-            const inputs = contactForm.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                const msg = input.nextElementSibling;
-                input.classList.remove('is-invalid', 'is-valid');
-                if (msg) msg.classList.remove('visible');
-
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.classList.add('is-invalid');
-                    if (msg) {
-                        msg.textContent = 'This field is required';
-                        msg.classList.add('visible');
-                    }
-                } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-                    isValid = false;
-                    input.classList.add('is-invalid');
-                    if (msg) {
-                        msg.textContent = 'Please enter a valid email';
-                        msg.classList.add('visible');
-                    }
-                } else {
-                    input.classList.add('is-valid');
-                }
-            });
-
-            if (!isValid) return;
-
             // Show sending state
             submitBtn.disabled = true;
             btnText.textContent = 'SENDING...';
@@ -508,46 +479,18 @@ document.addEventListener('DOMContentLoaded', () => {
         spySections.forEach(sec => spyObserver.observe(sec));
     }
 
-    // ── CV Preview Modal & Transitions ──
-    const cvModal = document.getElementById('cv-modal');
-    const openCvModalBtn = document.getElementById('open-cv-modal');
-    const closeCvModalBtn = document.querySelector('.cv-modal-close');
-    const cvForm = document.getElementById('cv-password-form');
-    const cvInput = document.getElementById('cv-password');
-    const cvError = document.getElementById('cv-error-msg');
-
-    if (cvModal && openCvModalBtn) {
-        openCvModalBtn.addEventListener('click', (e) => {
+    // ── Page Transitions (CV Link) ──
+    // Intercept clicks to cv.html to add a fade-out effect if they are direct links (not modal)
+    // Here we mainly transition after the correct modal password.
+    // Let's attach to any link that leads to a local HTML file
+    document.querySelectorAll('a[href$=".html"]').forEach(link => {
+        link.addEventListener('click', function(e) {
             e.preventDefault();
-            cvModal.classList.add('active');
-            if (cvInput) cvInput.value = '';
-            if (cvError) cvError.textContent = '';
+            const target = this.href;
+            document.body.classList.add('page-transitioning');
+            setTimeout(() => {
+                window.location.href = target;
+            }, 500);
         });
-
-        if (closeCvModalBtn) {
-            closeCvModalBtn.addEventListener('click', () => {
-                cvModal.classList.remove('active');
-            });
-        }
-
-        cvModal.addEventListener('click', (e) => {
-            if (e.target === cvModal) {
-                cvModal.classList.remove('active');
-            }
-        });
-
-        if (cvForm && cvInput) {
-            cvForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (cvInput.value.length > 0) { // Any non-empty password proceeds
-                    document.body.classList.add('page-transitioning');
-                    setTimeout(() => {
-                        window.location.href = 'cv.html';
-                    }, 500);
-                } else {
-                    cvError.textContent = 'Please enter a password.';
-                }
-            });
-        }
-    }
+    });
 });
