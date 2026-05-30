@@ -2513,43 +2513,11 @@ body.page-transitioning {
 
 
 
-/* ── Carousel Track ── */
-.carousel-track-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 2rem;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 1.25rem;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
-}
-
-/* ── Carousel Cards ── */
-.carousel-item {
-    flex: 0 0 calc(90% - 1.25rem);
-    min-width: 0;
-}
-
-@media (min-width: 480px) {
-    .carousel-item {
-        flex: 0 0 300px;
-    }
-}
-
-@media (min-width: 768px) {
-    .carousel-item {
-        flex: 0 0 320px;
-    }
-}
-
+/* ── Carousel Card Link ── */
 .carousel-card-link {
     display: block;
     width: 100%;
-    height: 280px;
+    height: 300px;
     position: relative;
     text-decoration: none;
     color: inherit;
@@ -2559,7 +2527,7 @@ body.page-transitioning {
 
 @media (min-width: 640px) {
     .carousel-card-link {
-        height: 310px;
+        height: 340px;
     }
 }
 
@@ -2570,17 +2538,18 @@ body.page-transitioning {
     height: 100%;
     border-radius: 1.25rem;
     overflow: hidden;
-    border: 1px solid #e8e8e8;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    background: #fff;
     transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
 
 .carousel-card-link:hover .carousel-card {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.14);
-    transform: translateY(-3px);
+    box-shadow: 0 16px 44px rgba(0,0,0,0.13);
+    transform: translateY(-4px);
 }
 
-/* Image wrapper — fills whole card by default */
+/* Image wrapper */
 .card-image-wrapper {
     position: absolute;
     top: 0;
@@ -2588,7 +2557,7 @@ body.page-transitioning {
     width: 100%;
     height: 100%;
     transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: #f0f0f0;
+    background-color: #ececec;
     overflow: hidden;
 }
 
@@ -2603,7 +2572,7 @@ body.page-transitioning {
     opacity: 1;
 }
 
-/* Animated GIF (hidden by default, shown on hover via JS) */
+/* Animated GIF */
 .card-image-wrapper .card-gif {
     position: absolute;
     inset: 0;
@@ -2614,24 +2583,19 @@ body.page-transitioning {
     transition: opacity 0.4s ease;
 }
 
-/* JS hook: when card is hovered, .gif-active class is added */
-.carousel-card-link.gif-active .card-gif {
-    opacity: 1;
-}
-.carousel-card-link.gif-active .card-static {
-    opacity: 0;
-}
+.carousel-card-link.gif-active .card-gif  { opacity: 1; }
+.carousel-card-link.gif-active .card-static { opacity: 0; }
 
-/* Subtle dark gradient always on bottom for readability */
+/* Gradient overlay */
 .card-fade-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60%;
-    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+    height: 55%;
+    background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.38s ease;
     pointer-events: none;
     z-index: 2;
 }
@@ -2847,113 +2811,6 @@ body.page-transitioning {
     }
 }
 
-.carousel-card-link {
-    display: block;
-    width: 100%;
-    height: 300px;
-    position: relative;
-    text-decoration: none;
-    color: inherit;
-}
-
-@media (min-width: 768px) {
-    .carousel-card-link {
-        height: 350px;
-    }
-}
-
-.carousel-card {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.card-image-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: all 0.5s ease;
-    background-color: #f3f4f6; /* Placeholder color when no image */
-}
-
-.card-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card-fade-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-/* Hover State - Image shrinks to top half */
-.carousel-card-link:hover .card-image-wrapper {
-    height: 50%;
-}
-.carousel-card-link:hover .card-fade-overlay {
-    opacity: 1;
-}
-
-.card-text-section {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: all 0.5s ease;
-}
-
-/* Hover State - Text appears in bottom half */
-.carousel-card-link:hover .card-text-section {
-    opacity: 1;
-}
-
-.card-title {
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-@media (min-width: 768px) {
-    .card-title {
-        font-size: 1.25rem;
-    }
-}
-
-.card-summary {
-    font-size: 0.875rem;
-    color: #6b7280;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-@media (min-width: 768px) {
-    .card-summary {
-        font-size: 1rem;
-    }
-}
+/* NOTE: Duplicate carousel-card styles removed — canonical styles are above (~line 2549) */
 
 /* Duplicate .card-arrow block removed — see line ~2703 for the canonical styles */
