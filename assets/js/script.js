@@ -494,3 +494,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ── Email Obfuscation ──
+// Reconstruct the email address at runtime from parts so that
+// web-crawling bots that read static HTML never see the full address.
+(function buildEmail() {
+    const parts = ['otieno', 'harry', '876', '@', 'gmail', '.', 'com'];
+    const address = parts.join('');
+    const el = document.getElementById('obfuscated-email');
+    if (el) {
+        el.textContent = address;
+        el.setAttribute('href', 'mailto:' + address);
+    }
+})();
