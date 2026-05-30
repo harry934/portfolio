@@ -234,12 +234,15 @@ function revealPageContent() {
 
     // Each entry: [selector, CSS class, delay in seconds]
     const reveals = [
-        ['#main-nav',          'reveal-nav',   0.0],
-        ['.hero-title',        'reveal-up',    0.1],
-        ['.hero-subtitle',     'reveal-up',    0.25],
-        ['.hero-actions-row',  'reveal-up',    0.4],
-        ['.image-wrapper',     'reveal-scale', 0.2],
-        ['.social-side-bar',   'reveal-left',  0.35],
+        ['#main-nav',          'reveal-nav',   0.6],
+        ['.hero-title',        'reveal-up',    0.7],
+        ['.image-wrapper',     'reveal-scale', 0.8],
+        ['.hero-subtitle',     'reveal-up',    0.9],
+        ['.social-side-bar li:nth-child(1)', 'reveal-left', 1.0],
+        ['.social-side-bar li:nth-child(2)', 'reveal-left', 1.1],
+        ['.social-side-bar li:nth-child(3)', 'reveal-left', 1.2],
+        ['.hero-actions-row a:nth-child(1)', 'reveal-up',   1.1],
+        ['.hero-actions-row a:nth-child(2)', 'reveal-up',   1.2],
     ];
 
     reveals.forEach(([sel, cls, delay]) => {
@@ -343,6 +346,35 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Custom Validation
+            let isValid = true;
+            const inputs = contactForm.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                const msg = input.nextElementSibling;
+                input.classList.remove('is-invalid', 'is-valid');
+                if (msg) msg.classList.remove('visible');
+
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('is-invalid');
+                    if (msg) {
+                        msg.textContent = 'This field is required';
+                        msg.classList.add('visible');
+                    }
+                } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                    isValid = false;
+                    input.classList.add('is-invalid');
+                    if (msg) {
+                        msg.textContent = 'Please enter a valid email';
+                        msg.classList.add('visible');
+                    }
+                } else {
+                    input.classList.add('is-valid');
+                }
+            });
+
+            if (!isValid) return;
+
             // Show sending state
             submitBtn.disabled = true;
             btnText.textContent = 'SENDING...';
@@ -444,5 +476,78 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-});
 
+    // ── Interactive Background (Parallax) ──
+    const aboutGrid = document.querySelector('.about-grid');
+    const netNetwork = document.querySelector('.background-network');
+    if (aboutGrid && netNetwork) {
+        aboutGrid.addEventListener('mousemove', (e) => {
+            const rect = aboutGrid.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            netNetwork.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+        });
+    }
+
+    // ── Scroll Spy Navigation ──
+    const spySections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links a');
+    if (spySections.length > 0 && navItems.length > 0) {
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('href') === `#${entry.target.id}`) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.4 });
+        spySections.forEach(sec => spyObserver.observe(sec));
+    }
+
+    // ── CV Preview Modal & Transitions ──
+    const cvModal = document.getElementById('cv-modal');
+    const openCvModalBtn = document.getElementById('open-cv-modal');
+    const closeCvModalBtn = document.querySelector('.cv-modal-close');
+    const cvForm = document.getElementById('cv-password-form');
+    const cvInput = document.getElementById('cv-password');
+    const cvError = document.getElementById('cv-error-msg');
+
+    if (cvModal && openCvModalBtn) {
+        openCvModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            cvModal.classList.add('active');
+            if (cvInput) cvInput.value = '';
+            if (cvError) cvError.textContent = '';
+        });
+
+        if (closeCvModalBtn) {
+            closeCvModalBtn.addEventListener('click', () => {
+                cvModal.classList.remove('active');
+            });
+        }
+
+        cvModal.addEventListener('click', (e) => {
+            if (e.target === cvModal) {
+                cvModal.classList.remove('active');
+            }
+        });
+
+        if (cvForm && cvInput) {
+            cvForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (cvInput.value.length > 0) { // Any non-empty password proceeds
+                    document.body.classList.add('page-transitioning');
+                    setTimeout(() => {
+                        window.location.href = 'cv.html';
+                    }, 500);
+                } else {
+                    cvError.textContent = 'Please enter a password.';
+                }
+            });
+        }
+    }
+});
