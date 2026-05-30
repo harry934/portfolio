@@ -314,6 +314,48 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressBar) progressBar.style.width = scrolled + "%";
     });
 
+    // ── Animated Stat Counters ──
+    // Counts from 0 up to data-target when scrolled into view
+    const statEls = document.querySelectorAll('.stat-number[data-target]');
+    if (statEls.length > 0) {
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.dataset.target, 10);
+                const suffix = el.dataset.suffix || '';
+                const duration = 1200; // ms
+                const fps = 60;
+                const frames = Math.round(duration / (1000 / fps));
+                let frame = 0;
+
+                // easeOutExpo for snappy start, smooth finish
+                const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+                const tick = () => {
+                    frame++;
+                    const progress = easeOutExpo(frame / frames);
+                    const current = Math.round(progress * target);
+                    el.textContent = current + suffix;
+
+                    if (frame < frames) {
+                        requestAnimationFrame(tick);
+                    } else {
+                        el.textContent = target + suffix;
+                        // Spring pop when counter finishes
+                        el.classList.add('pop');
+                        el.addEventListener('animationend', () => el.classList.remove('pop'), { once: true });
+                    }
+                };
+
+                requestAnimationFrame(tick);
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+
+        statEls.forEach(el => counterObserver.observe(el));
+    }
+
     // ── Nav Sticky Behavior ──
     const header = document.getElementById('main-nav');
     const navToggle = document.getElementById('nav-toggle');
@@ -360,23 +402,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (res.ok) {
-                    btnText.textContent = 'MESSAGE SENT ✓';
-                    submitBtn.style.background = '#222';
+                    // Hide the form and show the animated success card
+                    contactForm.style.opacity = '0';
+                    contactForm.style.pointerEvents = 'none';
+                    contactForm.style.transition = 'opacity 0.3s ease';
+                    const successCard = document.getElementById('form-success-card');
+                    if (successCard) {
+                        successCard.setAttribute('aria-hidden', 'false');
+                        // Small delay so the form fades out first
+                        setTimeout(() => successCard.classList.add('visible'), 200);
+                    }
                     contactForm.reset();
-                    setTimeout(() => {
-                        btnText.textContent = 'SEND VIA EMAIL';
-                        submitBtn.disabled = false;
-                        submitBtn.style.background = '';
-                    }, 3000);
+                    submitBtn.disabled = false;
                 } else {
                     throw new Error('Send failed');
                 }
             } catch {
                 btnText.textContent = 'FAILED — TRY AGAIN';
                 submitBtn.disabled = false;
-                setTimeout(() => { btnText.textContent = 'SEND VIA EMAIL'; }, 3000);
+                setTimeout(() => { btnText.textContent = 'SEND MESSAGE'; }, 3000);
             }
         });
+
+        // "Send Another" dismiss button on the success card
+        const dismissBtn = document.getElementById('success-dismiss-btn');
+        if (dismissBtn) {
+            dismissBtn.addEventListener('click', () => {
+                const successCard = document.getElementById('form-success-card');
+                if (successCard) {
+                    successCard.classList.remove('visible');
+                    successCard.setAttribute('aria-hidden', 'true');
+                    setTimeout(() => {
+                        contactForm.style.opacity = '1';
+                        contactForm.style.pointerEvents = '';
+                    }, 300);
+                }
+            });
+        }
     }
 
     // ── Close Mobile Nav on Link Click ──

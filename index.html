@@ -243,11 +243,11 @@
                         <p class="portfolio-description">My development journey is documented through open-source contributions, experimental prototypes, and production-ready systems. I believe in writing clean, scalable code that solves real-world problems.</p>
                         <div class="portfolio-stats">
                             <div class="stat">
-                                <span class="stat-number">25+</span>
+                                <span class="stat-number" data-target="25" data-suffix="+">25+</span>
                                 <span class="stat-label">Repositories</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-number">7</span>
+                                <span class="stat-number" data-target="7" data-suffix="">7</span>
                                 <span class="stat-label">Projects</span>
                             </div>
                         </div>
@@ -364,6 +364,16 @@
                             <i class="bi bi-send-fill"></i> <span>SEND MESSAGE</span>
                         </button>
                     </form>
+
+                    <!-- Success card — hidden until form submits successfully -->
+                    <div class="form-success-card" id="form-success-card" aria-live="polite" aria-hidden="true">
+                        <div class="success-icon-ring">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                        <h3>Message Sent!</h3>
+                        <p>Thanks for reaching out. I'll get back to you within <strong>24 hours</strong>. 🚀</p>
+                        <button class="btn btn-dark" id="success-dismiss-btn">Send Another</button>
+                    </div>
                </div>
             </div>
         </section>

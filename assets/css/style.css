@@ -2202,3 +2202,81 @@ body.page-transitioning {
     opacity: 0;
     transition: opacity 0.5s ease;
 }
+
+/* ============================================================
+   FEATURE: Animated Stat Counters  (#12)
+   ============================================================ */
+@keyframes statPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+.stat-number.pop {
+    animation: statPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================
+   FEATURE: Form Success Card  (#23)
+   ============================================================ */
+.form-success-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2.5rem 2rem;
+    background: #fff;
+    border: 1px solid #eee;
+    text-align: center;
+
+    /* Hidden by default — slides in from below */
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-grid {
+    position: relative; /* needed for success card absolute positioning */
+}
+
+.form-success-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* The animated check-mark ring */
+.success-icon-ring {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2rem;
+    animation: ringPop 0.5s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ringPop {
+    from { transform: scale(0) rotate(-90deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+}
+
+.form-success-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form-success-card p {
+    color: #666;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
