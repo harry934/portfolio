@@ -279,6 +279,15 @@
                     <div class="carousel-panel" id="carousel-panel">
                         <!-- Track -->
                         <div class="carousel-track-wrapper">
+                        <!-- Prev / Next arrows (shown when carousel is open) -->
+                        <div class="carousel-nav" id="carousel-nav-arrows" style="display:none;">
+                            <button class="nav-btn nav-prev" id="carousel-prev" aria-label="Previous project">
+                                <i class="bi bi-arrow-left"></i>
+                            </button>
+                            <button class="nav-btn nav-next" id="carousel-next" aria-label="Next project">
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+                        </div>
                             <div class="carousel-track" id="hover-carousel-track">
 
                                 <!-- 1: Portfolio -->
@@ -287,14 +296,14 @@
                                        data-gif="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmZkMjAzZzViaDFiZWJkZG1rdXpzbXhtdHU0dms3ejN0c21tcnZpbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MIxb5ENigXdc3rX1G9/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmZkMjAzZzViaDFiZWJkZG1rdXpzbXhtdHU0dms3ejN0c21tcnZpbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MIxb5ENigXdc3rX1G9/giphy_s.gif" alt="Portfolio preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="Portfolio animated preview" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Portfolio</h3>
                                                 <p class="card-summary">Personal portfolio showcasing skills, interests, and projects. HTML · CSS · JavaScript</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
@@ -306,14 +315,14 @@
                                        data-gif="https://media.giphy.com/media/b0EnJFv8e7vAasW2ru/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media.giphy.com/media/b0EnJFv8e7vAasW2ru/giphy.gif" alt="Innovate Hub preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="Innovate Hub animated" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Innovate Hub</h3>
                                                 <p class="card-summary">Platform showcasing how young innovators develop and refine ideas. HTML · CSS · JS · React</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
@@ -325,14 +334,14 @@
                                        data-gif="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWZvMHFpbWtkMms0bDAwZ3JpZXZvY2UxaXdkMjR4NTRyZXEybnRlcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lPrZAdsDJVs4hcXHVi/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWZvMHFpbWtkMms0bDAwZ3JpZXZvY2UxaXdkMjR4NTRyZXEybnRlcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lPrZAdsDJVs4hcXHVi/giphy.gif" alt="Emergency Response ML preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="Emergency Response ML animated" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Emergency Response ML</h3>
                                                 <p class="card-summary">ML model to analyze road camera footage for accidents or traffic. Python · Streamlit · TensorFlow</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
@@ -344,14 +353,14 @@
                                        data-gif="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmxzNGJnZnI3OWU3eWhjbWJ5Y2w3azhheWZ5azl4Z3V5NjN6ZTVvdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BQooLClng3Q4AiC5hb/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmxzNGJnZnI3OWU3eWhjbWJ5Y2w3azhheWZ5azl4Z3V5NjN6ZTVvdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BQooLClng3Q4AiC5hb/giphy.gif" alt="Children's Home Support preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="Children's Home animated" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Children's Home Support</h3>
                                                 <p class="card-summary">Platform to facilitate donations and child sponsorship. HTML · CSS · JS · M-Pesa API</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
@@ -363,14 +372,14 @@
                                        data-gif="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3JqcTN6cWt5OWpyOTIyczhxY3h1cHphbTVybDd2OGs5ZDJtYmxxdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dOKot4fwhzRroVuC7O/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3JqcTN6cWt5OWpyOTIyczhxY3h1cHphbTVybDd2OGs5ZDJtYmxxdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dOKot4fwhzRroVuC7O/giphy.gif" alt="M-Pesa STK Push preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="M-Pesa STK Push animated" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">M-Pesa STK Push</h3>
                                                 <p class="card-summary">Simple M-Pesa STK Push flow using Safaricom Daraja API. HTML · CSS · JavaScript</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
@@ -382,14 +391,14 @@
                                        data-gif="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExM29sbHVqd2d5Nzl4eXE0azZmcDhrZWQ3cDRkYzAwbWJtZnowOGNwZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZgTPZ7vRJPBcAylJdf/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExM29sbHVqd2d5Nzl4eXE0azZmcDhrZWQ3cDRkYzAwbWJtZnowOGNwZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZgTPZ7vRJPBcAylJdf/giphy.gif" alt="Food Ordering preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="Food Ordering animated" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Online Food Ordering</h3>
                                                 <p class="card-summary">Web-based restaurant system for food orders and payments. HTML · CSS · JavaScript</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
@@ -401,14 +410,14 @@
                                        data-gif="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjFzNHljeW0wd2VqejBvMm83bjI0bTBleWYwZGxrMWV2dWpuamh0cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fCDPBRgmCtwSIW75Vn/giphy.gif">
                                         <div class="carousel-card">
                                             <div class="card-image-wrapper">
-                                                <img class="card-static" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjFzNHljeW0wd2VqejBvMm83bjI0bTBleWYwZGxrMWV2dWpuamh0cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fCDPBRgmCtwSIW75Vn/giphy.gif" alt="Laundry Service preview">
+                                                <img class="card-static" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80" alt="Project preview thumbnail (Placeholder)">
                                                 <img class="card-gif" src="" alt="Laundry Service animated" loading="lazy">
                                                 <div class="card-fade-overlay"></div>
                                             </div>
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Laundry Service</h3>
                                                 <p class="card-summary">Booking platform for laundry services from the comfort of home. HTML · CSS · JS · M-Pesa</p>
-                                                <div class="card-arrow"><i class="bi bi-arrow-right"></i></div>
+                                                <div class="card-arrow"><span>View Project</span><i class="bi bi-arrow-right"></i></div>
                                             </div>
                                         </div>
                                     </a>
