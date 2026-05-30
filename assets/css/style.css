@@ -2724,11 +2724,11 @@ body.page-transitioning {
     display: none;
 }
 
-.carousel-card-link:hover .card-arrow {
+.card-arrow:hover {
     background: #111;
     color: #fff;
     border-color: #111;
-    transform: rotate(-45deg) scale(1.05);
+    transform: rotate(-45deg) scale(1.1);
     box-shadow: 0 4px 12px rgba(0,0,0,0.18);
 }
 
