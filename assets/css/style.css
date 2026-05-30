@@ -2483,11 +2483,10 @@ body.page-transitioning {
     padding: 0; /* Align perfectly with edges */
 }
 
-/* Push them slightly outside on larger screens */
+/* Push them slightly outside on larger screens without clipping */
 @media (min-width: 1024px) {
     .carousel-nav {
-        width: calc(100% + 4rem);
-        left: -2rem;
+        padding: 0 1rem;
     }
 }
 
@@ -2533,7 +2532,7 @@ body.page-transitioning {
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-top: 2rem;
+    margin-top: 0.5rem; /* Minimized space below Explore button */
     padding: 1rem 0; /* Breathing room for shadows */
 }
 
