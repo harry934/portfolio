@@ -2471,25 +2471,41 @@ body.page-transitioning {
 
 /* ── Nav Arrows (Prev / Next) ── */
 .carousel-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
     display: flex;
-    gap: 0.6rem;
-    align-items: center;
+    justify-content: space-between;
+    pointer-events: none; /* Let clicks pass through empty space */
+    z-index: 10;
+    padding: 0; /* Align perfectly with edges */
+}
+
+/* Push them slightly outside on larger screens */
+@media (min-width: 1024px) {
+    .carousel-nav {
+        width: calc(100% + 4rem);
+        left: -2rem;
+    }
 }
 
 .carousel-nav .nav-btn {
-    width: 3rem;
-    height: 3rem;
+    pointer-events: auto; /* Re-enable clicks on the buttons */
+    width: 3.25rem;
+    height: 3.25rem;
     border-radius: 50%;
-    border: 1.5px solid #d0d0d0;
+    border: 1.5px solid #eaeaea;
     background: #fff;
     color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.15rem;
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     flex-shrink: 0;
 }
 
@@ -2497,21 +2513,54 @@ body.page-transitioning {
     background: #111;
     color: #fff;
     border-color: #111;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+    transform: scale(1.1);
 }
 
 .carousel-nav .nav-btn:disabled {
     opacity: 0.3;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 .carousel-nav .nav-btn i {
     line-height: 1;
 }
 
+/* ── Carousel Track ── */
+.carousel-track-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+    padding: 1rem 0; /* Breathing room for shadows */
+}
 
+.carousel-track {
+    display: flex;
+    gap: 1.25rem;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+/* ── Carousel Cards ── */
+.carousel-item {
+    flex: 0 0 calc(90% - 1.25rem);
+    min-width: 0;
+}
+
+@media (min-width: 480px) {
+    .carousel-item {
+        flex: 0 0 300px;
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        flex: 0 0 320px;
+    }
+}
 
 /* ── Carousel Card Link ── */
 .carousel-card-link {
@@ -2608,24 +2657,24 @@ body.page-transitioning {
 }
 
 /* Text section — slides up from bottom on hover */
+/* ── Text section: slides up from bottom on hover ── */
 .card-text-section {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 45%;
-    padding: 1.1rem 1.1rem 1.5rem;
+    height: 48%;
+    padding: 1rem 1.1rem 0.9rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 0.3rem;
-    background: rgba(255, 255, 255, 0.97);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    justify-content: flex-start;
+    background: #fff;
     opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(8px);
+    transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1),
+                transform 0.38s cubic-bezier(0.4,0,0.2,1);
     z-index: 3;
+    border-top: 1px solid #f0f0f0;
 }
 
 .carousel-card-link:hover .card-text-section {
@@ -2633,34 +2682,44 @@ body.page-transitioning {
     transform: translateY(0);
 }
 
+/* Title */
 .card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #111;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0d0d0d;
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 2rem; /* space for arrow if title gets long */
 }
 
 @media (min-width: 640px) {
     .card-title {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
 }
 
+/* Description */
 .card-summary {
-    font-size: 0.8rem;
-    color: #666;
-    line-height: 1.4;
+    font-size: 0.775rem;
+    color: #555;
+    line-height: 1.5;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3; /* Increased to 3 lines for more detail */
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 0;
+    flex: 1;
+    padding-top: 0.35rem;
+    padding-right: 2.2rem; /* Crucial: stops text from overlapping the circular arrow */
 }
 
 @media (min-width: 640px) {
     .card-summary {
-        font-size: 0.85rem;
+        font-size: 0.825rem;
     }
 }
 
