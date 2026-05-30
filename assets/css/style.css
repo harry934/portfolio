@@ -2708,18 +2708,26 @@ body.page-transitioning {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 1.5px solid #ccc;
-    background: #fff;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #111;
     font-size: 1rem;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* Silky smooth per-property transitions */
+    transition:
+        background  0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        color       0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        transform   0.4s  cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow  0.35s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 4;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-/* Hide span for cached HTML clients that still have the text */
+/* Hide span for any cached HTML clients that still have the text */
 .card-arrow span {
     display: none;
 }
@@ -2728,8 +2736,8 @@ body.page-transitioning {
     background: #111;
     color: #fff;
     border-color: #111;
-    transform: rotate(-45deg) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    transform: rotate(-45deg) scale(1.12);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
 }
 
 /* ── Carousel footer row (nav arrows inline) ── */
@@ -2948,23 +2956,4 @@ body.page-transitioning {
     }
 }
 
-.card-arrow {
-    position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 9999px;
-    border: 1px solid #e5e7eb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-main);
-    transition: all 0.5s ease;
-}
-
-.carousel-card-link:hover .card-arrow {
-    transform: rotate(-45deg);
-    color: #000;
-    border-color: #000;
-}
+/* Duplicate .card-arrow block removed — see line ~2703 for the canonical styles */
