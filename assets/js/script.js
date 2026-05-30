@@ -636,61 +636,94 @@ document.addEventListener('DOMContentLoaded', () => {
     
     scrambleElements.forEach(el => scrambleObserver.observe(el));
 
-    // ── FEATURE: Featured Projects Carousel (Vanilla Translation) ──
+    // ── FEATURE: Projects Carousel (Toggle + GIF Hover + Dots) ──
+    const btnExplore    = document.getElementById('btn-explore-projects');
+    const carouselPanel = document.getElementById('carousel-panel');
+    const carouselNav   = document.getElementById('carousel-nav-arrows');
     const carouselTrack = document.getElementById('hover-carousel-track');
-    const btnPrev = document.querySelector('.nav-prev');
-    const btnNext = document.querySelector('.nav-next');
-    
-    if (carouselTrack && btnPrev && btnNext) {
-        let currentIndex = 0;
-        const items = carouselTrack.querySelectorAll('.carousel-item');
+    const btnPrev       = document.getElementById('carousel-prev');
+    const btnNext       = document.getElementById('carousel-next');
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    if (carouselTrack && btnExplore && carouselPanel) {
+        const items     = Array.from(carouselTrack.querySelectorAll('.carousel-item'));
         const itemCount = items.length;
-        
-        const updateCarousel = () => {
-            // Calculate how many items are visible based on screen width
-            const isDesktop = window.innerWidth >= 768;
-            const itemWidth = isDesktop ? 350 + 24 /* gap */ : items[0].offsetWidth + 24;
-            
-            // Limit index to avoid scrolling past the end
-            const maxIndex = isDesktop ? Math.max(0, itemCount - 2) : itemCount - 1;
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-            if (currentIndex < 0) currentIndex = 0;
-            
-            // Disable/Enable buttons
-            btnPrev.disabled = currentIndex === 0;
-            btnNext.disabled = currentIndex === maxIndex;
-            btnPrev.style.opacity = currentIndex === 0 ? '0.5' : '1';
-            btnNext.style.opacity = currentIndex === maxIndex ? '0.5' : '1';
-            
-            // Slide track
-            carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        let currentIndex = 0;
+
+        // ── Build Dots ──
+        items.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to project ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i));
+            if (dotsContainer) dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.carousel-dot')) : [];
+
+        // ── Slide Logic ──
+        const getItemWidth = () => {
+            if (items[0]) {
+                return items[0].getBoundingClientRect().width + 20; /* 20 = gap 1.25rem approx */
+            }
+            return 340;
         };
-        
-        btnPrev.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
+
+        const goTo = (index) => {
+            currentIndex = Math.max(0, Math.min(index, itemCount - 1));
+            carouselTrack.style.transform = `translateX(-${currentIndex * getItemWidth()}px)`;
+
+            // Update dots
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+
+            // Update prev/next buttons
+            if (btnPrev) { btnPrev.disabled = currentIndex === 0; }
+            if (btnNext) { btnNext.disabled = currentIndex === itemCount - 1; }
+        };
+
+        if (btnPrev) btnPrev.addEventListener('click', () => goTo(currentIndex - 1));
+        if (btnNext) btnNext.addEventListener('click', () => goTo(currentIndex + 1));
+        window.addEventListener('resize', () => goTo(currentIndex));
+
+        // ── Toggle Button ──
+        btnExplore.addEventListener('click', () => {
+            const isOpen = carouselPanel.classList.toggle('open');
+            btnExplore.classList.toggle('active', isOpen);
+            btnExplore.setAttribute('aria-expanded', String(isOpen));
+            if (carouselNav) carouselNav.style.display = isOpen ? 'flex' : 'none';
+
+            // When first opened, snap to index 0 so transform is correct
+            if (isOpen) {
+                setTimeout(() => goTo(0), 50); // slight delay for panel to expand
             }
         });
-        
-        btnNext.addEventListener('click', () => {
-            // maxIndex calculation inline to allow for resize
-            const isDesktop = window.innerWidth >= 768;
-            const maxIndex = isDesktop ? Math.max(0, itemCount - 2) : itemCount - 1;
-            
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-                updateCarousel();
-            }
+
+        // ── GIF Hover Swap ──
+        items.forEach(item => {
+            const link    = item.querySelector('.carousel-card-link');
+            const gifSrc  = link ? link.dataset.gif : null;
+            const gifImg  = link ? link.querySelector('.card-gif') : null;
+
+            if (!link || !gifSrc || !gifImg) return;
+
+            link.addEventListener('mouseenter', () => {
+                if (!gifImg.src || gifImg.src === window.location.href) {
+                    gifImg.src = gifSrc; // lazy-load the GIF on first hover
+                }
+                link.classList.add('gif-active');
+            });
+
+            link.addEventListener('mouseleave', () => {
+                link.classList.remove('gif-active');
+            });
         });
-        
-        // Handle resize
-        window.addEventListener('resize', updateCarousel);
-        
-        // Initial setup
-        updateCarousel();
+
+        // Initial button state
+        goTo(0);
     }
 });
+
+
 
 // ── Email Obfuscation ──
 // Reconstruct the email address at runtime from parts so that

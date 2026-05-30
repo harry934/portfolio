@@ -2375,8 +2375,393 @@ body.page-transitioning {
 }
 
 /* ============================================================
-   FEATURE: Featured Projects Carousel (Vanilla Translation)
+   FEATURE: Portfolio & Projects Carousel — Full Redesign
    ============================================================ */
+
+/* Spin keyframe for loading spinner */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* Portfolio container override — make it block layout */
+#projects .portfolio-container {
+    display: block;
+    padding: 3rem;
+    background: #fdfdfd;
+    border-radius: 2.5rem;
+    border: 1px solid #f0f0f0;
+}
+
+@media (min-width: 1024px) {
+    #projects .portfolio-container {
+        padding: 4rem 5rem;
+    }
+}
+
+/* Section header: title left, nav-arrows right */
+.carousel-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+    .carousel-header {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
+
+.carousel-title-area {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ── Explore Projects Toggle Button ── */
+.btn-explore-projects {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding: 0.85rem 1.8rem;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.btn-explore-projects:hover {
+    background: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.btn-explore-projects i {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-explore-projects.active i {
+    transform: rotate(180deg);
+}
+
+/* ── Carousel Reveal Panel ── */
+.carousel-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+    opacity: 0;
+}
+
+.carousel-panel.open {
+    max-height: 800px;
+    opacity: 1;
+}
+
+/* ── Nav Arrows (Prev / Next) ── */
+.carousel-nav {
+    display: flex;
+    gap: 0.6rem;
+    align-self: flex-start;
+}
+
+.carousel-nav .nav-btn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1.5px solid #d0d0d0;
+    background: #fff;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    flex-shrink: 0;
+}
+
+.carousel-nav .nav-btn:hover:not(:disabled) {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transform: scale(1.08);
+}
+
+.carousel-nav .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.carousel-nav .nav-btn i {
+    line-height: 1;
+}
+
+/* ── Carousel Track ── */
+.carousel-track-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 1.25rem;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+}
+
+/* ── Carousel Cards ── */
+.carousel-item {
+    flex: 0 0 calc(90% - 1.25rem);
+    min-width: 0;
+}
+
+@media (min-width: 480px) {
+    .carousel-item {
+        flex: 0 0 300px;
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        flex: 0 0 320px;
+    }
+}
+
+.carousel-card-link {
+    display: block;
+    width: 100%;
+    height: 280px;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 1.25rem;
+    overflow: hidden;
+}
+
+@media (min-width: 640px) {
+    .carousel-card-link {
+        height: 310px;
+    }
+}
+
+/* Card base */
+.carousel-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.carousel-card-link:hover .carousel-card {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+    transform: translateY(-3px);
+}
+
+/* Image wrapper — fills whole card by default */
+.card-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+/* Static thumbnail */
+.card-image-wrapper .card-static {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+    opacity: 1;
+}
+
+/* Animated GIF (hidden by default, shown on hover via JS) */
+.card-image-wrapper .card-gif {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* JS hook: when card is hovered, .gif-active class is added */
+.carousel-card-link.gif-active .card-gif {
+    opacity: 1;
+}
+.carousel-card-link.gif-active .card-static {
+    opacity: 0;
+}
+
+/* Subtle dark gradient always on bottom for readability */
+.card-fade-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.carousel-card-link:hover .card-image-wrapper {
+    height: 55%;
+}
+.carousel-card-link:hover .card-fade-overlay {
+    opacity: 1;
+}
+
+/* Text section — slides up from bottom on hover */
+.card-text-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    padding: 1.1rem 1.1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 3;
+}
+
+.carousel-card-link:hover .card-text-section {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+    line-height: 1.3;
+}
+
+@media (min-width: 640px) {
+    .card-title {
+        font-size: 1.1rem;
+    }
+}
+
+.card-summary {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+}
+
+@media (min-width: 640px) {
+    .card-summary {
+        font-size: 0.85rem;
+    }
+}
+
+/* ── Card Arrow (bottom-right of text section) ── */
+.card-arrow {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    font-size: 0.85rem;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 4;
+}
+
+.carousel-card-link:hover .card-arrow {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+    transform: rotate(-45deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+
+@media (min-width: 640px) {
+    .card-arrow {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* ── Carousel footer row (nav arrows inline) ── */
+.carousel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ddd;
+    transition: background 0.25s ease, width 0.25s ease;
+    cursor: pointer;
+}
+
+.carousel-dot.active {
+    background: #111;
+    width: 18px;
+    border-radius: 3px;
+}
+
 #featured-carousel {
     padding: 6rem 0;
     background-color: var(--bg-white);
