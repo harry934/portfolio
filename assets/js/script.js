@@ -635,6 +635,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.8 });
     
     scrambleElements.forEach(el => scrambleObserver.observe(el));
+
+    // ── FEATURE: Featured Projects Carousel (Vanilla Translation) ──
+    const carouselTrack = document.getElementById('hover-carousel-track');
+    const btnPrev = document.querySelector('.nav-prev');
+    const btnNext = document.querySelector('.nav-next');
+    
+    if (carouselTrack && btnPrev && btnNext) {
+        let currentIndex = 0;
+        const items = carouselTrack.querySelectorAll('.carousel-item');
+        const itemCount = items.length;
+        
+        const updateCarousel = () => {
+            // Calculate how many items are visible based on screen width
+            const isDesktop = window.innerWidth >= 768;
+            const itemWidth = isDesktop ? 350 + 24 /* gap */ : items[0].offsetWidth + 24;
+            
+            // Limit index to avoid scrolling past the end
+            const maxIndex = isDesktop ? Math.max(0, itemCount - 2) : itemCount - 1;
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            if (currentIndex < 0) currentIndex = 0;
+            
+            // Disable/Enable buttons
+            btnPrev.disabled = currentIndex === 0;
+            btnNext.disabled = currentIndex === maxIndex;
+            btnPrev.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            btnNext.style.opacity = currentIndex === maxIndex ? '0.5' : '1';
+            
+            // Slide track
+            carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        };
+        
+        btnPrev.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        
+        btnNext.addEventListener('click', () => {
+            // maxIndex calculation inline to allow for resize
+            const isDesktop = window.innerWidth >= 768;
+            const maxIndex = isDesktop ? Math.max(0, itemCount - 2) : itemCount - 1;
+            
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+        
+        // Handle resize
+        window.addEventListener('resize', updateCarousel);
+        
+        // Initial setup
+        updateCarousel();
+    }
 });
 
 // ── Email Obfuscation ──
