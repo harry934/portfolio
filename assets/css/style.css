@@ -2719,6 +2719,11 @@ body.page-transitioning {
     z-index: 4;
 }
 
+/* Hide span for cached HTML clients that still have the text */
+.card-arrow span {
+    display: none;
+}
+
 .carousel-card-link:hover .card-arrow {
     background: #111;
     color: #fff;
