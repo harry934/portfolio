@@ -391,13 +391,14 @@ body {
 }
 
 .hero-title {
-    font-size: 4.5rem;
+    font-size: 3.8rem;
     line-height: 1.1;
     margin-bottom: 2rem;
     letter-spacing: 2px;
 }
 
 .hero-title .accent {
+    display: block;
     font-weight: 300;
     color: #888;
     letter-spacing: 4px;
@@ -619,7 +620,7 @@ body {
     }
     
     .hero-title {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
     
     .hero-actions-row {
@@ -1746,7 +1747,7 @@ body {
     }
 
     .hero-title {
-        font-size: 2.4rem;
+        font-size: 2rem;
         letter-spacing: 1px;
         margin-bottom: 1.2rem;
     }
@@ -1980,7 +1981,7 @@ body {
     }
 
     .hero-title {
-        font-size: 1.9rem;
+        font-size: 1.7rem;
         letter-spacing: 0.5px;
         line-height: 1.15;
     }
