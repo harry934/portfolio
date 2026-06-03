@@ -2458,7 +2458,7 @@ body.page-transitioning {
 }
 
 .carousel-panel {
-    /* Always fully expanded now */
+    margin: 0 1.5rem; /* Space for arrows so they don't touch cards */
 }
 
 .carousel-panel.open {
@@ -2469,20 +2469,23 @@ body.page-transitioning {
 .carousel-nav {
     position: absolute;
     top: 50%;
-    left: -1.5rem; /* Pull outside */
-    width: calc(100% + 3rem); /* Expand to fit pulled arrows */
+    left: -1.5rem;
+    width: calc(100% + 3rem);
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     pointer-events: none; /* Let clicks pass through empty space */
     z-index: 10;
-    padding: 0; 
+    margin: 0;
 }
 
-/* Push them slightly outside on larger screens without clipping */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+    .carousel-panel {
+        margin: 0 3rem; /* More breathing room on larger screens */
+    }
     .carousel-nav {
-        padding: 0 1rem;
+        left: -3rem;
+        width: calc(100% + 6rem);
     }
 }
 
@@ -2490,23 +2493,22 @@ body.page-transitioning {
     pointer-events: auto; /* Re-enable clicks on the buttons */
     width: 2.8rem;
     height: 2.8rem;
-    border-radius: 8px; /* Soft square, different from the circular view link */
     border: none;
-    background: #f4f4f4; /* Subtle background */
-    color: #555;
+    background: transparent;
+    color: #111;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.15rem;
+    font-size: 1.8rem;
     cursor: pointer;
     transition: all 0.25s ease;
     flex-shrink: 0;
 }
 
 .carousel-nav .nav-btn:hover:not(:disabled) {
-    background: #e4e4e4;
-    color: #111;
-    transform: scale(1.05);
+    background: transparent;
+    color: #555;
+    transform: scale(1.15);
 }
 
 .carousel-nav .nav-btn:disabled {
