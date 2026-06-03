@@ -1,0 +1,619 @@
+/* ============================================================
+   INTELLIGENT EVENT THEMING SYSTEM
+   Adds event-specific accents over the original monochrome theme.
+   Does not replace or break the primary layout/design.
+   ============================================================ */
+
+:root {
+    /* Base theme overrides applied only when active */
+    --event-accent: transparent;
+    --event-accent-2: transparent;
+    --event-glow: transparent;
+    --event-banner-bg: transparent;
+    --event-banner-text: #fff;
+    --event-particle-color: transparent;
+    
+    /* Layout adjustments */
+    --banner-offset: 0px;
+}
+
+/* ============================================================
+   1. EVENT THEME DEFINITIONS
+   ============================================================ */
+
+/* 🇰🇪 Kenyan Holidays */
+[data-event="new-year"] {
+    --event-accent: #c5a059; /* Gold */
+    --event-accent-2: #f2e9d2; /* Champagne */
+    --event-glow: rgba(197, 160, 89, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #1a1a1a 0%, #c5a059 100%);
+    --event-particle-color: rgba(197, 160, 89, 0.4);
+}
+
+[data-event="womens-day"] {
+    --event-accent: #6b3fa0; /* Purple */
+    --event-accent-2: #e6ccff; /* Lavender */
+    --event-glow: rgba(107, 63, 160, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #6b3fa0 0%, #4a2b6e 100%);
+    --event-particle-color: rgba(107, 63, 160, 0.3);
+}
+
+[data-event="world-health"] {
+    --event-accent: #008080; /* Teal */
+    --event-accent-2: #ccffff; /* Mint */
+    --event-glow: rgba(0, 128, 128, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #008080 0%, #004d4d 100%);
+    --event-particle-color: rgba(0, 128, 128, 0.3);
+}
+
+[data-event="earth-day"] {
+    --event-accent: #2e8b57; /* Forest Green */
+    --event-accent-2: #a5d6a7; /* Sage */
+    --event-glow: rgba(46, 139, 87, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #2e8b57 0%, #1a4f31 100%);
+    --event-particle-color: rgba(46, 139, 87, 0.3);
+}
+
+[data-event="labour-day"] {
+    --event-accent: #b71c1c; /* Deep Red */
+    --event-accent-2: #ffb300; /* Amber */
+    --event-glow: rgba(183, 28, 28, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #b71c1c 0%, #7f0000 100%);
+    --event-particle-color: rgba(183, 28, 28, 0.3);
+}
+
+[data-event="madaraka-day"] {
+    --event-accent: #006600; /* Flag Green */
+    --event-accent-2: #bb0000; /* Flag Red */
+    --event-glow: rgba(0, 102, 0, 0.12);
+    --event-banner-bg: linear-gradient(90deg, #111111 0%, #bb0000 50%, #006600 100%);
+    --event-particle-color: rgba(187, 0, 0, 0.3);
+}
+
+[data-event="african-child"] {
+    --event-accent: #e65100; /* Warm Orange */
+    --event-accent-2: #fbc02d; /* Yellow */
+    --event-glow: rgba(230, 81, 0, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #e65100 0%, #ff8f00 100%);
+    --event-particle-color: rgba(230, 81, 0, 0.3);
+}
+
+[data-event="africa-day"] {
+    --event-accent: #008000; /* Pan-African Green */
+    --event-accent-2: #ffd700; /* Gold */
+    --event-glow: rgba(0, 128, 0, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #008000 0%, #ffd700 100%);
+    --event-banner-text: #1a1a1a;
+    --event-particle-color: rgba(255, 215, 0, 0.3);
+}
+
+[data-event="moi-day"] {
+    --event-accent: #bb0000; /* Flag Red */
+    --event-accent-2: #111111; /* Flag Black */
+    --event-glow: rgba(187, 0, 0, 0.12);
+    --event-banner-bg: linear-gradient(90deg, #bb0000 0%, #111111 100%);
+    --event-particle-color: rgba(187, 0, 0, 0.3);
+}
+
+[data-event="mashujaa-day"] {
+    --event-accent: #8b0000; /* Deep Red */
+    --event-accent-2: #004d00; /* Forest Green */
+    --event-glow: rgba(139, 0, 0, 0.15);
+    --event-banner-bg: linear-gradient(90deg, #111111 0%, #8b0000 50%, #004d00 100%);
+    --event-particle-color: rgba(139, 0, 0, 0.3);
+}
+
+[data-event="jamhuri-day"] {
+    --event-accent: #006600; /* Flag Green */
+    --event-accent-2: #bb0000; /* Flag Red */
+    --event-glow: rgba(0, 102, 0, 0.15);
+    --event-banner-bg: linear-gradient(90deg, #111111 0%, #bb0000 33%, #006600 66%, #ffffff 100%);
+    --event-banner-text: #ffffff; /* Requires careful blending or shadow if white is at end, or just rely on the first 66% */
+    --event-particle-color: rgba(0, 102, 0, 0.35);
+}
+
+/* Adjust banner text shadow for Jamhuri day because of the white end gradient */
+[data-event="jamhuri-day"] .event-banner {
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+[data-event="christmas"] {
+    --event-accent: #006400; /* Deep Emerald */
+    --event-accent-2: #daa520; /* Warm Gold */
+    --event-glow: rgba(0, 100, 0, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #8b0000 0%, #006400 100%);
+    --event-particle-color: rgba(255, 255, 255, 0.4); /* Snow-like */
+}
+
+[data-event="nye"] {
+    --event-accent: #4b0082; /* Indigo/Purple */
+    --event-accent-2: #ffd700; /* Gold */
+    --event-glow: rgba(75, 0, 130, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #1a1a1a 0%, #4b0082 100%);
+    --event-particle-color: rgba(255, 215, 0, 0.4);
+}
+
+/* 🌍 International Days */
+[data-event="valentines"] {
+    --event-accent: #dc143c; /* Crimson */
+    --event-accent-2: #ffc0cb; /* Rose */
+    --event-glow: rgba(220, 20, 60, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+    --event-particle-color: rgba(220, 20, 60, 0.3);
+}
+
+[data-event="poetry-day"] {
+    --event-accent: #cd853f; /* Peru / Warm Amber */
+    --event-accent-2: #d2691e; /* Chocolate / Copper */
+    --event-glow: rgba(205, 133, 63, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #8b4513 0%, #cd853f 100%);
+    --event-particle-color: rgba(205, 133, 63, 0.3);
+}
+
+[data-event="book-day"] {
+    --event-accent: #483d8b; /* Dark Slate Blue */
+    --event-accent-2: #f5deb3; /* Wheat / Parchment */
+    --event-glow: rgba(72, 61, 139, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #483d8b 0%, #2f4f4f 100%);
+    --event-particle-color: rgba(72, 61, 139, 0.3);
+}
+
+[data-event="star-wars"] {
+    --event-accent: #000080; /* Navy */
+    --event-accent-2: #00bfff; /* Deep Sky Blue */
+    --event-glow: rgba(0, 191, 255, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #000000 0%, #000080 100%);
+    --event-particle-color: rgba(0, 191, 255, 0.3);
+}
+
+[data-event="environment-day"] {
+    --event-accent: #556b2f; /* Dark Olive Green */
+    --event-accent-2: #8fbc8f; /* Dark Sea Green */
+    --event-glow: rgba(85, 107, 47, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #556b2f 0%, #2e8b57 100%);
+    --event-particle-color: rgba(85, 107, 47, 0.3);
+}
+
+[data-event="music-day"] {
+    --event-accent: #8a2be2; /* Blue Violet */
+    --event-accent-2: #ff7f50; /* Coral */
+    --event-glow: rgba(138, 43, 226, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #8a2be2 0%, #ff7f50 100%);
+    --event-particle-color: rgba(138, 43, 226, 0.3);
+}
+
+[data-event="us-independence"] {
+    --event-accent: #000080; /* Navy */
+    --event-accent-2: #b22222; /* Firebrick Red */
+    --event-glow: rgba(0, 0, 128, 0.15);
+    --event-banner-bg: linear-gradient(90deg, #000080 0%, #ffffff 50%, #b22222 100%);
+    --event-banner-text: #1a1a1a;
+    --event-particle-color: rgba(178, 34, 34, 0.3);
+}
+
+[data-event="us-independence"] .event-banner {
+    text-shadow: 0 1px 3px rgba(255,255,255,0.8);
+}
+
+[data-event="youth-day"] {
+    --event-accent: #00ced1; /* Dark Turquoise */
+    --event-accent-2: #ff8c00; /* Dark Orange */
+    --event-glow: rgba(0, 206, 209, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #00ced1 0%, #ff8c00 100%);
+    --event-particle-color: rgba(0, 206, 209, 0.3);
+}
+
+[data-event="charity-day"] {
+    --event-accent: #daa520; /* Goldenrod */
+    --event-accent-2: #fffdd0; /* Cream */
+    --event-glow: rgba(218, 165, 32, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #daa520 0%, #b8860b 100%);
+    --event-particle-color: rgba(218, 165, 32, 0.3);
+}
+
+[data-event="older-persons"] {
+    --event-accent: #906090; /* Warm Mauve */
+    --event-accent-2: #c0c0c0; /* Silver */
+    --event-glow: rgba(144, 96, 144, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #906090 0%, #704070 100%);
+    --event-particle-color: rgba(192, 192, 192, 0.3);
+}
+
+[data-event="teachers-day"] {
+    --event-accent: #0000cd; /* Medium Blue */
+    --event-accent-2: #ffbf00; /* Amber */
+    --event-glow: rgba(0, 0, 205, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #0000cd 0%, #00008b 100%);
+    --event-particle-color: rgba(255, 191, 0, 0.3);
+}
+
+[data-event="remembrance"] {
+    --event-accent: #cc0000; /* Poppy Red */
+    --event-accent-2: #1a1a1a; /* Dark */
+    --event-glow: rgba(204, 0, 0, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #cc0000 0%, #1a1a1a 100%);
+    --event-particle-color: rgba(204, 0, 0, 0.3);
+}
+
+[data-event="toilet-day"] {
+    --event-accent: #87ceeb; /* Sky Blue */
+    --event-accent-2: #ffffff; /* White */
+    --event-glow: rgba(135, 206, 235, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+    --event-particle-color: rgba(135, 206, 235, 0.3);
+}
+
+[data-event="aids-day"] {
+    --event-accent: #dc143c; /* Crimson */
+    --event-accent-2: #ffffff; /* White */
+    --event-glow: rgba(220, 20, 60, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+    --event-particle-color: rgba(220, 20, 60, 0.3);
+}
+
+[data-event="human-rights"] {
+    --event-accent: #0047ab; /* Cobalt Blue */
+    --event-accent-2: #ffd700; /* Gold */
+    --event-glow: rgba(0, 71, 171, 0.15);
+    --event-banner-bg: linear-gradient(135deg, #0047ab 0%, #003153 100%);
+    --event-particle-color: rgba(255, 215, 0, 0.3);
+}
+
+
+/* ============================================================
+   2. EXISTING ELEMENT OVERRIDES (Non-destructive)
+   These apply dynamically when [data-event] is active.
+   ============================================================ */
+
+body[data-event] {
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Adjust header spacing when banner is present */
+body[data-event] .header {
+    top: var(--banner-offset);
+}
+
+/* Add a subtle top border to the hero image or glowing shadow */
+body[data-event] .image-wrapper {
+    box-shadow: 0 40px 80px var(--event-glow);
+    transition: box-shadow 0.6s ease;
+}
+
+/* Subtle event tint to standard background */
+body[data-event] .hero-standard {
+    background: radial-gradient(circle at top right, var(--event-glow) 0%, transparent 60%);
+}
+
+/* Scroll Progress Bar gets the accent */
+body[data-event] .scroll-progress {
+    background: var(--event-accent);
+}
+
+/* Section headings subtle underline dot */
+body[data-event] .section-heading::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--event-accent);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* Buttons */
+body[data-event] .btn-outline:hover {
+    border-color: var(--event-accent);
+    color: var(--event-accent);
+}
+
+/* Form inputs focus state */
+body[data-event] .contact-form input:focus,
+body[data-event] .contact-form textarea:focus {
+    border-color: var(--event-accent);
+    box-shadow: 0 0 0 3px var(--event-glow);
+}
+
+/* ============================================================
+   3. EVENT BANNER COMPONENT
+   ============================================================ */
+
+.event-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: var(--event-banner-bg);
+    color: var(--event-banner-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1005; /* Above header */
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.event-banner.visible {
+    transform: translateY(0);
+}
+
+.event-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.event-banner-emoji {
+    font-size: 1.1rem;
+}
+
+.event-banner-title {
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.event-banner-desc {
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.event-banner-close {
+    position: absolute;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    padding: 5px;
+    line-height: 1;
+}
+
+.event-banner-close:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .event-banner {
+        font-size: 0.75rem;
+        height: auto;
+        min-height: 48px;
+        padding: 0.5rem 2.5rem 0.5rem 1rem;
+    }
+    .event-banner-content {
+        flex-direction: column;
+        gap: 0.2rem;
+        align-items: flex-start;
+    }
+    .event-banner-desc {
+        display: none; /* Hide description on very small screens to save space */
+    }
+}
+
+
+/* ============================================================
+   4. EVENT WIDGET ("Today's Celebration")
+   ============================================================ */
+
+.event-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 998; /* Just below back-to-top */
+    font-family: 'Inter', sans-serif;
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s ease;
+}
+
+.event-widget.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Badge Mode (Collapsed) */
+.event-widget-badge {
+    background: var(--bg-white);
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.event-widget-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px var(--event-glow);
+}
+
+.event-widget-badge-emoji {
+    font-size: 1.2rem;
+}
+
+.event-widget-badge-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Card Mode (Expanded) */
+.event-widget-card {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 280px;
+    background: var(--bg-white);
+    border: 1px solid #f0f0f0;
+    border-top: 3px solid var(--event-accent);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: none; /* toggled by JS */
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    transform-origin: bottom right;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.event-widget.expanded .event-widget-card {
+    display: block;
+    /* Force reflow for animation */
+    animation: popIn 0.3s forwards cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.event-widget.expanded .event-widget-badge {
+    display: none;
+}
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.event-widget-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.event-widget-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.event-widget-card-date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-widget-card-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.event-widget-card-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.event-widget-card-close:hover {
+    color: var(--event-accent);
+}
+
+@media (max-width: 768px) {
+    .event-widget {
+        bottom: 80px; /* Above mobile nav */
+        right: 15px;
+    }
+    .event-widget-badge-text {
+        display: none; /* Emoji only on mobile */
+    }
+    .event-widget-badge {
+        padding: 0.6rem;
+    }
+}
+
+
+/* ============================================================
+   5. PARTICLE SYSTEM LAYER
+   ============================================================ */
+
+.event-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.event-particles.active {
+    opacity: 1;
+}
+
+
+/* ============================================================
+   6. DARK MODE ADJUSTMENTS
+   Ensures event colors remain visible and harmonious in dark mode.
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* If the main site implements dark mode, tweak widget backgrounds here */
+    body.dark-mode .event-widget-badge,
+    body.dark-mode .event-widget-card {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+    
+    body.dark-mode .event-widget-badge-text,
+    body.dark-mode .event-widget-card-title {
+        color: #fff;
+    }
+    
+    body.dark-mode .event-widget-card-date,
+    body.dark-mode .event-widget-card-desc {
+        color: #aaa;
+    }
+    
+    body.dark-mode .event-widget-card-close {
+        color: #aaa;
+    }
+    body.dark-mode .event-widget-card-close:hover {
+        color: var(--event-accent-2); /* Use lighter accent in dark mode */
+    }
+}
+
+/* ============================================================
+   7. ADMIN PREVIEW WIDGET
+   ============================================================ */
+   
+.event-preview-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 10000;
+    font-family: monospace;
+    font-size: 12px;
+}

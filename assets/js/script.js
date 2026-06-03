@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNext       = document.getElementById('carousel-next');
     const dotsContainer = document.getElementById('carousel-dots');
 
-    if (carouselTrack && btnExplore && carouselPanel) {
+    if (carouselTrack && carouselPanel) {
         const items     = Array.from(carouselTrack.querySelectorAll('.carousel-item'));
         const itemCount = items.length;
         let currentIndex = 0;
@@ -685,20 +685,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnNext) btnNext.addEventListener('click', () => goTo(currentIndex + 1));
         window.addEventListener('resize', () => goTo(currentIndex));
 
-        // ── Toggle Button ──
-        btnExplore.addEventListener('click', () => {
-            const isOpen = carouselPanel.classList.toggle('open');
-            btnExplore.classList.toggle('active', isOpen);
-            btnExplore.setAttribute('aria-expanded', String(isOpen));
-            if (carouselNav) carouselNav.style.display = isOpen ? 'flex' : 'none';
-
-            // When first opened, snap to index 0 so transform is correct
-            if (isOpen) {
-                setTimeout(() => goTo(0), 50); // slight delay for panel to expand
-            }
-        });
-
-        // ── GIF Hover Swap ──
+        // Removed toggle button logic since it's always open
+        
+        // ── Auto-load GIFs ──
         items.forEach(item => {
             const link    = item.querySelector('.carousel-card-link');
             const gifSrc  = link ? link.dataset.gif : null;
@@ -706,16 +695,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!link || !gifSrc || !gifImg) return;
 
-            link.addEventListener('mouseenter', () => {
-                if (!gifImg.src || gifImg.src === window.location.href) {
-                    gifImg.src = gifSrc; // lazy-load the GIF on first hover
-                }
-                link.classList.add('gif-active');
-            });
-
-            link.addEventListener('mouseleave', () => {
-                link.classList.remove('gif-active');
-            });
+            // Load the GIF immediately
+            if (!gifImg.src || gifImg.src === window.location.href) {
+                gifImg.src = gifSrc; 
+            }
+            link.classList.add('gif-active');
         });
 
         // Initial button state

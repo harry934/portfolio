@@ -18,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/events.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Devicon — exact tech brand logos -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -256,31 +257,13 @@
                                 </div>
                             </div>
 
-                            <!-- Explore toggle button -->
-                            <button class="btn-explore-projects" id="btn-explore-projects" aria-expanded="false">
-                                <i class="bi bi-grid-3x2-gap-fill"></i>
-                                Explore Projects
-                                <i class="bi bi-chevron-down"></i>
-                            </button>
-                        </div>
-
-                        <!-- Prev / Next arrows (shown when carousel is open) -->
-                        <div class="carousel-nav" id="carousel-nav-arrows" style="display:none;">
-                            <button class="nav-btn nav-prev" id="carousel-prev" aria-label="Previous project">
-                                <i class="bi bi-arrow-left"></i>
-                            </button>
-                            <button class="nav-btn nav-next" id="carousel-next" aria-label="Next project">
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
                         </div>
                     </div>
 
-                    <!-- Collapsible Carousel Panel -->
-                    <div class="carousel-panel" id="carousel-panel">
-                        <!-- Track -->
-                        <div class="carousel-track-wrapper">
-                        <!-- Prev / Next arrows (shown when carousel is open) -->
-                        <div class="carousel-nav" id="carousel-nav-arrows" style="display:none;">
+                    <!-- Carousel Panel -->
+                    <div class="carousel-panel open" id="carousel-panel" style="position: relative;">
+                        <!-- Prev / Next arrows -->
+                        <div class="carousel-nav" id="carousel-nav-arrows">
                             <button class="nav-btn nav-prev" id="carousel-prev" aria-label="Previous project">
                                 <i class="bi bi-arrow-left"></i>
                             </button>
@@ -288,9 +271,10 @@
                                 <i class="bi bi-arrow-right"></i>
                             </button>
                         </div>
+                        
+                        <!-- Track -->
+                        <div class="carousel-track-wrapper">
                             <div class="carousel-track" id="hover-carousel-track">
-                                </div>
-
                                 <!-- 2: Innovate Hub -->
                                 <div class="carousel-item">
                                     <div class="carousel-card-link" data-gif="https://media.giphy.com/media/b0EnJFv8e7vAasW2ru/giphy.gif">
@@ -303,7 +287,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Innovate Hub</h3>
                                                 <p class="card-summary">An interactive platform dedicated to showcasing young innovators. Features a responsive UI built with React to track the ideation and development process of creative projects.</p>
-                                                <a href="https://innovations-b1a19.web.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i></a>
+                                                <a href="https://innovations-b1a19.web.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -321,7 +305,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Emergency Response ML</h3>
                                                 <p class="card-summary">A machine learning solution utilizing TensorFlow to analyze live road camera footage. It detects accidents and traffic congestion in real-time, presented via a Streamlit dashboard.</p>
-                                                <a href="https://emergencyresponsee.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i></a>
+                                                <a href="https://emergencyresponsee.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -339,7 +323,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Children's Home Support</h3>
                                                 <p class="card-summary">A philanthropic platform designed to streamline donations and facilitate child sponsorships. Integrates the Safaricom Daraja API for seamless and secure M-Pesa transactions.</p>
-                                                <a href="https://children-home.onrender.com/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i></a>
+                                                <a href="https://children-home.onrender.com/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -357,7 +341,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">M-Pesa STK Push</h3>
                                                 <p class="card-summary">A functional demonstration of the M-Pesa STK Push payment flow. Implements the Safaricom Daraja API to provide a seamless mobile money checkout experience.</p>
-                                                <a href="https://stkmpesa.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i></a>
+                                                <a href="https://stkmpesa.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +359,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Online Food Ordering</h3>
                                                 <p class="card-summary">A comprehensive web-based restaurant management system enabling customers to browse menus, place online food orders, and process secure payments.</p>
-                                                <a href="https://pizzachickncrust.up.railway.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i></a>
+                                                <a href="https://pizzachickncrust.up.railway.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -393,7 +377,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Laundry Service</h3>
                                                 <p class="card-summary">A convenient booking platform allowing users to schedule home laundry services. Features an intuitive interface and integrated M-Pesa mobile payments for effortless checkout.</p>
-                                                <a href="https://redroselaundry.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i></a>
+                                                <a href="https://redroselaundry.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -539,6 +523,7 @@
     <a href="#hero" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/events.js"></script>
 
     <!-- Service Worker Registration (#26) -->
     <script>
@@ -552,4 +537,3 @@
     </script>
 </body>
 </html>
-
