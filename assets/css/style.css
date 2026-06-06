@@ -609,7 +609,13 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: 50% 5%; /* Shows upper body (waist up) */
-    filter: contrast(1.05); /* Clean look */
+    filter: grayscale(100%) contrast(1.05); /* Clean black and white look */
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.image-wrapper img:hover {
+    filter: grayscale(0%) contrast(1.05); /* Colored on hover */
+    transform: scale(1.05); /* Smooth zoom in briefly */
 }
 
 @media (max-width: 1024px) {
