@@ -596,6 +596,7 @@ body {
 }
 
 .image-wrapper {
+    position: relative;
     width: 100%;
     aspect-ratio: 0.8;
     border-radius: 40px;
@@ -605,24 +606,51 @@ body {
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.image-wrapper:hover {
+.image-wrapper:hover,
+.social-side-bar:hover ~ .image-wrapper {
     transform: translateY(-8px);
     box-shadow: 0 50px 100px rgba(0,0,0,0.2); /* Enhanced lift-off shadow */
 }
 
+/* Base Image: Always Grayscale, no transform */
 .image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: 50% 5%; /* Shows upper body (waist up) */
     filter: grayscale(100%) contrast(1.05); /* Clean black and white look */
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.image-wrapper:hover img {
-    filter: grayscale(0%) contrast(1.05); /* Colored on hover */
-    transform: scale(1.08); /* Smooth zoom in */
+/* Venetian Blinds Reveal */
+.blind {
+    position: absolute;
+    inset: 0;
+    background: url('../img/profile.jpg') center 5% / cover no-repeat;
+    filter: contrast(1.05);
+    z-index: 2;
+    
+    /* Flip effect setup */
+    transform-origin: center;
+    transform: rotateX(90deg); /* Hidden initially */
+    opacity: 0; /* Prevents edge artifacts */
+    
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+    /* Use the inline variable --i to stagger the transition delay */
+    transition-delay: calc(var(--i) * 0.1s);
 }
+
+.image-wrapper:hover .blind,
+.social-side-bar:hover ~ .image-wrapper .blind {
+    transform: rotateX(0deg);
+    opacity: 1;
+}
+
+/* Hard-clip each div into exactly a 20% horizontal slice */
+.blind:nth-child(2) { clip-path: inset(0% 0 80% 0); transform-origin: 50% 10%; }
+.blind:nth-child(3) { clip-path: inset(20% 0 60% 0); transform-origin: 50% 30%; }
+.blind:nth-child(4) { clip-path: inset(40% 0 40% 0); transform-origin: 50% 50%; }
+.blind:nth-child(5) { clip-path: inset(60% 0 20% 0); transform-origin: 50% 70%; }
+.blind:nth-child(6) { clip-path: inset(80% 0 0% 0); transform-origin: 50% 90%; }
 
 /* Fix for Mobile/Touch Screens */
 @media (hover: none) {
