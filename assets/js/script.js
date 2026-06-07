@@ -295,6 +295,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
+    // ── Profile Image Hover Triggers ──
+    const imageWrapper = document.querySelector('.image-wrapper');
+    const hoverTriggers = document.querySelectorAll('.nav-links a, .hero-content, .logo');
+    
+    if (imageWrapper) {
+        hoverTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                imageWrapper.classList.add('hover-active');
+            });
+            trigger.addEventListener('mouseleave', () => {
+                imageWrapper.classList.remove('hover-active');
+            });
+        });
+    }
+
     // ── Typed.js ──
     new Typed('#typed', {
         strings: ['Fitness Advisor', 'Innovator', 'UI/UX Designer', 'Web Developer','Cyber Security Enthusiast','Junior DevOps'],

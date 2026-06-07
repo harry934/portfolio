@@ -607,7 +607,8 @@ body {
 }
 
 .image-wrapper:hover,
-.social-side-bar:hover ~ .image-wrapper {
+.social-side-bar:hover ~ .image-wrapper,
+.image-wrapper.hover-active {
     transform: translateY(-8px);
     box-shadow: 0 50px 100px rgba(0,0,0,0.2); /* Enhanced lift-off shadow */
 }
@@ -640,7 +641,8 @@ body {
 }
 
 .image-wrapper:hover .blind,
-.social-side-bar:hover ~ .image-wrapper .blind {
+.social-side-bar:hover ~ .image-wrapper .blind,
+.image-wrapper.hover-active .blind {
     transform: rotateX(0deg);
     opacity: 1;
 }
