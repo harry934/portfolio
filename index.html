@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/events.css">
+    <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Devicon — exact tech brand logos -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -117,31 +118,32 @@
             </div>
         </section>
         <!-- About Section -->
-        <section id="about" class="section">
-            <div class="container">
-                <h2 class="section-heading" data-scramble="About Me">About Me</h2>
+        <section id="about" class="about-me-section">
+            <div class="about-container">
+                <h2 class="section-heading" data-scramble="About Me" style="text-align: center; margin-bottom: 2rem;">About Me</h2>
                 <div class="about-grid">
-                    <div class="about-text-container">
-                        <div class="background-network">
-                            <div class="net-node node-a"></div>
-                            <div class="net-node node-b"></div>
-                            <div class="net-node node-c"></div>
-                            <div class="net-node node-d"></div>
-                            <div class="net-line line-a"></div>
-                            <div class="net-line line-b"></div>
-                        </div>
-                        <div class="about-text">
-                            <p>I'm Harry Otieno Mokaya, a Software Engineer from Nairobi with roots in Migori County. I work across multiple domains from web and mobile development to machine learning and IoT systems. My focus is on building practical solutions that solve real problems.</p>
-                            <p>Whether it's developing responsive web applications, training ML models, or creating IoT prototypes, I enjoy the challenge of turning ideas into working products. When I'm not coding, you'll find me exploring fitness tech and wellness applications. I believe technology should be accessible and beneficial to everyone, which drives my approach to development.</p>
-                        </div>
+                    <!-- 3D Image Carousel Container -->
+                    <div class="about-image-container" id="about-image-container">
+                        <!-- Images will be injected here via JavaScript -->
                     </div>
-                    <div class="about-visual">
-                        <div class="tech-hub">
-                            <div class="hub-icon"><i class="bi bi-hexagon-fill"></i></div>
-                            <div class="orbit-1"></div>
-                            <div class="orbit-2"></div>
-                            <div class="floating-data d1"></div>
-                            <div class="floating-data d2"></div>
+                    
+                    <!-- Content & Controls -->
+                    <div class="about-content">
+                        <!-- Animated Text Container -->
+                        <div id="about-text-container" class="about-text-container">
+                            <h3 class="about-name" id="about-name"></h3>
+                            <p class="about-designation" id="about-designation"></p>
+                            <p class="about-quote" id="about-quote"></p>
+                        </div>
+                        
+                        <!-- Navigation Buttons -->
+                        <div class="about-arrow-buttons">
+                            <button class="about-arrow-button prev-button" id="about-prev-btn" aria-label="Previous image">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button class="about-arrow-button next-button" id="about-next-btn" aria-label="Next image">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -413,47 +415,16 @@
         <!-- Resume Section -->
         <section id="resume" class="section">
             <div class="container">
-                <div class="resume-split-card">
-                    <div class="resume-left">
-                        <h2 class="resume-label">Core Expertise</h2>
-                        <div class="social-orbit-wrap">
-
-                            <!-- Ripples -->
-                            <div class="orb-ripple orb-r1"></div>
-                            <div class="orb-ripple orb-r2"></div>
-                            <div class="orb-ripple orb-r3"></div>
-
-                            <!-- Center badge -->
-                            <div class="orb-center"><span>Tech<br>Stack</span></div>
-
-                            <!-- Inner ring — clockwise -->
-                            <div class="orb-ring orb-ring-1">
-                                <div class="orb-item orb-a-0"   data-name="React">        <i class="devicon-react-original colored"></i></div>
-                                <div class="orb-item orb-a-90"  data-name="Python">       <i class="devicon-python-plain colored"></i></div>
-                                <div class="orb-item orb-a-180" data-name="Kotlin">       <i class="devicon-kotlin-plain colored"></i></div>
-                                <div class="orb-item orb-a-270" data-name="Node.js">      <i class="devicon-nodejs-plain colored"></i></div>
-                            </div>
-
-                            <!-- Outer ring — counter-clockwise -->
-                            <div class="orb-ring orb-ring-2">
-                                <div class="orb-item orb-a-45"  data-name="TensorFlow">   <i class="devicon-tensorflow-original colored"></i></div>
-                                <div class="orb-item orb-a-135" data-name="Android Studio"><i class="devicon-androidstudio-plain colored"></i></div>
-                                <div class="orb-item orb-a-225" data-name="Arduino">       <i class="devicon-arduino-plain colored"></i></div>
-                                <div class="orb-item orb-a-315" data-name="TypeScript">   <i class="devicon-typescript-plain colored"></i></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="resume-right">
+                <div class="resume-split-card" style="grid-template-columns: 1fr; text-align: center;">
+                    <div class="resume-right" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem;">
                         <h2 class="resume-label">Curriculum Vitae</h2>
-                        <p>Download my professional resume to see my full experience and academic background.</p>
+                        <p style="max-width: 600px; margin: 0 auto 2rem;">Download my professional resume to see my full experience and academic background.</p>
                         <div class="cv-buttons">
                             <a href="cv.html" class="btn btn-dark btn-with-icon">
-                                <i class="bi bi-lock-fill"></i> <span>OPEN PROTECTED CV</span>
+                                <i class="bi bi-lock-fill"></i> <span>OPEN CV</span>
                             </a>
                         </div>
-                        <div class="resume-protection-badge">
+                        <div class="resume-protection-badge" style="justify-content: center; margin-top: 1.5rem;">
                             <i class="bi bi-lock-fill"></i>
                             <span>Confidential &mdash; password required to open</span>
                         </div>
@@ -530,6 +501,8 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/events.js"></script>
+    <script src="about.js"></script>
+    <script src="assets/js/security.js"></script>
 
     <!-- Service Worker Registration (#26) -->
     <script>

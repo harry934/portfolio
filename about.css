@@ -1,0 +1,182 @@
+/* about.css */
+/* Scoped entirely to .about-me-section to avoid global conflicts */
+
+.about-me-section {
+  /* Configuration Variables - easily customizable */
+  --about-color-name: #1a1a1a;
+  --about-color-designation: #6b7280;
+  --about-color-quote: #4b5563;
+  --about-color-arrow-bg: #141414;
+  --about-color-arrow-fg: #f1f1f7;
+  --about-color-arrow-hover-bg: #00a6fb;
+  
+  --about-font-name: 1.5rem;
+  --about-font-designation: 0.925rem;
+  --about-font-quote: 1.125rem;
+
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+
+
+.about-me-section * {
+  box-sizing: border-box;
+}
+
+.about-container {
+  width: 100%;
+}
+
+.about-grid {
+  display: grid;
+  gap: 5rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- Image Carousel Styles --- */
+.about-image-container {
+  position: relative;
+  width: 100%;
+  height: 24rem;
+  perspective: 1000px;
+}
+
+.about-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  
+  /* Transition matches framer-motion easeInOut with 0.8s */
+  transition: transform 0.8s cubic-bezier(.4,2,.3,1), opacity 0.8s cubic-bezier(.4,2,.3,1), z-index 0.8s;
+  transform-style: preserve-3d;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* State modifiers applied by JS */
+.about-image.is-active {
+  z-index: 3;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0px) translateY(0px) scale(1) rotateY(0deg);
+}
+
+.about-image.is-left {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  /* transform is dynamic based on width, applied via inline styles in JS */
+}
+
+.about-image.is-right {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  /* transform is dynamic based on width, applied via inline styles in JS */
+}
+
+/* --- Content Styles --- */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about-text-container {
+  min-height: 16rem; /* Prevents layout shifting */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-name {
+  color: var(--about-color-name);
+  font-size: var(--about-font-name);
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.about-designation {
+  color: var(--about-color-designation);
+  font-size: var(--about-font-designation);
+  margin: 0 0 2rem 0;
+}
+
+.about-quote {
+  color: var(--about-color-quote);
+  font-size: var(--about-font-quote);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Word animation mirroring framer motion */
+.about-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(5px);
+  animation: aboutBlurIn 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes aboutBlurIn {
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+/* --- Navigation Controls --- */
+.about-arrow-buttons {
+  display: flex;
+  gap: 1.5rem;
+  padding-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .about-arrow-buttons {
+    padding-top: 0;
+    margin-top: auto;
+  }
+}
+
+.about-arrow-button {
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+  background-color: var(--about-color-arrow-bg);
+  color: var(--about-color-arrow-fg);
+  padding: 0;
+  outline: none;
+}
+
+.about-arrow-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.about-arrow-button:hover,
+.about-arrow-button:focus {
+  background-color: var(--about-color-arrow-hover-bg);
+}
