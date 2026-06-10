@@ -20,43 +20,43 @@ document.addEventListener('DOMContentLoaded', () => {
   name: "Beyond Coding",
   designation: "Innovation & Growth",
   quote: "Outside development, I enjoy exploring innovation, startup ideas, and understanding how technology can be used to create opportunities. I’m always curious about new ideas and how they can grow into meaningful products or experiences.",
-  src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
+  src: ""
 },
 {
   name: "Web & Mobile",
   designation: "Frontend & Backend",
   quote: "I enjoy creating applications that balance good design with solid functionality. I like building experiences that feel smooth to use while making sure the systems behind them are reliable and well structured.",
-  src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800"
+  src: ""
 },
 {
   name: "Machine Learning",
   designation: "AI Exploration",
   quote: "Machine learning interests me because of its ability to make systems more adaptive and intelligent. I enjoy learning how AI can be integrated into applications to improve decision-making and create better user experiences.",
-  src: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800"
+  src: ""
 },
 {
   name: "IoT Projects",
   designation: "Systems & Prototyping",
   quote: "One area I enjoy exploring is IoT and connected systems. There’s something exciting about combining hardware and software to build interactive solutions that connect the physical and digital world.",
-  src: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
+  src: ""
 },
 {
   name: "Gym & Discipline",
   designation: "Fitness Lifestyle",
-  quote: "Outside tech, I spend time in the gym and genuinely enjoy training. Fitness has taught me consistency, discipline, and showing up even when motivation isn’t there—qualities I try to carry into my projects and personal growth as well.",
-  src: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800"
+  quote: "Outside tech, I spend time in the gym and genuinely enjoy training. Fitness has taught me consistency, discipline, and showing up even when motivation isn’t there. I try to carry those qualities into my projects and personal growth as well.",
+  src: "assets/img/gym.jpg"
 },
 {
   name: "Accessible Tech",
   designation: "User Focus",
   quote: "I believe good technology should feel approachable and useful. I try to create products that are practical, easy to interact with, and designed with real users and real situations in mind.",
-  src: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800"
+  src: ""
 },
 {
   name: "Always Improving",
   designation: "Continuous Learning",
   quote: "Technology changes quickly, and I enjoy keeping up through projects, experimentation, and learning new approaches. I see growth as an ongoing process and always try to leave every project knowing more than when I started.",
-  src: "https://images.unsplash.com/photo-1513258496099-48166314a108?auto=format&fit=crop&q=80&w=800"
+  src: ""
 },
 {
   name: "Let's Connect",
