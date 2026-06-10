@@ -11,18 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   src: "assets/img/chillen.jpg"
 },
 {
-  name: "Beyond Coding",
-  designation: "Nature & Adventure",
-  quote: "When I'm away from the screen, I enjoy taking walks, spending time outdoors, and exploring new places. I enjoy nature, adventure, and moments that help me reset, stay inspired, and enjoy life beyond technology.",
-  src: "assets/img/pfp1.jpg"
-},
-{
-  name: "Gym & Discipline",
-  designation: "Fitness Lifestyle",
-  quote: "Outside tech, I spend time in the gym and genuinely enjoy training. Fitness has taught me consistency, discipline, and showing up even when motivation isn’t there. I try to carry those qualities into my projects and personal growth as well.",
-  src: "assets/img/gym.jpg"
-},
-{
   name: "Networking",
   designation: "Open to Opportunities",
   quote: "I enjoy meeting people, exchanging ideas, and collaborating on projects that challenge me to grow. If you're building something meaningful or just want to connect, I’d be glad to have the conversation.",
@@ -33,6 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
   designation: "Problem Solver",
   quote: "I really enjoy solving real-world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
   src: "assets/img/IoT.jpg"
+},
+{
+  name: "Beyond Coding",
+  designation: "Nature & Adventure",
+  quote: "When I'm away from the screen, I enjoy taking walks, spending time outdoors, and exploring new places. I enjoy nature, adventure, and moments that help me reset, stay inspired, and enjoy life beyond technology.",
+  src: "assets/img/pfp1.jpg"
+},
+{
+  name: "Gym & Discipline",
+  designation: "Fitness Lifestyle",
+  quote: "Outside tech, I spend time in the gym and genuinely enjoy training. Fitness has taught me consistency, discipline, and showing up even when motivation isn’t there. I try to carry those qualities into my projects and personal growth as well.",
+  src: "assets/img/gym.jpg"
 },
 {
   name: "Always Improving",
