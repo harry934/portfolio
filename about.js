@@ -4,66 +4,66 @@ document.addEventListener('DOMContentLoaded', () => {
   // Modify or add items here up to 10. 
   // Make sure to replace the placeholder "src" links with your actual image paths from assets/img
   const aboutData = [
-    {
-      name: "Harry Otieno Mokaya",
-      designation: "Software Engineer",
-      quote: "I'm a Software Engineer from Nairobi with roots in Migori County. I work across multiple domains from web and mobile development to machine learning and IoT systems.",
-      src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Practical Solutions",
-      designation: "Problem Solver",
-      quote: "My focus is on building practical solutions that solve real problems. Whether it's developing responsive web applications, training ML models, or creating IoT prototypes, I enjoy the challenge of turning ideas into working products.",
-      src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Beyond Coding",
-      designation: "Tech Enthusiast",
-      quote: "When I'm not coding, you'll find me exploring fitness tech and wellness applications. I believe technology should be accessible and beneficial to everyone, which drives my approach to development.",
-      src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Web & Mobile",
-      designation: "Frontend & Backend",
-      quote: "I specialize in creating seamless user experiences using modern web and mobile frameworks. Building interfaces that look great and function perfectly is what I strive for.",
-      src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Machine Learning",
-      designation: "AI Integration",
-      quote: "I'm passionate about the potential of machine learning. Training models and integrating AI features into applications allows me to build smarter, predictive systems.",
-      src: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "IoT Prototypes",
-      designation: "Hardware meets Software",
-      quote: "Bridging the gap between the physical and digital worlds is fascinating. I enjoy tinkering with IoT devices and building prototypes that connect hardware to the cloud.",
-      src: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Fitness Tech",
-      designation: "Wellness Innovation",
-      quote: "My personal interest in health translates into my technical pursuits. I love exploring how technology can be used to improve fitness, track progress, and promote overall wellness.",
-      src: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Accessible Tech",
-      designation: "Inclusive Design",
-      quote: "Technology should leave no one behind. I try to adopt an accessible approach to design and development, ensuring that my products are usable by as many people as possible.",
-      src: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Lifelong Learner",
-      designation: "Continuous Improvement",
-      quote: "The tech industry moves fast, and so do I. I'm constantly learning new languages, frameworks, and methodologies to keep my skills sharp and relevant.",
-      src: "https://images.unsplash.com/photo-1513258496099-48166314a108?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-      name: "Let's Connect",
-      designation: "Open to Opportunities",
-      quote: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's build something amazing together.",
-      src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800"
-    }
+   {
+  name: "Harry Otieno Mokaya",
+  designation: "Software & DevOps Engineer",
+  quote: "I'm a Software Engineer from Nairobi with roots in Migori County. I enjoy building digital products and exploring different areas of technology. For me, the best part is turning ideas into something real that people can interact with and benefit from.",
+  src: "assets/img/chillen.jpg"
+},
+{
+  name: "Building Solutions",
+  designation: "Problem Solver",
+  quote: "I really enjoy solving real-world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
+  src: ""
+},
+{
+  name: "Beyond Coding",
+  designation: "Innovation & Growth",
+  quote: "Outside development, I enjoy exploring innovation, startup ideas, and understanding how technology can be used to create opportunities. I’m always curious about new ideas and how they can grow into meaningful products or experiences.",
+  src: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "Web & Mobile",
+  designation: "Frontend & Backend",
+  quote: "I enjoy creating applications that balance good design with solid functionality. I like building experiences that feel smooth to use while making sure the systems behind them are reliable and well structured.",
+  src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "Machine Learning",
+  designation: "AI Exploration",
+  quote: "Machine learning interests me because of its ability to make systems more adaptive and intelligent. I enjoy learning how AI can be integrated into applications to improve decision-making and create better user experiences.",
+  src: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "IoT Projects",
+  designation: "Systems & Prototyping",
+  quote: "One area I enjoy exploring is IoT and connected systems. There’s something exciting about combining hardware and software to build interactive solutions that connect the physical and digital world.",
+  src: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "Gym & Discipline",
+  designation: "Fitness Lifestyle",
+  quote: "Outside tech, I spend time in the gym and genuinely enjoy training. Fitness has taught me consistency, discipline, and showing up even when motivation isn’t there—qualities I try to carry into my projects and personal growth as well.",
+  src: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "Accessible Tech",
+  designation: "User Focus",
+  quote: "I believe good technology should feel approachable and useful. I try to create products that are practical, easy to interact with, and designed with real users and real situations in mind.",
+  src: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "Always Improving",
+  designation: "Continuous Learning",
+  quote: "Technology changes quickly, and I enjoy keeping up through projects, experimentation, and learning new approaches. I see growth as an ongoing process and always try to leave every project knowing more than when I started.",
+  src: "https://images.unsplash.com/photo-1513258496099-48166314a108?auto=format&fit=crop&q=80&w=800"
+},
+{
+  name: "Let's Connect",
+  designation: "Open to Opportunities",
+  quote: "I enjoy meeting people, exchanging ideas, and collaborating on projects that challenge me to grow. If you're building something meaningful or just want to connect, I’d be glad to have the conversation.",
+  src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800"
+}
   ];
 
   // --- DOM Elements ---
