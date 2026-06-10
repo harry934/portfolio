@@ -11,12 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   src: "assets/img/chillen.jpg"
 },
 {
-  name: "Building Solutions",
-  designation: "Problem Solver",
-  quote: "I really enjoy solving real-world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
-  src: "assets/img/IoT.jpg"
-},
-{
   name: "Beyond Coding",
   designation: "Nature & Adventure",
   quote: "When I'm away from the screen, I enjoy taking walks, spending time outdoors, and exploring new places. I enjoy nature, adventure, and moments that help me reset, stay inspired, and enjoy life beyond technology.",
@@ -29,21 +23,27 @@ document.addEventListener('DOMContentLoaded', () => {
   src: "assets/img/gym.jpg"
 },
 {
+  name: "Networking",
+  designation: "Open to Opportunities",
+  quote: "I enjoy meeting people, exchanging ideas, and collaborating on projects that challenge me to grow. If you're building something meaningful or just want to connect, I’d be glad to have the conversation.",
+  src: "assets/img/nss.jpg"
+},
+{
+  name: "Building Solutions",
+  designation: "Problem Solver",
+  quote: "I really enjoy solving real-world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
+  src: "assets/img/IoT.jpg"
+},
+{
   name: "Web & Mobile",
   designation: "Frontend & Backend",
   quote: "I enjoy creating applications that balance good design with solid functionality. I like building experiences that feel smooth to use while making sure the systems behind them are reliable and well structured.",
-  src: "assets/img/DESIGNING.jpg"
+  src: "assets/img/web.jpg"
 },
 {
   name: "Always Improving",
   designation: "Continuous Learning",
   quote: "Technology changes quickly, and I enjoy keeping up through projects, experimentation, and learning new approaches. I see growth as an ongoing process and always try to leave every project knowing more than when I started.",
-  src: ""
-},
-{
-  name: "Networking",
-  designation: "Open to Opportunities",
-  quote: "I enjoy meeting people, exchanging ideas, and collaborating on projects that challenge me to grow. If you're building something meaningful or just want to connect, I’d be glad to have the conversation.",
   src: ""
 }
   ];
