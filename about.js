@@ -14,31 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
   name: "Building Solutions",
   designation: "Problem Solver",
   quote: "I really enjoy solving real-world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
-  src: ""
+  src: "assets/img/IoT.jpg"
 },
 {
   name: "Beyond Coding",
-  designation: "Innovation & Growth",
-  quote: "Outside development, I enjoy exploring innovation, startup ideas, and understanding how technology can be used to create opportunities. I’m always curious about new ideas and how they can grow into meaningful products or experiences.",
-  src: "assets/img/nss.jpg"
-},
-{
-  name: "Web & Mobile",
-  designation: "Frontend & Backend",
-  quote: "I enjoy creating applications that balance good design with solid functionality. I like building experiences that feel smooth to use while making sure the systems behind them are reliable and well structured.",
-  src: ""
-},
-{
-  name: "Machine Learning",
-  designation: "AI Exploration",
-  quote: "Machine learning interests me because of its ability to make systems more adaptive and intelligent. I enjoy learning how AI can be integrated into applications to improve decision-making and create better user experiences.",
-  src: ""
-},
-{
-  name: "IoT Projects",
-  designation: "Systems & Prototyping",
-  quote: "One area I enjoy exploring is IoT and connected systems. There’s something exciting about combining hardware and software to build interactive solutions that connect the physical and digital world.",
-  src: ""
+  designation: "Nature & Adventure",
+  quote: "When I'm away from the screen, I enjoy taking walks, spending time outdoors, and exploring new places. I enjoy nature, adventure, and moments that help me reset, stay inspired, and enjoy life beyond technology.",
+  src: "assets/img/pfp1.jpg"
 },
 {
   name: "Gym & Discipline",
@@ -47,16 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
   src: "assets/img/gym.jpg"
 },
 {
+  name: "Web & Mobile",
+  designation: "Frontend & Backend",
+  quote: "I enjoy creating applications that balance good design with solid functionality. I like building experiences that feel smooth to use while making sure the systems behind them are reliable and well structured.",
+  src: "assets/img/DESIGNING.jpg"
+},
+{
   name: "Always Improving",
   designation: "Continuous Learning",
   quote: "Technology changes quickly, and I enjoy keeping up through projects, experimentation, and learning new approaches. I see growth as an ongoing process and always try to leave every project knowing more than when I started.",
   src: ""
 },
 {
-  name: "Let's Connect",
+  name: "Networking",
   designation: "Open to Opportunities",
   quote: "I enjoy meeting people, exchanging ideas, and collaborating on projects that challenge me to grow. If you're building something meaningful or just want to connect, I’d be glad to have the conversation.",
-  src: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800"
+  src: ""
 }
   ];
 
