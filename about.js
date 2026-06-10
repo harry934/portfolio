@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   name: "Beyond Coding",
   designation: "Innovation & Growth",
   quote: "Outside development, I enjoy exploring innovation, startup ideas, and understanding how technology can be used to create opportunities. I’m always curious about new ideas and how they can grow into meaningful products or experiences.",
-  src: ""
+  src: "assets/img/nss.jpg"
 },
 {
   name: "Web & Mobile",
@@ -45,12 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
   designation: "Fitness Lifestyle",
   quote: "Outside tech, I spend time in the gym and genuinely enjoy training. Fitness has taught me consistency, discipline, and showing up even when motivation isn’t there. I try to carry those qualities into my projects and personal growth as well.",
   src: "assets/img/gym.jpg"
-},
-{
-  name: "Accessible Tech",
-  designation: "User Focus",
-  quote: "I believe good technology should feel approachable and useful. I try to create products that are practical, easy to interact with, and designed with real users and real situations in mind.",
-  src: ""
 },
 {
   name: "Always Improving",
