@@ -35,16 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   src: "assets/img/IoT.jpg"
 },
 {
-  name: "Web & Mobile",
-  designation: "Frontend & Backend",
-  quote: "I enjoy creating applications that balance good design with solid functionality. I like building experiences that feel smooth to use while making sure the systems behind them are reliable and well structured.",
-  src: "assets/img/web.jpg"
-},
-{
   name: "Always Improving",
   designation: "Continuous Learning",
   quote: "Technology changes quickly, and I enjoy keeping up through projects, experimentation, and learning new approaches. I see growth as an ongoing process and always try to leave every project knowing more than when I started.",
-  src: ""
+  src: "assets/img/tech.jpg"
 }
   ];
 
