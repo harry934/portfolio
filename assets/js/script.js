@@ -129,6 +129,9 @@ function initTextRoll() {
    Measures real scrollHeight so transition knows exact target.
    ============================================================ */
 function initExpCardSmooth() {
+    const isTouchOrTablet = window.matchMedia('(max-width: 992px), (hover: none)').matches;
+    if (isTouchOrTablet) return;
+
     const COLLAPSED_H = 88; // px — dots row + title
     document.querySelectorAll('.exp-card').forEach(card => {
         // 1. Expand to natural height to measure it

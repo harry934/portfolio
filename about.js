@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const designationEl = document.getElementById('about-designation');
   const quoteEl = document.getElementById('about-quote');
   const textContainer = document.getElementById('about-text-container');
-  const prevBtn = document.getElementById('about-prev-btn');
-  const nextBtn = document.getElementById('about-next-btn');
+  const prevBtns = document.querySelectorAll('.about-prev-btn');
+  const nextBtns = document.querySelectorAll('.about-next-btn');
 
   // Verify all elements exist before proceeding
-  if (!imageContainer || !textContainer || !prevBtn || !nextBtn) return;
+  if (!imageContainer || !textContainer || !prevBtns.length || !nextBtns.length) return;
 
   // --- State ---
   let activeIndex = 0;
@@ -75,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const images = document.querySelectorAll('.about-image');
 
   // --- Helpers ---
+  function isMobile() {
+    return window.matchMedia('(max-width: 768px)').matches;
+  }
+
   function calculateGap(width) {
     const minWidth = 1024;
     const maxWidth = 1456;
@@ -87,22 +91,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateLayout() {
     containerWidth = imageContainer.offsetWidth || 1200;
-    const gap = calculateGap(containerWidth);
-    const maxStickUp = gap * 0.8;
+    const mobile = isMobile();
 
     images.forEach((img, index) => {
-      // Clean previous state
       img.classList.remove('is-active', 'is-left', 'is-right', 'is-far-left', 'is-far-right');
-      img.style.transform = ''; 
+      img.style.transform = '';
 
-      // Calculate relative positions
+      const isActive = index === activeIndex;
+
+      if (mobile) {
+        if (isActive) {
+          img.classList.add('is-active');
+        }
+        return;
+      }
+
+      const gap = calculateGap(containerWidth);
+      const maxStickUp = gap * 0.8;
+
       const isLeft = (activeIndex - 1 + length) % length === index;
       const isRight = (activeIndex + 1) % length === index;
       const isFarLeft = length > 4 && (activeIndex - 2 + length) % length === index;
       const isFarRight = length > 4 && (activeIndex + 2) % length === index;
-      const isActive = index === activeIndex;
 
-      // Apply appropriate styles replicating the Framer Motion transforms
       if (isActive) {
         img.classList.add('is-active');
       } else if (isLeft) {
@@ -166,8 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Event Listeners ---
-  nextBtn.addEventListener('click', handleNext);
-  prevBtn.addEventListener('click', handlePrev);
+  prevBtns.forEach(btn => btn.addEventListener('click', handlePrev));
+  nextBtns.forEach(btn => btn.addEventListener('click', handleNext));
 
   // Touch swipe navigation for mobile
   let touchStartX = 0;

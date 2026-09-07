@@ -50,9 +50,11 @@
         <div class="container nav-flex">
             <div class="logo">H<span>O</span></div>
             <nav class="nav-links">
+                <a href="#hero" class="nav-mobile-only">Home</a>
                 <a href="#about">About Me</a>
                 <a href="#expertise">My Expertise</a>
                 <a href="#projects">My Projects</a>
+                <a href="#resume" class="nav-mobile-only">Resume</a>
                 <a href="#contact">Contact Info</a>
             </nav>
             <button class="hamburger" id="nav-toggle" aria-label="Toggle navigation menu">
@@ -122,26 +124,33 @@
             <div class="about-container">
                 <h2 class="section-heading" data-scramble="About Me" style="text-align: center; margin-bottom: 2rem;">About Me</h2>
                 <div class="about-grid">
-                    <!-- 3D Image Carousel Container -->
-                    <div class="about-image-container" id="about-image-container">
-                        <!-- Images will be injected here via JavaScript -->
+                    <div class="about-image-wrapper">
+                        <div class="about-image-container" id="about-image-container">
+                            <!-- Images will be injected here via JavaScript -->
+                        </div>
+                        <!-- Mobile-only overlay arrows -->
+                        <div class="about-arrow-buttons about-arrows-mobile">
+                            <button class="about-arrow-button prev-button about-prev-btn" aria-label="Previous image">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button class="about-arrow-button next-button about-next-btn" aria-label="Next image">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
-                    
-                    <!-- Content & Controls -->
+
                     <div class="about-content">
-                        <!-- Animated Text Container -->
                         <div id="about-text-container" class="about-text-container">
                             <h3 class="about-name" id="about-name"></h3>
                             <p class="about-designation" id="about-designation"></p>
                             <p class="about-quote" id="about-quote"></p>
                         </div>
-                        
-                        <!-- Navigation Buttons -->
-                        <div class="about-arrow-buttons">
-                            <button class="about-arrow-button prev-button" id="about-prev-btn" aria-label="Previous image">
+                        <!-- Desktop arrows (original position) -->
+                        <div class="about-arrow-buttons about-arrows-desktop">
+                            <button class="about-arrow-button prev-button about-prev-btn" aria-label="Previous image">
                                 <i class="bi bi-chevron-left"></i>
                             </button>
-                            <button class="about-arrow-button next-button" id="about-next-btn" aria-label="Next image">
+                            <button class="about-arrow-button next-button about-next-btn" aria-label="Next image">
                                 <i class="bi bi-chevron-right"></i>
                             </button>
                         </div>
@@ -260,7 +269,7 @@
                                     <span class="stat-label">Repositories</span>
                                 </div>
                                 <div class="stat">
-                                    <span class="stat-number" data-target="7" data-suffix="">7</span>
+                                    <span class="stat-number" data-target="8" data-suffix="">8</span>
                                     <span class="stat-label">Projects</span>
                                 </div>
                             </div>
@@ -295,7 +304,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Innovate Hub</h3>
                                                 <p class="card-summary">An interactive platform dedicated to showcasing young innovators. Features a responsive UI built with React to track the ideation and development process of creative projects.</p>
-                                                <a href="https://innovations-b1a19.web.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                                <a href="https://innovations-b1a19.web.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -313,7 +322,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Emergency Response ML</h3>
                                                 <p class="card-summary">A machine learning solution utilizing TensorFlow to analyze live road camera footage. It detects accidents and traffic congestion in real-time, presented via a Streamlit dashboard.</p>
-                                                <a href="https://emergencyresponsee.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                                <a href="https://emergencyresponsee.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -331,7 +340,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Children's Home Support</h3>
                                                 <p class="card-summary">A philanthropic platform designed to streamline donations and facilitate child sponsorships. Integrates the Safaricom Daraja API for seamless and secure M-Pesa transactions.</p>
-                                                <a href="https://children-home.onrender.com/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                                <a href="https://children-home.onrender.com/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -349,7 +358,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">M-Pesa STK Push</h3>
                                                 <p class="card-summary">A functional demonstration of the M-Pesa STK Push payment flow. Implements the Safaricom Daraja API to provide a seamless mobile money checkout experience.</p>
-                                                <a href="https://stkmpesa.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                                <a href="https://stkmpesa.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -367,7 +376,7 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Online Food Ordering</h3>
                                                 <p class="card-summary">A comprehensive web-based restaurant management system enabling customers to browse menus, place online food orders, and process secure payments.</p>
-                                                <a href="https://pizzachickncrust.up.railway.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                                <a href="https://pizzachickncrust.up.railway.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -385,7 +394,25 @@
                                             <div class="card-text-section">
                                                 <h3 class="card-title">Laundry Service</h3>
                                                 <p class="card-summary">A convenient booking platform allowing users to schedule home laundry services. Features an intuitive interface and integrated M-Pesa mobile payments for effortless checkout.</p>
-                                                <a href="https://redroselaundry.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-arrow-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                                <a href="https://redroselaundry.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 8: Norye Perfumes -->
+                                <div class="carousel-item">
+                                    <div class="carousel-card-link" data-gif="https://media.giphy.com/media/2guirIzksoT9EsxA3E/giphy.gif">
+                                        <div class="carousel-card">
+                                            <div class="card-image-wrapper">
+                                                <img class="card-static" src="https://raw.githubusercontent.com/harry934/Norye-perfumes/main/images/norye-n23-hero.png" alt="Norye Perfumes storefront preview">
+                                                <img class="card-gif" src="" alt="Norye Perfumes preview" loading="lazy">
+                                                <div class="card-fade-overlay"></div>
+                                            </div>
+                                            <div class="card-text-section">
+                                                <h3 class="card-title">Norye Perfumes</h3>
+                                                <p class="card-summary">A perfume e-commerce site with product browsing, live search, shopping cart, and WhatsApp checkout.</p>
+                                                <a href="https://norye-perfumes.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="View Project" class="card-arrow"><i class="bi bi-box-arrow-up-right"></i><span class="card-arrow-tooltip">View Site</span></a>
                                             </div>
                                         </div>
                                     </div>
@@ -408,23 +435,19 @@
             </div>
         </section>
 
-
-        </section>
-
-
         <!-- Resume Section -->
         <section id="resume" class="section">
             <div class="container">
-                <div class="resume-split-card" style="grid-template-columns: 1fr; text-align: center;">
-                    <div class="resume-right" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem;">
+                <div class="resume-split-card resume-split-card--centered">
+                    <div class="resume-right resume-right--centered">
                         <h2 class="resume-label">Curriculum Vitae</h2>
-                        <p style="max-width: 600px; margin: 0 auto 2rem;">Download my professional resume to see my full experience and academic background.</p>
+                        <p class="resume-desc">Download my professional resume to see my full experience and academic background.</p>
                         <div class="cv-buttons">
                             <a href="cv.html" class="btn btn-dark btn-with-icon">
                                 <i class="bi bi-lock-fill"></i> <span>OPEN CV</span>
                             </a>
                         </div>
-                        <div class="resume-protection-badge" style="justify-content: center; margin-top: 1.5rem;">
+                        <div class="resume-protection-badge resume-protection-badge--centered">
                             <i class="bi bi-lock-fill"></i>
                             <span>Confidential &mdash; password required to open</span>
                         </div>
@@ -488,14 +511,6 @@
     <footer class="footer-simple">
         <p>&copy; 2024 Harry Otieno. Designed with minimalist aesthetics.</p>
     </footer>
-
-    <!-- Mobile Bottom Navigation (#11) -->
-    <nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
-        <a href="#hero" class="nav-btn"><i class="bi bi-house"></i><span>Home</span></a>
-        <a href="#about" class="nav-btn"><i class="bi bi-person"></i><span>About</span></a>
-        <a href="#projects" class="nav-btn"><i class="bi bi-code-slash"></i><span>Work</span></a>
-        <a href="#contact" class="nav-btn"><i class="bi bi-envelope"></i><span>Contact</span></a>
-    </nav>
 
     <a href="#hero" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
 

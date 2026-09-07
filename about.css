@@ -45,6 +45,11 @@
 }
 
 /* --- Image Carousel Styles --- */
+.about-image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .about-image-container {
   position: relative;
   width: 100%;
@@ -159,13 +164,39 @@
 .about-arrow-buttons {
   display: flex;
   gap: 1.5rem;
+}
+
+/* Desktop: arrows in content column (original layout) */
+.about-arrows-mobile {
+  display: none;
+}
+
+.about-arrows-desktop {
   padding-top: 3rem;
 }
 
-@media (min-width: 768px) {
-  .about-arrow-buttons {
+@media (min-width: 769px) {
+  .about-arrows-desktop {
     padding-top: 0;
     margin-top: auto;
+  }
+}
+
+/* Mobile: overlay arrows on image, hide desktop set */
+@media (max-width: 768px) {
+  .about-arrows-desktop {
+    display: none;
+  }
+
+  .about-arrows-mobile {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.35rem;
+    pointer-events: none;
   }
 }
 
@@ -177,7 +208,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   border: none;
   background-color: var(--about-color-arrow-bg);
   color: var(--about-color-arrow-fg);
@@ -185,14 +216,45 @@
   outline: none;
 }
 
-.about-arrow-button svg {
+@media (max-width: 768px) {
+  .about-arrows-mobile .about-arrow-button {
+    pointer-events: auto;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.12);
+  }
+
+  .about-arrows-mobile .about-arrow-button:active {
+    transform: scale(0.94);
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+.about-arrow-button svg,
+.about-arrow-button i {
   width: 18px;
   height: 18px;
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .about-arrow-button:hover,
 .about-arrow-button:focus {
   background-color: var(--about-color-arrow-hover-bg);
+}
+
+@media (max-width: 768px) {
+  .about-arrows-mobile .about-arrow-button:hover,
+  .about-arrows-mobile .about-arrow-button:focus {
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+  }
 }
 
 /* --- Mobile Responsiveness --- */
@@ -205,16 +267,38 @@
   }
 
   .about-grid {
-    gap: 2rem;
+    gap: 0.75rem;
+  }
+
+  .about-content {
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .about-image-container {
-    height: 20rem;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    perspective: none;
+    overflow: hidden;
+  }
+
+  .about-image {
+    border-radius: 1rem;
+  }
+
+  .about-image.is-active {
+    position: relative;
+    transform: none;
   }
 
   .about-text-container {
     min-height: auto;
     text-align: left;
+    margin-top: 0;
+  }
+
+  .about-designation {
+    margin-bottom: 0.65rem;
   }
 
   .about-name {
@@ -224,11 +308,6 @@
   .about-quote {
     font-size: 1rem;
   }
-
-  .about-arrow-buttons {
-    justify-content: flex-start;
-    padding-top: 1.5rem;
-  }
 }
 
 /* Mobile: further scale down */
@@ -237,8 +316,8 @@
     padding: 2rem 1rem;
   }
 
-  .about-image-container {
-    height: 17rem;
+  .about-grid {
+    gap: 0.5rem;
   }
 
   .about-name {
@@ -253,17 +332,5 @@
   .about-quote {
     font-size: 0.95rem;
     line-height: 1.65;
-  }
-
-  .about-arrow-button {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
-}
-
-/* Very small mobile (360px) */
-@media (max-width: 360px) {
-  .about-image-container {
-    height: 14rem;
   }
 }

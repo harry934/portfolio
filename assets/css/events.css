@@ -536,7 +536,7 @@ body[data-event] .contact-form textarea:focus {
 
 @media (max-width: 768px) {
     .event-widget {
-        bottom: 80px; /* Above mobile nav */
+        bottom: calc(1.25rem + env(safe-area-inset-bottom));
         right: 15px;
     }
     .event-widget-badge-text {

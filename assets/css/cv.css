@@ -710,7 +710,7 @@ body {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .cv-document {
         grid-template-columns: 1fr;
         border-radius: 0;
@@ -731,7 +731,45 @@ body {
     }
 
     .cv-util-bar {
+        flex-direction: column;
+        align-items: stretch;
         padding: 0.75rem 1rem;
+        gap: 0.75rem;
+    }
+
+    .cv-util-brand {
+        text-align: center;
+    }
+
+    .cv-util-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .cv-util-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .gate-card {
+        padding: 2rem 1.25rem 1.75rem;
+    }
+
+    .cv-sidebar,
+    .cv-main {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .cv-entry-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.35rem;
+    }
+
+    .cv-entry-date {
+        white-space: normal;
     }
 }
 
