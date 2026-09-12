@@ -431,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('Send failed');
                 }
             } catch {
-                btnText.textContent = 'FAILED — TRY AGAIN';
+                btnText.textContent = 'FAILED. TRY AGAIN';
                 submitBtn.disabled = false;
                 setTimeout(() => { btnText.textContent = 'SEND MESSAGE'; }, 3000);
             }
@@ -702,6 +702,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initial button state
         goTo(0);
+    }
+
+    // ── Confidential project access gate ──
+    const confidentialModal = document.getElementById('confidential-modal');
+    if (confidentialModal) {
+        const projectTitleEl = document.getElementById('confidential-modal-project');
+        const contactBtn = document.getElementById('confidential-contact-btn');
+        const contactMessage = document.getElementById('contact-message');
+        let activeProjectName = '';
+
+        const closeConfidentialModal = () => {
+            confidentialModal.classList.remove('is-visible');
+            document.body.classList.remove('confidential-modal-open');
+            window.setTimeout(() => {
+                if (!confidentialModal.classList.contains('is-visible')) {
+                    confidentialModal.hidden = true;
+                    confidentialModal.setAttribute('aria-hidden', 'true');
+                }
+            }, 320);
+        };
+
+        const openConfidentialModal = (projectName) => {
+            activeProjectName = projectName;
+            if (projectTitleEl) {
+                projectTitleEl.textContent = projectName;
+            }
+            confidentialModal.hidden = false;
+            confidentialModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('confidential-modal-open');
+            requestAnimationFrame(() => {
+                confidentialModal.classList.add('is-visible');
+                contactBtn?.focus();
+            });
+        };
+
+        const goToContactForAccess = () => {
+            if (contactMessage && activeProjectName) {
+                contactMessage.value =
+                    `Hi Harry,\n\nI'd like to know more about your confidential project: ${activeProjectName}.\n\nThank you.`;
+            }
+            closeConfidentialModal();
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.setTimeout(() => contactMessage?.focus(), 500);
+        };
+
+        document.querySelectorAll('.carousel-card-link[data-confidential]').forEach((card) => {
+            const projectName =
+                card.dataset.projectName ||
+                card.querySelector('.card-title')?.textContent?.trim() ||
+                'this project';
+            const accessLink = card.querySelector('.card-arrow');
+
+            accessLink?.addEventListener('click', (e) => {
+                e.preventDefault();
+                openConfidentialModal(projectName);
+            });
+        });
+
+        contactBtn?.addEventListener('click', goToContactForAccess);
+        confidentialModal.querySelectorAll('[data-confidential-close]').forEach((el) => {
+            el.addEventListener('click', closeConfidentialModal);
+        });
+        confidentialModal.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeConfidentialModal();
+        });
     }
 });
 

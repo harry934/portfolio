@@ -107,7 +107,7 @@ class EventThemeEngine {
             <div class="event-banner-content">
                 <span class="event-banner-emoji">${this.activeEvent.emoji}</span>
                 <span class="event-banner-title">${this.activeEvent.name}</span>
-                <span class="event-banner-desc"> — ${this.activeEvent.desc}</span>
+                <span class="event-banner-desc">: ${this.activeEvent.desc}</span>
             </div>
             <button class="event-banner-close" aria-label="Dismiss">&times;</button>
         `;

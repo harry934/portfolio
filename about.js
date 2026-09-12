@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 {
   name: "Building Solutions",
   designation: "Problem Solver",
-  quote: "I really enjoy solving real-world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
+  quote: "I really enjoy solving real world problems through technology. Whether it's designing systems, developing platforms, or improving existing ideas, I like the process of taking something from concept to a working solution that creates actual value.",
   src: "assets/img/IoT.webp"
 },
 {

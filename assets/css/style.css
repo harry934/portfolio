@@ -2628,6 +2628,7 @@ body.page-transitioning {
 .carousel-item {
     flex: 0 0 calc(88% - 0.75rem);
     min-width: 0;
+    position: relative;
 }
 
 @media (min-width: 480px) {
@@ -2651,7 +2652,7 @@ body.page-transitioning {
     text-decoration: none;
     color: inherit;
     border-radius: 1.25rem;
-    overflow: hidden;
+    overflow: visible;
 }
 
 @media (min-width: 640px) {
@@ -2666,7 +2667,7 @@ body.page-transitioning {
     width: 100%;
     height: 100%;
     border-radius: 1.25rem;
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid #e4e4e4;
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     background: #fff;
@@ -2687,6 +2688,7 @@ body.page-transitioning {
     height: 55%; /* Always 55% to keep split layout */
     background-color: #ececec;
     overflow: hidden;
+    border-radius: 1.25rem 1.25rem 0 0;
 }
 
 /* Static thumbnail */
@@ -2741,6 +2743,8 @@ body.page-transitioning {
     transform: translateY(0); /* Always visible */
     z-index: 3;
     border-top: 1px solid #f0f0f0;
+    border-radius: 0 0 1.25rem 1.25rem;
+    overflow: visible;
 }
 
 /* Title */
@@ -2811,14 +2815,15 @@ body.page-transitioning {
 
 .card-arrow-tooltip {
     position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%) translateY(6px);
+    bottom: calc(100% + 0.45rem);
+    right: 0;
+    left: auto;
+    transform: translateY(4px);
     background: rgba(17, 17, 17, 0.92);
     color: #fff;
-    padding: 0.25rem 0.55rem;
+    padding: 0.35rem 0.65rem;
     border-radius: 6px;
-    font-size: 0.62rem;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.03em;
     white-space: nowrap;
@@ -2827,12 +2832,18 @@ body.page-transitioning {
     transition: opacity 0.25s ease, transform 0.25s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border: none;
+    z-index: 20;
 }
 
 .card-arrow:hover .card-arrow-tooltip,
 .card-arrow:focus-visible .card-arrow-tooltip {
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
+}
+
+.carousel-item:has(.card-arrow:hover),
+.carousel-item:has(.card-arrow:focus-visible) {
+    z-index: 6;
 }
 
 .card-arrow:hover,
@@ -2853,6 +2864,181 @@ body.page-transitioning {
         background: #111;
         color: #fff;
     }
+}
+
+/* ── Confidential project gate ── */
+.confidential-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 12000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+}
+
+.confidential-gate[hidden] {
+    display: none;
+}
+
+body.confidential-modal-open {
+    overflow: hidden;
+}
+
+.confidential-gate-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.45);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.confidential-gate.is-visible .confidential-gate-backdrop {
+    opacity: 1;
+}
+
+.confidential-gate-card {
+    position: relative;
+    width: min(100%, 26rem);
+    background: #fff;
+    border-radius: 1.25rem;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.13);
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    transition:
+        opacity 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+        transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.confidential-gate-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.confidential-gate.is-visible .confidential-gate-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.confidential-gate-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-right: 0.35rem;
+}
+
+.confidential-gate-dots {
+    flex: 1;
+    padding: 0.85rem 0 0.35rem 1rem;
+}
+
+.confidential-gate-close {
+    margin: 0.75rem 0.75rem 0 0;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #e8e8e8;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.confidential-gate-close:hover,
+.confidential-gate-close:focus-visible {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+    outline: none;
+}
+
+.confidential-gate-body {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0.25rem 1.75rem 1.6rem;
+}
+
+.confidential-gate-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+}
+
+.confidential-gate-eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.confidential-gate-body h3 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #111;
+}
+
+.confidential-gate-project {
+    margin: 0.35rem 0 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.confidential-gate-text {
+    margin: 0 0 1.35rem;
+    color: #666;
+    line-height: 1.65;
+    font-size: 0.9rem;
+}
+
+.confidential-gate-cta {
+    width: 100%;
+    justify-content: center;
+}
+
+.confidential-gate-dismiss {
+    margin-top: 0.85rem;
+    border: none;
+    background: none;
+    color: #888;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.confidential-gate-dismiss:hover,
+.confidential-gate-dismiss:focus-visible {
+    color: #111;
+    outline: none;
 }
 
 /* ── Carousel footer row (nav arrows inline) ── */
