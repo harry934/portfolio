@@ -169,17 +169,19 @@
                     <p class="expertise-section-sub">Domains I've built in, what I've learned, and where I stand.</p>
                 </div>
 
+                <div class="expertise-grid-panel">
                 <div class="expertise-bento-grid">
 
                         <!-- Web Dev -->
-                    <div class="exp-card">
+                    <div class="exp-card" role="button" tabindex="0">
+                        <span class="exp-open-hint" aria-hidden="true"><i class="bi bi-box-arrow-up-right"></i></span>
                         <div class="exp-dots">
                             <span class="exp-dot dot-r"></span>
                             <span class="exp-dot dot-y"></span>
                             <span class="exp-dot dot-g"></span>
-                            <span class="skill-badge skill-advanced">Advanced</span>
+                            <span class="skill-badge skill-advanced" data-short="Adv">Advanced</span>
                         </div>
-                        <h3><i class="devicon-react-original colored"></i> Web Development</h3>
+                        <h3><i class="devicon-react-original colored"></i><span class="exp-title-text">Web Development</span></h3>
                         <p>I've built full stack web apps covering REST APIs, interactive UIs, database integration, authentication and cloud deployment. Comfortable across the entire stack from frontend to backend.</p>
                         <div class="exp-tags">
                             <span class="tech-pill" data-name="React"><i class="devicon-react-original colored"></i></span>
@@ -192,14 +194,15 @@
                     </div>
 
                     <!-- ML -->
-                    <div class="exp-card">
+                    <div class="exp-card" role="button" tabindex="0">
+                        <span class="exp-open-hint" aria-hidden="true"><i class="bi bi-box-arrow-up-right"></i></span>
                         <div class="exp-dots">
                             <span class="exp-dot dot-r"></span>
                             <span class="exp-dot dot-y"></span>
                             <span class="exp-dot dot-g"></span>
-                            <span class="skill-badge skill-intermediate">Intermediate</span>
+                            <span class="skill-badge skill-intermediate" data-short="Int">Intermediate</span>
                         </div>
-                        <h3><i class="devicon-python-plain colored"></i> Machine Learning</h3>
+                        <h3><i class="devicon-python-plain colored"></i><span class="exp-title-text">Machine Learning</span></h3>
                         <p>I've trained classification and regression models, worked on NLP tasks like sentiment analysis, and understand the full ML pipeline from data cleaning and feature engineering through to evaluation.</p>
                         <div class="exp-tags">
                             <span class="tech-pill" data-name="Python"><i class="devicon-python-plain colored"></i></span>
@@ -211,14 +214,15 @@
                     </div>
 
                     <!-- Android -->
-                    <div class="exp-card">
+                    <div class="exp-card" role="button" tabindex="0">
+                        <span class="exp-open-hint" aria-hidden="true"><i class="bi bi-box-arrow-up-right"></i></span>
                         <div class="exp-dots">
                             <span class="exp-dot dot-r"></span>
                             <span class="exp-dot dot-y"></span>
                             <span class="exp-dot dot-g"></span>
-                            <span class="skill-badge skill-intermediate">Intermediate</span>
+                            <span class="skill-badge skill-intermediate" data-short="Int">Intermediate</span>
                         </div>
-                        <h3><i class="devicon-androidstudio-plain colored"></i> Android Development</h3>
+                        <h3><i class="devicon-androidstudio-plain colored"></i><span class="exp-title-text">Android Development</span></h3>
                         <p>I've built native Android apps in Java and Kotlin using Android Studio, working with ViewModels, Room databases, Retrofit for API calls and the MVVM architecture to keep code clean and scalable.</p>
                         <div class="exp-tags">
                             <span class="tech-pill" data-name="Java"><i class="devicon-java-plain colored"></i></span>
@@ -230,14 +234,15 @@
                     </div>
 
                     <!-- IoT -->
-                    <div class="exp-card">
+                    <div class="exp-card" role="button" tabindex="0">
+                        <span class="exp-open-hint" aria-hidden="true"><i class="bi bi-box-arrow-up-right"></i></span>
                         <div class="exp-dots">
                             <span class="exp-dot dot-r"></span>
                             <span class="exp-dot dot-y"></span>
                             <span class="exp-dot dot-g"></span>
-                            <span class="skill-badge skill-intermediate">Intermediate</span>
+                            <span class="skill-badge skill-intermediate" data-short="Int">Intermediate</span>
                         </div>
-                        <h3><i class="devicon-arduino-plain colored"></i> IoT Systems</h3>
+                        <h3><i class="devicon-arduino-plain colored"></i><span class="exp-title-text">IoT Systems</span></h3>
                         <p>I've prototyped IoT systems using Arduino and ESP32 boards, connecting sensors and displays to the internet via MQTT and HTTP and integrating them with web dashboards for remote monitoring.</p>
                         <div class="exp-tags">
                             <span class="tech-pill" data-name="Arduino"><i class="devicon-arduino-plain colored"></i></span>
@@ -249,14 +254,15 @@
                     </div>
 
                     <!-- Apps Script / ERP -->
-                    <div class="exp-card">
+                    <div class="exp-card" role="button" tabindex="0">
+                        <span class="exp-open-hint" aria-hidden="true"><i class="bi bi-box-arrow-up-right"></i></span>
                         <div class="exp-dots">
                             <span class="exp-dot dot-r"></span>
                             <span class="exp-dot dot-y"></span>
                             <span class="exp-dot dot-g"></span>
-                            <span class="skill-badge skill-advanced">Advanced</span>
+                            <span class="skill-badge skill-advanced" data-short="Adv">Advanced</span>
                         </div>
-                        <h3><i class="devicon-google-plain colored"></i> Google Apps Script &amp; ERP</h3>
+                        <h3><i class="devicon-google-plain colored"></i><span class="exp-title-text">Apps Script &amp; ERP</span></h3>
                         <p>I've built internal ERP style systems with Google Apps Script: username/password auth, role based access, Google Sheets as the database, and HTML Service UIs for staff, tasks, progress, and notifications.</p>
                         <div class="exp-tags">
                             <span class="tech-pill" data-name="Apps Script"><i class="devicon-google-plain colored"></i></span>
@@ -267,6 +273,7 @@
                         </div>
                     </div>
 
+                </div>
                 </div>
             </div>
         </section>
@@ -568,6 +575,24 @@
     </footer>
 
     <a href="#hero" class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- Expertise detail modal -->
+    <div id="expertise-modal" class="expertise-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="expertise-modal-title">
+        <div class="expertise-modal-backdrop" data-exp-modal-close></div>
+        <div class="expertise-modal-card">
+            <div class="expertise-modal-header">
+                <div class="exp-dots expertise-modal-dots" id="expertise-modal-dots"></div>
+                <button type="button" class="expertise-modal-close" data-exp-modal-close aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="expertise-modal-body">
+                <h3 id="expertise-modal-title"></h3>
+                <p id="expertise-modal-desc"></p>
+                <div class="exp-tags" id="expertise-modal-tags"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Confidential project gate -->
     <div id="confidential-modal" class="confidential-gate" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="confidential-modal-heading">

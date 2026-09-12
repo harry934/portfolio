@@ -125,37 +125,160 @@ function initTextRoll() {
 }
 
 /* ============================================================
-   EXPERTISE CARD — Perfectly smooth height animation
-   Measures real scrollHeight so transition knows exact target.
+   EXPERTISE — Icon tiles + detail modal
+   Scroll guard prevents accidental opens while scrolling (#4).
    ============================================================ */
-function initExpCardSmooth() {
-    const isTouchOrTablet = window.matchMedia('(max-width: 992px), (hover: none)').matches;
-    if (isTouchOrTablet) return;
+function initExpertiseStackPreviews() {
+    document.querySelectorAll('.expertise-bento-grid .exp-card').forEach(card => {
+        const tags = card.querySelectorAll('.exp-tags .tech-pill');
+        let preview = card.querySelector('.exp-stack-preview');
 
-    const COLLAPSED_H = 88; // px — dots row + title
-    document.querySelectorAll('.exp-card').forEach(card => {
-        // 1. Expand to natural height to measure it
-        card.style.height = 'auto';
-        card.style.overflow = 'visible';
-        const fullH = card.scrollHeight;
+        if (!preview) {
+            preview = document.createElement('div');
+            preview.className = 'exp-stack-preview';
+            preview.setAttribute('aria-hidden', 'true');
+            card.querySelector('h3')?.insertAdjacentElement('afterend', preview);
+        }
 
-        // 2. Snap back to collapsed (no animation yet)
-        card.style.transition = 'none';
-        card.style.height = COLLAPSED_H + 'px';
-        card.style.overflow = 'hidden';
+        preview.innerHTML = '';
+        Array.from(tags).slice(0, 3).forEach(pill => {
+            const icon = document.createElement('span');
+            icon.className = 'exp-stack-icon';
+            icon.innerHTML = pill.innerHTML;
+            preview.appendChild(icon);
+        });
+    });
+}
 
-        // 3. Re-enable transition on next frame
+function initExpertiseReveal() {
+    const cards = document.querySelectorAll('.expertise-bento-grid .exp-card');
+    if (!cards.length) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+        cards.forEach(card => card.classList.add('is-revealed'));
+        return;
+    }
+
+    cards.forEach((card, i) => {
+        card.style.transition =
+            `opacity 0.55s cubic-bezier(0.165, 0.84, 0.44, 1) ${i * 0.06}s, ` +
+            `transform 0.55s cubic-bezier(0.165, 0.84, 0.44, 1) ${i * 0.06}s, ` +
+            'border-color 0.3s ease, box-shadow 0.3s ease';
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    cards.forEach(card => revealObserver.observe(card));
+}
+
+function initExpertiseModal() {
+    const modal = document.getElementById('expertise-modal');
+    const cards = document.querySelectorAll('.expertise-bento-grid .exp-card');
+    if (!modal || !cards.length) return;
+
+    initExpertiseStackPreviews();
+    initExpertiseReveal();
+
+    const dotsEl = document.getElementById('expertise-modal-dots');
+    const titleEl = document.getElementById('expertise-modal-title');
+    const descEl = document.getElementById('expertise-modal-desc');
+    const tagsEl = document.getElementById('expertise-modal-tags');
+
+    let isScrolling = false;
+    let scrollTimer;
+
+    const markScrolling = () => {
+        isScrolling = true;
+        clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(() => {
+            isScrolling = false;
+        }, 150);
+    };
+
+    window.addEventListener('scroll', markScrolling, { passive: true });
+    window.addEventListener('wheel', markScrolling, { passive: true });
+    window.addEventListener('touchmove', markScrolling, { passive: true });
+
+    const getCardLabel = (card) => {
+        const title = card.querySelector('h3')?.textContent?.replace(/\s+/g, ' ').trim() || 'Expertise domain';
+        const level = card.querySelector('.skill-badge')?.textContent?.trim();
+        return level ? `${title} — ${level}` : title;
+    };
+
+    cards.forEach((card) => {
+        card.setAttribute('aria-label', getCardLabel(card) + '. Click for details.');
+    });
+
+    const closeModal = () => {
+        modal.classList.remove('is-visible');
+        document.body.classList.remove('expertise-modal-open');
+        window.setTimeout(() => {
+            if (!modal.classList.contains('is-visible')) {
+                modal.hidden = true;
+                modal.setAttribute('aria-hidden', 'true');
+            }
+        }, 320);
+    };
+
+    const openModal = (card) => {
+        const dots = card.querySelector('.exp-dots');
+        const heading = card.querySelector('h3');
+        const desc = card.querySelector('p');
+        const tags = card.querySelector('.exp-tags');
+
+        if (dotsEl && dots) {
+            dotsEl.innerHTML = dots.innerHTML;
+        }
+        if (titleEl && heading) {
+            titleEl.innerHTML = heading.innerHTML;
+        }
+        if (descEl && desc) {
+            descEl.textContent = desc.textContent;
+        }
+        if (tagsEl && tags) {
+            tagsEl.innerHTML = tags.innerHTML;
+        }
+
+        cards.forEach(c => c.classList.remove('is-selected'));
+        card.classList.add('is-selected');
+
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('expertise-modal-open');
         requestAnimationFrame(() => {
-            card.style.transition = '';
+            modal.classList.add('is-visible');
         });
+        modal.querySelector('.expertise-modal-close')?.focus();
+    };
 
-        // 4. Hover: animate to exact measured height
-        card.addEventListener('mouseenter', () => {
-            card.style.height = fullH + 'px';
+    const tryOpen = (card) => {
+        if (isScrolling) return;
+        openModal(card);
+    };
+
+    cards.forEach((card) => {
+        card.addEventListener('click', () => tryOpen(card));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                tryOpen(card);
+            }
         });
-        card.addEventListener('mouseleave', () => {
-            card.style.height = COLLAPSED_H + 'px';
-        });
+    });
+
+    modal.querySelectorAll('[data-exp-modal-close]').forEach((el) => {
+        el.addEventListener('click', closeModal);
+    });
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
     });
 }
 
@@ -283,8 +406,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Text Roll: build character layers before anything reveals ──
     initTextRoll();
 
-    // ── Expertise Card: smooth expand + network canvas ──
-    initExpCardSmooth();
+    // ── Expertise: icon tiles + modal + network canvas ──
+    initExpertiseModal();
     initExpertiseNetwork();
 
     // ── Intro: lock scroll, then dismiss automatically ──

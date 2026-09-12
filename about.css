@@ -2,14 +2,13 @@
 /* Scoped entirely to .about-me-section to avoid global conflicts */
 
 .about-me-section {
-  /* Configuration Variables - easily customizable */
   --about-color-name: #1a1a1a;
   --about-color-designation: #6b7280;
   --about-color-quote: #4b5563;
   --about-color-arrow-bg: #141414;
   --about-color-arrow-fg: #f1f1f7;
   --about-color-arrow-hover-bg: #00a6fb;
-  
+
   --about-font-name: 1.5rem;
   --about-font-designation: 0.925rem;
   --about-font-quote: 1.125rem;
@@ -22,8 +21,6 @@
   font-family: inherit;
 }
 
-
-
 .about-me-section * {
   box-sizing: border-box;
 }
@@ -35,7 +32,7 @@
 .about-grid {
   display: grid;
   gap: 5rem;
-  align-items: center;
+  align-items: start;
 }
 
 @media (min-width: 768px) {
@@ -44,69 +41,95 @@
   }
 }
 
-/* --- Image Carousel Styles --- */
+/* --- Depth image carousel — fixed stage, uniform slide size --- */
 .about-image-wrapper {
   position: relative;
   width: 100%;
+  height: 26rem;
+  min-height: 26rem;
+  max-height: 26rem;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .about-image-container {
   position: relative;
   width: 100%;
-  height: 24rem;
-  perspective: 1000px;
+  height: 100%;
+  min-height: 26rem;
+  max-height: 26rem;
+  background: transparent;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  contain: layout style paint;
 }
 
 .about-image {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  left: 50%;
+  top: 50%;
+  width: 84%;
+  height: 92%;
+  min-width: 84%;
+  min-height: 92%;
+  max-width: 84%;
+  max-height: 92%;
   object-fit: cover;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  
-  /* Transition matches framer-motion easeInOut with 0.8s */
-  transition: transform 0.8s cubic-bezier(.4,2,.3,1), opacity 0.8s cubic-bezier(.4,2,.3,1), z-index 0.8s;
+  object-position: center center;
+  border-radius: 1.35rem;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+
+  transition:
+    transform 0.9s cubic-bezier(0.165, 0.84, 0.44, 1),
+    opacity 0.9s cubic-bezier(0.165, 0.84, 0.44, 1),
+    filter 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
   opacity: 0;
   pointer-events: none;
   z-index: 1;
+  border: none;
+  cursor: pointer;
 }
 
-/* State modifiers applied by JS */
 .about-image.is-active {
-  z-index: 3;
+  z-index: 100;
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(0px) translateY(0px) scale(1) rotateY(0deg);
+  cursor: default;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
-.about-image.is-left {
-  z-index: 2;
-  opacity: 1;
-  pointer-events: auto;
-  /* transform is dynamic based on width, applied via inline styles in JS */
-}
-
+.about-image.is-left,
 .about-image.is-right {
-  z-index: 2;
-  opacity: 1;
+  z-index: 90;
   pointer-events: auto;
-  /* transform is dynamic based on width, applied via inline styles in JS */
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
 }
 
-.about-image.is-far-left {
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
-  /* transform is dynamic based on width, applied via inline styles in JS */
-}
-
+.about-image.is-far-left,
 .about-image.is-far-right {
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
-  /* transform is dynamic based on width, applied via inline styles in JS */
+  z-index: 80;
+  pointer-events: auto;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.about-image.is-depth-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  filter: blur(4px) !important;
+  z-index: 0 !important;
+}
+
+.about-image.is-left:hover,
+.about-image.is-right:hover,
+.about-image.is-far-left:hover,
+.about-image.is-far-right:hover {
+  filter: blur(0.2px) !important;
 }
 
 /* --- Content Styles --- */
@@ -114,11 +137,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 26rem;
 }
 
 .about-text-container {
-  min-height: 16rem; /* Prevents layout shifting */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  min-height: 17.5rem;
+  transition: opacity 0.45s cubic-bezier(0.165, 0.84, 0.44, 1),
+              transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
   opacity: 1;
   transform: translateY(0);
 }
@@ -143,7 +168,6 @@
   margin: 0;
 }
 
-/* Word animation mirroring framer motion */
 .about-word {
   display: inline-block;
   opacity: 0;
@@ -166,7 +190,6 @@
   gap: 1.5rem;
 }
 
-/* Desktop: arrows in content column (original layout) */
 .about-arrows-mobile {
   display: none;
 }
@@ -182,7 +205,6 @@
   }
 }
 
-/* Mobile: overlay arrows on image, hide desktop set */
 @media (max-width: 768px) {
   .about-arrows-desktop {
     display: none;
@@ -192,7 +214,7 @@
     display: flex;
     position: absolute;
     inset: 0;
-    z-index: 5;
+    z-index: 110;
     align-items: center;
     justify-content: space-between;
     padding: 0 0.35rem;
@@ -257,9 +279,7 @@
   }
 }
 
-/* --- Mobile Responsiveness --- */
-
-/* Tablet: scale down the image container height */
+/* --- Mobile: lighter depth stack --- */
 @media (max-width: 768px) {
   .about-me-section {
     padding: 2.5rem 1.25rem;
@@ -275,24 +295,44 @@
     padding-top: 0;
   }
 
-  .about-image-container {
+  .about-image-wrapper {
     height: auto;
+    min-height: 0;
+    max-height: none;
     aspect-ratio: 4 / 3;
-    perspective: none;
+  }
+
+  .about-image-container {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    perspective: 900px;
+    perspective-origin: 50% 50%;
     overflow: hidden;
   }
 
   .about-image {
+    width: 88%;
+    height: 90%;
+    min-width: 88%;
+    min-height: 90%;
+    max-width: 88%;
+    max-height: 90%;
     border-radius: 1rem;
   }
 
   .about-image.is-active {
-    position: relative;
-    transform: none;
+    transform: translate(-50%, -50%);
+  }
+
+  .about-content {
+    min-height: auto;
   }
 
   .about-text-container {
-    min-height: auto;
+    min-height: 10.5rem;
     text-align: left;
     margin-top: 0;
   }
@@ -310,7 +350,6 @@
   }
 }
 
-/* Mobile: further scale down */
 @media (max-width: 480px) {
   .about-me-section {
     padding: 2rem 1rem;
@@ -332,5 +371,11 @@
   .about-quote {
     font-size: 0.95rem;
     line-height: 1.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-image {
+    transition: opacity 0.35s ease;
   }
 }

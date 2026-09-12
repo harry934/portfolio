@@ -1117,47 +1117,138 @@ body {
     font-weight: 400;
 }
 
+.expertise-section-hint {
+    font-size: inherit;
+    color: var(--text-muted);
+    opacity: 0.55;
+    font-weight: 400;
+}
+
+/* Portfolio-style panel wrapper (#9) */
+.expertise-grid-panel {
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    border-radius: 24px;
+    padding: 1.25rem 1.15rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+/* 3 + 2 centered rows — wider cards, less cramming than 5-across */
 .expertise-bento-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
 }
 
-@media (max-width: 992px) {
+.expertise-bento-grid .exp-card:nth-child(1) { grid-column: 1 / 3; }
+.expertise-bento-grid .exp-card:nth-child(2) { grid-column: 3 / 5; }
+.expertise-bento-grid .exp-card:nth-child(3) { grid-column: 5 / 7; }
+.expertise-bento-grid .exp-card:nth-child(4) { grid-column: 2 / 4; }
+.expertise-bento-grid .exp-card:nth-child(5) { grid-column: 4 / 6; }
+
+@media (max-width: 991px) {
     .expertise-bento-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.65rem;
     }
 
-    .exp-card {
-        transform: skewX(0deg) !important;
-        height: auto !important;
-        overflow: visible !important;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    .expertise-bento-grid .exp-card:nth-child(n) {
+        grid-column: auto;
     }
 }
 
-/* ── Uiverse.io skew card — light palette to match site ── */
-.exp-card {
-    padding: 0;
+@media (max-width: 768px) {
+    .expertise-bento-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+    }
+}
+
+/* ── Expertise tile — scaled 3+2 grid, details in modal ── */
+.expertise-bento-grid .exp-card {
+    padding: 1rem 1.1rem 0.85rem;
     background: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e8e8e8;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.07);
-    border-left: 2px solid rgba(0, 0, 0, 0.04);
-    box-shadow: -18px 28px 40px rgba(0, 0, 0, 0.07);
-    transform: skewX(6deg);
-    /* JS sets exact height — CSS just defines the transition speed */
-    transition: height     0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                transform  0.45s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    box-shadow: none;
     overflow: hidden;
     color: var(--text-main);
-    position: relative; /* for ::before dot grid */
-    cursor: default;
+    position: relative;
+    cursor: pointer;
+    min-height: 160px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.5rem;
+    align-content: start;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0;
+    transform: translateY(16px);
 }
 
-/* Subtle dot-grid pattern on card background */
+.expertise-bento-grid .exp-card.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Open arrow hint — visible on hover (#13) */
+.expertise-bento-grid .exp-open-hint {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 0.6rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: #f5f5f5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    font-size: 0.62rem;
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.expertise-bento-grid .exp-card:hover .exp-open-hint,
+.expertise-bento-grid .exp-card:focus-visible .exp-open-hint {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.expertise-bento-grid .exp-card:hover .exp-open-hint {
+    background: #111;
+    color: #fff;
+}
+
+.expertise-bento-grid .exp-card:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 2px;
+}
+
+.expertise-bento-grid .exp-card:hover,
+.expertise-bento-grid .exp-card:focus-visible {
+    border-color: #ddd;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Last-opened card state (#14) */
+.expertise-bento-grid .exp-card.is-selected {
+    border-color: #aaa;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Tiles stay clean — dot grid only in modal */
+.expertise-bento-grid .exp-card::before {
+    display: none;
+}
+
+/* Modal cards keep flat dot-grid via .exp-card::before when not in grid */
 .exp-card::before {
     content: '';
     position: absolute;
@@ -1166,17 +1257,13 @@ body {
     background-size: 18px 18px;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
-    transition: opacity 0.45s ease;
+    opacity: 0.55;
 }
 
-.exp-card:hover::before {
-    opacity: 1;
-}
-
-.exp-card:hover {
-    transform: skewX(0deg);
-    box-shadow: -8px 20px 40px rgba(0, 0, 0, 0.10);
+/* Hide long copy in grid — shown in modal */
+.expertise-bento-grid .exp-card p,
+.expertise-bento-grid .exp-card .exp-tags {
+    display: none;
 }
 
 /* All card children sit above the dot-grid */
@@ -1187,11 +1274,61 @@ body {
 
 /* Traffic-light dot row */
 .exp-dots {
-    padding: 0.75rem 1rem 0.35rem;
+    padding: 0.65rem 0.85rem 0.25rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 6px;
+}
+
+/* Tiles: traffic-light dots + badge — in document flow */
+.expertise-bento-grid .exp-dots {
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+    align-items: center;
+    position: static;
+    z-index: 2;
+    gap: 4px;
+}
+
+.expertise-bento-grid .exp-dots .exp-dot {
+    display: block;
+    width: 9px;
+    height: 9px;
+}
+
+.expertise-bento-grid .exp-dots .skill-badge {
+    margin-left: auto;
+    padding: 0.18rem 0.5rem;
+    letter-spacing: 0.04em;
+    font-size: 0;
+    line-height: 1.1;
+    max-width: 5.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 50px;
+    box-shadow: none;
+}
+
+.expertise-bento-grid .exp-dots .skill-badge::after {
+    content: attr(data-short);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+@media (min-width: 992px) {
+    .expertise-bento-grid .exp-dots .skill-badge {
+        font-size: 0.52rem;
+        letter-spacing: 0.04em;
+        padding: 0.2rem 0.55rem;
+    }
+
+    .expertise-bento-grid .exp-dots .skill-badge::after {
+        display: none;
+    }
 }
 
 .exp-dot {
@@ -1234,23 +1371,95 @@ body {
     border: 1px solid #e0e0e0;
 }
 
-/* Card heading */
-.exp-card h3 {
+/* Tile heading — icon above title */
+.expertise-bento-grid .exp-card h3 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    text-shadow: none;
+    padding: 0;
+    padding-right: 1.75rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.45rem;
+    text-align: left;
+    line-height: 1.35;
+    align-self: stretch;
+}
+
+.expertise-bento-grid .exp-card h3 .exp-title-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+}
+
+.expertise-bento-grid .exp-card h3 i {
+    font-size: 2.15rem;
+    line-height: 1;
+    flex-shrink: 0;
+    width: auto;
+    height: auto;
+    display: inline-block;
+}
+
+/* Top 3 stack icons on tile (#17) */
+.expertise-bento-grid .exp-stack-preview {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.38rem;
+    padding: 0;
+    margin: 0;
+}
+
+.expertise-bento-grid .exp-stack-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: #f9f9f9;
+    border: 1px solid #efefef;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.expertise-bento-grid .exp-stack-icon i {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .expertise-bento-grid .exp-card {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Modal heading — horizontal icon + title */
+.expertise-modal-body h3 {
     font-size: 0.85rem;
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-main);
     text-shadow: none;
-    padding: 0.5rem 1rem 0.3rem;
+    padding: 0.25rem 1.25rem 0.35rem;
     margin: 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.exp-card h3 i {
-    font-size: 1.3rem; /* Devicon logos — slightly larger for impact */
+.expertise-modal-body h3 i {
+    font-size: 1.3rem;
     line-height: 1;
     flex-shrink: 0;
 }
@@ -1348,6 +1557,165 @@ body {
 
 /* Keep old grid hidden */
 .expertise-grid { display: none; }
+
+/* ── Expertise detail modal ── */
+.expertise-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 11500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+}
+
+.expertise-modal[hidden] {
+    display: none;
+}
+
+body.expertise-modal-open {
+    overflow: hidden;
+}
+
+.expertise-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.42);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.expertise-modal.is-visible .expertise-modal-backdrop {
+    opacity: 1;
+}
+
+.expertise-modal-card {
+    position: relative;
+    width: min(100%, 32rem);
+    max-height: min(88vh, 560px);
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 1.25rem;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.13);
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    transition:
+        opacity 0.35s cubic-bezier(0.165, 0.84, 0.44, 1),
+        transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.expertise-modal-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.expertise-modal.is-visible .expertise-modal-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Shared popup header + close — expertise & confidential modals */
+.expertise-modal-header,
+.confidential-gate-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
+    padding: 0.7rem 0.85rem 0.7rem 0;
+    min-height: 3rem;
+}
+
+.expertise-modal-dots,
+.confidential-gate-dots {
+    flex: 1;
+    min-width: 0;
+    padding: 0 0 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.expertise-modal-dots.exp-dots,
+.confidential-gate-dots.exp-dots {
+    padding: 0 0.35rem 0 1rem;
+}
+
+.expertise-modal-close,
+.confidential-gate-close {
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #777;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.25s ease;
+}
+
+.expertise-modal-close i,
+.confidential-gate-close i {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.expertise-modal-close:hover,
+.expertise-modal-close:focus-visible,
+.confidential-gate-close:hover,
+.confidential-gate-close:focus-visible {
+    background: transparent;
+    color: #111;
+    outline: none;
+}
+
+.expertise-modal-close:hover i,
+.expertise-modal-close:focus-visible i,
+.confidential-gate-close:hover i,
+.confidential-gate-close:focus-visible i {
+    transform: rotate(90deg) scale(1.12);
+}
+
+.expertise-modal-close:focus-visible,
+.confidential-gate-close:focus-visible {
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+
+.expertise-modal-body {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 0.5rem;
+}
+
+.expertise-modal-body p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    padding: 0.55rem 1.25rem 0.85rem;
+    margin: 0;
+}
+
+.expertise-modal-body .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.15rem 1.25rem 1.25rem;
+}
 
 
 /* Resume Split Card */
@@ -1936,11 +2304,6 @@ body {
     }
 
     /* ── Expertise Section ── */
-    .expertise-bento-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-    }
-
     .expertise-header {
         margin-bottom: 2rem;
     }
@@ -1949,12 +2312,32 @@ body {
         font-size: 1.5rem;
     }
 
-    /* On mobile: no skew, always fully visible, no hover needed */
-    .exp-card {
-        transform: skewX(0deg) !important;
-        height: auto !important;     /* Override JS inline height */
-        overflow: visible !important;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    .expertise-grid-panel {
+        padding: 1rem 0.85rem;
+        border-radius: 20px;
+    }
+
+    .expertise-bento-grid .exp-card {
+        padding: 0.85rem 0.75rem 0.7rem;
+        min-height: 140px;
+    }
+
+    .expertise-bento-grid .exp-card h3 {
+        font-size: 0.72rem;
+        gap: 0.35rem;
+    }
+
+    .expertise-bento-grid .exp-card h3 i {
+        font-size: 1.85rem;
+    }
+
+    .expertise-bento-grid .exp-stack-icon {
+        width: 1.55rem;
+        height: 1.55rem;
+    }
+
+    .expertise-bento-grid .exp-stack-icon i {
+        font-size: 0.85rem;
     }
 
     .section-heading {
@@ -2929,47 +3312,11 @@ body.confidential-modal-open {
     transform: translateY(0) scale(1);
 }
 
-.confidential-gate-header {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding-right: 0.35rem;
-}
-
-.confidential-gate-dots {
-    flex: 1;
-    padding: 0.85rem 0 0.35rem 1rem;
-}
-
 .confidential-gate-badge {
-    padding: 0.12rem 0.45rem;
+    padding: 0.18rem 0.5rem;
     font-size: 0.48rem;
     letter-spacing: 1px;
-}
-
-.confidential-gate-close {
-    margin: 0.75rem 0.75rem 0 0;
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid #e8e8e8;
-    border-radius: 50%;
-    background: #fff;
-    color: #111;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.confidential-gate-close:hover,
-.confidential-gate-close:focus-visible {
-    background: #111;
-    color: #fff;
-    border-color: #111;
-    outline: none;
+    line-height: 1.2;
 }
 
 .confidential-gate-body {
