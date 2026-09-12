@@ -733,7 +733,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('confidential-modal-open');
             requestAnimationFrame(() => {
                 confidentialModal.classList.add('is-visible');
-                contactBtn?.focus();
             });
         };
 
