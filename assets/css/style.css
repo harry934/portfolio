@@ -1126,13 +1126,13 @@ body {
 
 /* Portfolio-style panel wrapper (#9) */
 .expertise-grid-panel {
-    background: #fdfdfd;
-    border: 1px solid #f0f0f0;
+    background: #ececec;
+    border: 1px solid #e0e0e0;
     border-radius: 24px;
     padding: 1.25rem 1.15rem;
     max-width: 1100px;
     margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 /* 3 + 2 centered rows — wider cards, less cramming than 5-across */
@@ -1171,8 +1171,8 @@ body {
     padding: 1rem 1.1rem 0.85rem;
     background: #ffffff;
     border-radius: 16px;
-    border: 1px solid #f0f0f0;
-    box-shadow: none;
+    border: 1px solid #d6d6d6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     overflow: hidden;
     color: var(--text-main);
     position: relative;
@@ -1233,14 +1233,20 @@ body {
 
 .expertise-bento-grid .exp-card:hover,
 .expertise-bento-grid .exp-card:focus-visible {
-    border-color: #ddd;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    border-color: #bdbdbd;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.expertise-bento-grid .exp-card.is-revealed:hover,
+.expertise-bento-grid .exp-card.is-revealed:focus-visible {
+    transform: translateY(-2px);
 }
 
 /* Last-opened card state (#14) */
 .expertise-bento-grid .exp-card.is-selected {
-    border-color: #aaa;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    border-color: #888;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12), 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 /* Tiles stay clean — dot grid only in modal */
