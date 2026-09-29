@@ -479,7 +479,27 @@ body {
 .hero-subtitle {
     font-size: 1.2rem;
     color: var(--text-muted);
-    margin-bottom: 3rem;
+    margin-bottom: 0.65rem;
+}
+
+.hero-founder {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 2.75rem;
+    letter-spacing: 0.02em;
+}
+
+.hero-founder a {
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-founder a:hover {
+    color: #000;
+    border-bottom-color: #000;
 }
 
 .hero-actions-row {
@@ -552,11 +572,14 @@ body {
     color: white;
 }
 
-.example-2 .icon-content a svg {
+.example-2 .icon-content a svg,
+.example-2 .icon-content a .bi {
     position: relative;
     z-index: 1;
     width: 24px;
     height: 24px;
+    font-size: 1.35rem;
+    line-height: 1;
 }
 
 .example-2 .icon-content a .filled {
@@ -586,6 +609,11 @@ body {
 .example-2 .icon-content a[data-social="email"] .filled,
 .example-2 .icon-content a[data-social="email"] ~ .tooltip {
     background-color: #555;
+}
+
+.example-2 .icon-content a[data-social="craftedke"] .filled,
+.example-2 .icon-content a[data-social="craftedke"] ~ .tooltip {
+    background-color: #111;
 }
 
 @media (max-width: 992px) {
@@ -2062,6 +2090,18 @@ body.expertise-modal-open {
     margin-bottom: 0.2rem;
 }
 
+.contact-link {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    transition: border-color 0.2s ease;
+}
+
+.contact-link:hover {
+    border-bottom-color: #000;
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -2229,6 +2269,11 @@ body.expertise-modal-open {
 
     .hero-subtitle {
         font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-founder {
+        font-size: 0.88rem;
         margin-bottom: 2rem;
     }
 
