@@ -99,15 +99,6 @@
                             <div class="tooltip">GitHub</div>
                         </li>
                         <li class="icon-content">
-                            <a data-social="email" aria-label="Email" href="mailto:otienoharry876@gmail.com">
-                                <div class="filled"></div>
-                                <svg viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM16 4.697l-5.875 3.525L16 11.743zm-1.724 6.704L8 7.248l-6.276 4.153A2 2 0 0 0 8 14a2 2 0 0 0 6.276-2.599zM0 11.743l5.875-3.521L0 4.697z"/>
-                                </svg>
-                            </a>
-                            <div class="tooltip">Email</div>
-                        </li>
-                        <li class="icon-content">
                             <a data-social="craftedke" aria-label="Craftedke" href="https://craftedke.tech" target="_blank" rel="noopener noreferrer">
                                 <div class="filled"></div>
                                 <i class="bi bi-globe2" aria-hidden="true"></i>
@@ -550,36 +541,24 @@
                 <h2 class="section-heading" data-scramble="Get In Touch">Get In Touch</h2>
                 <div class="contact-grid">
                     <div class="contact-info">
-                        <div class="contact-item dark">
-                            <i class="bi bi-geo-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Nairobi, Kenya</p>
+                        <div class="contact-info-items">
+                            <div class="contact-item dark">
+                                <i class="bi bi-geo-alt"></i>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Nairobi, Kenya</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="contact-item dark">
-                            <i class="bi bi-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <!-- Email is injected by JS to prevent bot scraping -->
-                                <p><a id="obfuscated-email" href="#" style="color:inherit;text-decoration:none;" aria-label="Email Harry Otieno"></a></p>
-                            </div>
-                        </div>
-                        <div class="contact-item dark">
-                            <i class="bi bi-telephone"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+254 112601334</p>
-                            </div>
-                        </div>
-                        <div class="contact-item dark">
-                            <i class="bi bi-building"></i>
-                            <div>
-                                <h4>Craftedke</h4>
-                                <p>Founder · <a href="https://craftedke.tech" target="_blank" rel="noopener noreferrer" class="contact-link">craftedke.tech</a></p>
+                            <div class="contact-item dark">
+                                <i class="bi bi-building"></i>
+                                <div>
+                                    <h4>Craftedke</h4>
+                                    <p>Founder · <a href="https://craftedke.tech" target="_blank" rel="noopener noreferrer" class="contact-link">craftedke.tech</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="contact-form-panel">
                     <form class="contact-form dark" id="contact-form">
                         <input type="text"  id="contact-name"    name="name"    placeholder="Your Name"    required>
                         <input type="email" id="contact-email"   name="email"   placeholder="Your Email"   required>
@@ -588,8 +567,6 @@
                             <i class="bi bi-send-fill"></i> <span>SEND MESSAGE</span>
                         </button>
                     </form>
-
-                    <!-- Success card — hidden until form submits successfully -->
                     <div class="form-success-card" id="form-success-card" aria-live="polite" aria-hidden="true">
                         <div class="success-icon-ring">
                             <i class="bi bi-check-lg"></i>
@@ -597,6 +574,7 @@
                         <h3>Message Sent!</h3>
                         <p>Thanks for reaching out. I'll get back to you within <strong>24 hours</strong>. 🚀</p>
                         <button class="btn btn-dark" id="success-dismiss-btn">Send Another</button>
+                    </div>
                     </div>
                </div>
             </div>

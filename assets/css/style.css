@@ -2071,6 +2071,20 @@ body.expertise-modal-open {
     gap: 6rem;
 }
 
+.contact-form-panel {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    min-height: 420px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-panel .contact-form {
+    flex: 1;
+}
+
 .contact-item {
     display: flex;
     gap: 1.5rem;
@@ -2813,11 +2827,6 @@ body.page-transitioning {
     inset: 0;
     z-index: 10;
     transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.contact-grid {
-    position: relative; /* needed for success card absolute positioning */
-    min-height: 420px;
 }
 
 .form-success-card.visible {
