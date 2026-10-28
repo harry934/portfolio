@@ -256,10 +256,11 @@ body {
 }
 
 .header.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
+    background: transparent;
+    backdrop-filter: none;
     padding: 1rem 0;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    box-shadow: none;
+    pointer-events: none;
 }
 
 .nav-flex {
@@ -277,6 +278,13 @@ body {
 .logo span {
     color: #bbb;
     font-weight: 300;
+}
+
+/* Hide logo when scrolled — hamburger only */
+.header.scrolled .logo {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 .nav-links {
@@ -322,6 +330,7 @@ body {
 /* Show Hamburger on Scroll */
 .header.scrolled .hamburger {
     display: flex;
+    pointer-events: auto;
 }
 
 .hamburger span {
