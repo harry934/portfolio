@@ -483,17 +483,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Nav Sticky Behavior ──
+    // Scroll down → hamburger only | Scroll up → full navbar
     const header = document.getElementById('main-nav');
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
+    let lastScrollY = window.pageYOffset;
 
     window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 50) {
-            header.classList.add('scrolled');
+        const currentY = window.pageYOffset;
+
+        if (currentY <= 50) {
+            header.classList.remove('scrolled', 'nav-down', 'nav-up');
         } else {
-            header.classList.remove('scrolled');
+            header.classList.add('scrolled');
+            if (currentY > lastScrollY) {
+                // scrolling down → hamburger only
+                header.classList.add('nav-up');
+                header.classList.remove('nav-down');
+            } else if (currentY < lastScrollY) {
+                // scrolling up → show full navbar
+                header.classList.add('nav-down');
+                header.classList.remove('nav-up');
+            }
         }
-    });
+
+        lastScrollY = currentY;
+    }, { passive: true });
 
     if (navToggle) {
         navToggle.addEventListener('click', () => {

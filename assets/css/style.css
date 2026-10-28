@@ -255,7 +255,17 @@ body {
     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.header.scrolled {
+/* Scroll down — full navbar bar */
+.header.scrolled.nav-down {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 1rem 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    pointer-events: auto;
+}
+
+/* Scroll up — no bar, hamburger only */
+.header.scrolled.nav-up {
     background: transparent;
     backdrop-filter: none;
     padding: 1rem 0;
@@ -273,6 +283,7 @@ body {
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -1.5px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .logo span {
@@ -280,8 +291,8 @@ body {
     font-weight: 300;
 }
 
-/* Hide logo when scrolled — hamburger only */
-.header.scrolled .logo {
+/* Scroll up — hide logo */
+.header.scrolled.nav-up .logo {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -293,8 +304,8 @@ body {
     transition: all 0.4s ease;
 }
 
-/* Hide Nav Links on Scroll */
-.header.scrolled .nav-links:not(.active) {
+/* Scroll up — hide nav links (unless menu open) */
+.header.scrolled.nav-up .nav-links:not(.active) {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
@@ -317,7 +328,7 @@ body {
 
 /* Hamburger */
 .hamburger {
-    display: none; /* Hidden at top */
+    display: none; /* Hidden at top / when full nav showing */
     flex-direction: column;
     gap: 6px;
     background: none;
@@ -327,14 +338,49 @@ body {
     padding: 10px;
 }
 
-/* Show Hamburger on Scroll — furthest right of viewport */
-.header.scrolled .hamburger {
+/* Scroll up — hamburger furthest right */
+.header.scrolled.nav-up .hamburger {
     display: flex;
     pointer-events: auto;
     position: fixed;
     top: 1.25rem;
-    right: 0.5rem;
+    right: 8px;
     margin: 0;
+    padding: 8px;
+}
+
+/* Scroll down — hide hamburger on desktop (full nav is showing) */
+@media (min-width: 993px) {
+    .header.scrolled.nav-down .hamburger {
+        display: none;
+    }
+}
+
+/* Mobile: always keep hamburger when scrolled (links are in the menu) */
+@media (max-width: 992px) {
+    .header.scrolled.nav-down .hamburger,
+    .header.scrolled.nav-up .hamburger {
+        display: flex;
+        pointer-events: auto;
+        position: fixed;
+        top: 1.25rem;
+        right: 8px;
+        margin: 0;
+        padding: 8px;
+    }
+
+    .header.scrolled.nav-down {
+        background: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+        pointer-events: none;
+    }
+
+    .header.scrolled.nav-down .logo {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
 }
 
 .hamburger span {
