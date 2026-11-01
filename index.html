@@ -16,9 +16,11 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/events.css">
+    <link rel="stylesheet" href="assets/css/dock-nav.css">
+    <link rel="stylesheet" href="assets/dock-island/dock-island.css">
     <link rel="stylesheet" href="about.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Devicon — exact tech brand logos -->
@@ -46,24 +48,11 @@
         <div class="stair-panel"></div>
     </div>
     <div class="scroll-progress"></div>
-    <header class="header" id="main-nav">
-        <div class="container nav-flex">
-            <div class="logo">H<span>O</span></div>
-            <nav class="nav-links">
-                <a href="#hero" class="nav-mobile-only">Home</a>
-                <a href="#about">About Me</a>
-                <a href="#expertise">My Expertise</a>
-                <a href="#projects">My Projects</a>
-                <a href="#resume" class="nav-mobile-only">Resume</a>
-                <a href="#contact">Contact Info</a>
-            </nav>
-            <button class="hamburger" id="nav-toggle" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+    <!-- Legacy header kept for a11y fallbacks; visually replaced by dock island -->
+    <header class="header" id="main-nav" hidden aria-hidden="true"></header>
+
+    <!-- Crafted-style dock island nav -->
+    <div id="notch-nav-root" class="notch-nav-root" aria-live="polite"></div>
 
     <main class="smooth-scroll-container">
         <!-- Hero Section -->
@@ -120,39 +109,16 @@
         </section>
         <!-- About Section -->
         <section id="about" class="about-me-section">
+            <canvas id="about-network" class="about-canvas" aria-hidden="true"></canvas>
             <div class="about-container">
                 <h2 class="section-heading" data-scramble="About Me" style="text-align: center; margin-bottom: 2rem;">About Me</h2>
                 <div class="about-grid">
-                    <div class="about-image-wrapper">
-                        <div class="about-image-container" id="about-image-container">
-                            <!-- Images will be injected here via JavaScript -->
-                        </div>
-                        <!-- Mobile-only overlay arrows -->
-                        <div class="about-arrow-buttons about-arrows-mobile">
-                            <button class="about-arrow-button prev-button about-prev-btn" aria-label="Previous image">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <button class="about-arrow-button next-button about-next-btn" aria-label="Next image">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                        </div>
+                    <div id="about-staircase" class="stc-root" aria-label="About photo carousel">
+                        <!-- Staircase carousel mounts here via about.js -->
                     </div>
-
-                    <div class="about-content">
-                        <div id="about-text-container" class="about-text-container">
-                            <h3 class="about-name" id="about-name"></h3>
-                            <p class="about-designation" id="about-designation"></p>
-                            <p class="about-quote" id="about-quote"></p>
-                        </div>
-                        <!-- Desktop arrows (original position) -->
-                        <div class="about-arrow-buttons about-arrows-desktop">
-                            <button class="about-arrow-button prev-button about-prev-btn" aria-label="Previous image">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <button class="about-arrow-button next-button about-next-btn" aria-label="Next image">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                        </div>
+                    <div id="about-detail" class="about-detail" hidden>
+                        <p class="about-designation" id="about-designation"></p>
+                        <p class="about-quote" id="about-quote"></p>
                     </div>
                 </div>
             </div>
@@ -654,6 +620,8 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/events.js"></script>
+    <script src="assets/dock-island/dock-island.js"></script>
+    <script src="assets/js/dock-nav.js"></script>
     <script src="about.js"></script>
     <script src="assets/js/security.js"></script>
 

@@ -1,0 +1,122 @@
+/* Portfolio dock mount + mobile pill. Desktop island comes from Crafted DockIsland. */
+
+.notch-nav-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  pointer-events: none;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+.notch-nav-root > * {
+  pointer-events: none;
+}
+
+#notch-nav-root,
+#notch-nav-root * {
+  box-sizing: border-box;
+}
+
+/* Hide legacy top bar — dock replaces it */
+#main-nav,
+.header {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
+
+body {
+  padding-top: 0;
+  background: #fff;
+}
+
+/* Room for curved bezel + dock */
+@media (min-width: 993px) {
+  section[id]:not(#hero) {
+    scroll-margin-top: 3.25rem;
+  }
+
+  html.dock-landed body {
+    /* Keep content readable inside the curved screen frame */
+    background: #fff;
+  }
+}
+
+@media (max-width: 992px) {
+  .notch-nav-root {
+    display: none !important;
+  }
+}
+
+/* ── Mobile bottom island pill (desktop uses Crafted DockIsland) ── */
+.dock-mobile-root {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .dock-mobile-root {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index: 1100;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .dock-mobile-pill {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #111;
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .dock-mobile-pill a {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    color: #b4b4b4;
+    text-decoration: none;
+    transition: color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+  }
+
+  .dock-mobile-pill a svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.85;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .dock-mobile-pill a:hover,
+  .dock-mobile-pill a:focus-visible {
+    color: #eee;
+    background: #2a2a2a;
+    outline: none;
+  }
+
+  .dock-mobile-pill a.is-active {
+    color: #eee;
+    background: #313131;
+  }
+
+  section[id] {
+    scroll-margin-bottom: 5rem;
+  }
+}

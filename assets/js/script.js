@@ -360,7 +360,6 @@ function revealPageContent() {
 
     // Each entry: [selector, CSS class, delay in seconds]
     const reveals = [
-        ['#main-nav',          'reveal-nav',   0.6],
         ['.hero-title',        'reveal-up',    0.7],
         ['.image-wrapper',     'reveal-scale', 0.8],
         ['.hero-subtitle',     'reveal-up',    0.9],
@@ -482,43 +481,37 @@ document.addEventListener('DOMContentLoaded', () => {
         statEls.forEach(el => counterObserver.observe(el));
     }
 
-    // ── Nav Sticky Behavior ──
-    // Scroll down → hamburger only | Scroll up → full navbar
+    // ── Legacy header nav (replaced by dock island) ──
     const header = document.getElementById('main-nav');
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    let lastScrollY = window.pageYOffset;
+    if (header && navToggle && navLinks) {
+        let lastScrollY = window.pageYOffset;
 
-    window.addEventListener('scroll', () => {
-        const currentY = window.pageYOffset;
+        window.addEventListener('scroll', () => {
+            const currentY = window.pageYOffset;
 
-        if (currentY <= 50) {
-            header.classList.remove('scrolled', 'nav-down', 'nav-up');
-        } else {
-            header.classList.add('scrolled');
-            if (currentY > lastScrollY) {
-                // scrolling down → hamburger only
-                header.classList.add('nav-up');
-                header.classList.remove('nav-down');
-            } else if (currentY < lastScrollY) {
-                // scrolling up → show full navbar
-                header.classList.add('nav-down');
-                header.classList.remove('nav-up');
+            if (currentY <= 50) {
+                header.classList.remove('scrolled', 'nav-down', 'nav-up');
+            } else {
+                header.classList.add('scrolled');
+                if (currentY > lastScrollY) {
+                    header.classList.add('nav-up');
+                    header.classList.remove('nav-down');
+                } else if (currentY < lastScrollY) {
+                    header.classList.add('nav-down');
+                    header.classList.remove('nav-up');
+                }
             }
-        }
 
-        lastScrollY = currentY;
-    }, { passive: true });
+            lastScrollY = currentY;
+        }, { passive: true });
 
-    if (navToggle) {
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             navToggle.classList.toggle('active');
         });
-    }
 
-    // Auto-close mobile menu when a nav link is clicked
-    if (navLinks) {
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -592,14 +585,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ── Close Mobile Nav on Link Click ──
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            navToggle.classList.remove('active');
+    // ── Close Mobile Nav on Link Click (legacy header only) ──
+    if (navLinks && navToggle) {
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
         });
-    });
+    }
 
     // ── Smooth Scrolling ──
     const allLinks = document.querySelectorAll('a[href^="#"]');
@@ -674,6 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Scroll Spy Navigation ──
+    // Scroll-spy for legacy .nav-links (dock island handles its own active state)
     const spySections = document.querySelectorAll('section[id]');
     const navItems = document.querySelectorAll('.nav-links a');
     if (spySections.length > 0 && navItems.length > 0) {
@@ -710,7 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── FEATURE: Mobile Swipe for Projects Carousel ──
     // (Page-swipe section-jumping is disabled — carousels handle their own touch)
     const carouselTrackEl = document.getElementById('hover-carousel-track');
-    const aboutImgContainer = document.getElementById('about-image-container');
+    const aboutStaircase = document.getElementById('about-staircase');
 
     // Track swipe origin to ignore carousel swipes at page level
     let _pageSwipeSuppressed = false;
@@ -719,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Suppress page-level swipe if touch starts inside a carousel
         _pageSwipeSuppressed =
             (carouselTrackEl && carouselTrackEl.contains(e.target)) ||
-            (aboutImgContainer && aboutImgContainer.contains(e.target));
+            (aboutStaircase && aboutStaircase.contains(e.target));
     }, { passive: true });
 
     // Projects carousel — touch swipe support
