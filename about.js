@@ -8,7 +8,7 @@ function initAboutStaircase() {
   const aboutData = [
     {
       title: 'Harry Otieno Mokaya',
-      designation: 'Software & DevOps Engineer · Founder, Craftedke',
+      designation: 'Software & DevSecOps Engineer · Founder, Craftedke',
       quote:
         "I'm a Software Engineer from Nairobi with roots in Migori County. I'm the founder of Craftedke, where I build digital products and explore different areas of technology. For me, the best part is turning ideas into something real that people can interact with and benefit from.",
       src: 'assets/img/chillen.webp',

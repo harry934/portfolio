@@ -1,10 +1,10 @@
 /**
  * Soft console-style UI feedback (original Web Audio tones).
- * Inspired by modern game UI ticks — not PlayStation assets.
+ * Smooth, glassy ticks — not PlayStation assets.
  */
 (function () {
   const MUTE_KEY = 'portfolio-ui-sound';
-  const THROTTLE_MS = 45;
+  const THROTTLE_MS = 55;
 
   let ctx = null;
   let master = null;
@@ -49,7 +49,8 @@
     if (!ctx) {
       ctx = new AC();
       master = ctx.createGain();
-      master.gain.value = 0.28;
+      // Quiet overall mix so clicks feel soft, not stiff
+      master.gain.value = 0.16;
       master.connect(ctx.destination);
     }
     if (ctx.state === 'suspended') {
@@ -58,43 +59,57 @@
     return ctx;
   }
 
-  function blip(c, t0, freq, dur, peak, type) {
+  /** Soft sine with gentle attack/release (glass UI feel). */
+  function softTone(c, t0, freq, dur, peak) {
     const osc = c.createOscillator();
     const gain = c.createGain();
-    osc.type = type;
+    const filter = c.createBiquadFilter();
+
+    osc.type = 'sine';
     osc.frequency.setValueAtTime(freq, t0);
-    osc.frequency.exponentialRampToValueAtTime(Math.max(80, freq * 0.72), t0 + dur);
+    // Gentle downward glide
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.92, t0 + dur);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(freq * 2.4, t0);
+    filter.Q.value = 0.7;
+
+    const attack = Math.min(0.018, dur * 0.28);
     gain.gain.setValueAtTime(0.0001, t0);
-    gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.004);
+    gain.gain.linearRampToValueAtTime(peak, t0 + attack);
     gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-    osc.connect(gain);
+
+    osc.connect(filter);
+    filter.connect(gain);
     gain.connect(master);
     osc.start(t0);
-    osc.stop(t0 + dur + 0.02);
+    osc.stop(t0 + dur + 0.04);
   }
 
-  function noiseTick(c, t0, dur, peak) {
+  /** Very soft airy shimmer under the tone. */
+  function softAir(c, t0, dur, peak) {
     const frames = Math.max(1, Math.floor(c.sampleRate * dur));
     const buffer = c.createBuffer(1, frames, c.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < frames; i++) {
-      data[i] = (Math.random() * 2 - 1) * (1 - i / frames);
+      const env = 1 - i / frames;
+      data[i] = (Math.random() * 2 - 1) * env * env;
     }
     const src = c.createBufferSource();
     src.buffer = buffer;
     const filter = c.createBiquadFilter();
-    filter.type = 'bandpass';
-    filter.frequency.value = 3200;
-    filter.Q.value = 1.1;
+    filter.type = 'lowpass';
+    filter.frequency.value = 1800;
+    filter.Q.value = 0.5;
     const gain = c.createGain();
     gain.gain.setValueAtTime(0.0001, t0);
-    gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.002);
+    gain.gain.linearRampToValueAtTime(peak, t0 + 0.01);
     gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
     src.connect(filter);
     filter.connect(gain);
     gain.connect(master);
     src.start(t0);
-    src.stop(t0 + dur + 0.01);
+    src.stop(t0 + dur + 0.02);
   }
 
   function play(kind) {
@@ -109,21 +124,18 @@
     const t0 = c.currentTime + 0.001;
     try {
       if (kind === 'icon') {
-        // Crisp high select tick
-        noiseTick(c, t0, 0.028, 0.12);
-        blip(c, t0, 2100, 0.055, 0.09, 'triangle');
-        blip(c, t0 + 0.012, 3100, 0.04, 0.045, 'sine');
+        softAir(c, t0, 0.06, 0.018);
+        softTone(c, t0, 880, 0.11, 0.055);
+        softTone(c, t0 + 0.02, 1320, 0.09, 0.028);
       } else if (kind === 'confirm') {
-        // Slightly fuller confirm
-        noiseTick(c, t0, 0.032, 0.1);
-        blip(c, t0, 620, 0.08, 0.07, 'sine');
-        blip(c, t0 + 0.018, 1240, 0.07, 0.08, 'triangle');
-        blip(c, t0 + 0.034, 1860, 0.05, 0.04, 'sine');
+        softAir(c, t0, 0.08, 0.016);
+        softTone(c, t0, 523.25, 0.14, 0.05);
+        softTone(c, t0 + 0.028, 783.99, 0.12, 0.04);
+        softTone(c, t0 + 0.055, 1046.5, 0.1, 0.022);
       } else {
-        // Soft default tap
-        noiseTick(c, t0, 0.024, 0.09);
-        blip(c, t0, 1650, 0.05, 0.08, 'triangle');
-        blip(c, t0 + 0.01, 2400, 0.035, 0.035, 'sine');
+        softAir(c, t0, 0.055, 0.014);
+        softTone(c, t0, 740, 0.1, 0.048);
+        softTone(c, t0 + 0.016, 988, 0.08, 0.022);
       }
     } catch {
       // Silent fail if audio graph fails
@@ -170,7 +182,8 @@
     if (shouldSkip(el)) return;
     const kind = kindFor(el);
     play(kind);
-    pulse(kind === 'confirm' ? 12 : 7);
+    // Softer phone buzz
+    pulse(kind === 'confirm' ? 8 : 4);
   }
 
   document.addEventListener('pointerdown', onPointerDown, {
@@ -178,7 +191,6 @@
     capture: true,
   });
 
-  // Unlock audio graph on first gesture anywhere
   function unlockOnce() {
     ensureCtx();
     document.removeEventListener('pointerdown', unlockOnce, true);

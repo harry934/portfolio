@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Typed.js ──
     new Typed('#typed', {
-        strings: ['Fitness Advisor', 'Innovator', 'UI/UX Designer', 'Web Developer','Cyber Security Enthusiast','Junior DevOps'],
+        strings: ['Fitness Advisor', 'Innovator', 'UI/UX Designer', 'Web Developer','Cyber Security Enthusiast','Junior DevSecOps'],
         typeSpeed: 40,
         backSpeed: 20,
         backDelay: 1000,
