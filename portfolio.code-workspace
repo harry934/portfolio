@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "Portfolio Website",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "git.openRepositoryInParentFolders": "never",
+    "git.autoRepositoryDetection": "openEditors",
+    "git.ignoredRepositories": [
+      "/home/harry/Github Projects"
+    ],
+    "git.detectSubmodules": false
+  }
+}
