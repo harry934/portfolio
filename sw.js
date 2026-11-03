@@ -1,4 +1,4 @@
-const CACHE_NAME = 'harry-portfolio-v4';
+const CACHE_NAME = 'harry-portfolio-v5';
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
     '/assets/dock-island/dock-island.css',
     '/assets/dock-island/dock-island.js',
     '/assets/js/script.js',
+    '/assets/js/ui-haptics.js',
     '/assets/js/dock-nav.js',
     '/about.js',
     '/about.css',
